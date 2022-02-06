@@ -1,0 +1,39 @@
+<h1 class="h3 title">
+  <span class="ib-m">{{moduleDisplayName}}</span>
+  <button *ngIf="newButton && newButton.hasPermission" mat-raised-button [matTooltip]='newButton.matTooltip'
+    [matTooltipClass]='newButton.matTooltipClass' [matTooltipPosition]='newButton.matTooltipPosition'
+    [color]='newButton.color' (click)="openEditDialog(newButton.dialogComponent,null,-1)"
+    class="ib-m m-l-15">Add</button>
+</h1>
+<mat-card class="m-t-5 m-b-5" *ngIf="filterSction">
+  <ng-template #dynamicComponent></ng-template> 
+</mat-card>
+
+<ngx-datatable class="material fullscreen" [rows]="rows" [columns]="columns" [loadingIndicator]="loadingIndicator"
+  [columnMode]="'force'" [headerHeight]="50" rowHeight="auto" [footerHeight]="50" [externalPaging]="true"
+  [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" [externalSorting]="true"
+  (page)="setPage($event)" (sort)="onSort($event)">
+</ngx-datatable>
+
+<!--without pagination-->
+<!-- <ngx-datatable class="material fullscreen" [rows]="rows" [columns]="columns" [loadingIndicator]="loadingIndicator"
+  [columnMode]="'force'" [headerHeight]="50" rowHeight="auto" [footerHeight]="50" [externalSorting]="true"
+  (sort)="onSort($event)">
+</ngx-datatable> -->
+
+<!--Action Template-->
+<ng-template #actionTemplate let-row="row" let-value="value" let-rowIndex="rowIndex">
+  <ng-container *ngFor="let item of actionButton">
+
+    <a class="m-l-5 tbl-action-button" *ngIf="item.hasPermission" [matTooltip]='item.matTooltip'
+      [matTooltipClass]='item.matTooltipClass' [matTooltipPosition]='item.matTooltipPosition'
+      (click)="openEditDialog(item.dialogComponent,row,rowIndex)">
+      <mat-icon [color]='item.color'>{{item.matIcon}}</mat-icon>
+    </a>
+  </ng-container>
+  <!-- <button class="m-l-5" *ngFor="let item of actionButton" mat-raised-button [matTooltip]='item.matTooltip'
+    [matTooltipClass]='item.matTooltipClass' [matTooltipPosition]='item.matTooltipPosition' [color]='item.color'
+    (click)="openEditDialog(item.dialogComponent,row,rowIndex)">
+    <mat-icon>{{item.matIcon}}</mat-icon>
+  </button> -->
+</ng-template>

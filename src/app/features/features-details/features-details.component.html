@@ -1,0 +1,44 @@
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Details</h1>
+  </header>
+  <mat-dialog-content>
+    <mat-list>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Feature Name :</small>
+          <div class="w-100 font-weight-bold">{{row.data.featureName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Feature Desc :</small>
+          <div class="w-100 font-weight-bold">{{row.data.featureDesc}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Feature Quanty :</small>
+          <div class="w-100 font-weight-bold">{{row.data.featureQuanty}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Plan Type Price :</small>
+          <div class="w-100 font-weight-bold">{{row.data.planTypePrice}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>    
+      <div mat-subheader>Plan Type</div>
+      <mat-list-item *ngFor="let folder of row.data.planTypes">
+        <mat-icon mat-list-icon>local_offer</mat-icon>
+        <div mat-line>{{folder.planTypeName}}</div>      
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+  </div>

@@ -1,0 +1,101 @@
+<form [formGroup]='cacheForm' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.notificationGroup.name}}</h1>
+    <mat-dialog-content>
+
+        <!--groupType-->
+        <mat-form-field class="full-width">            
+            <input matInput placeholder="Group Type" autocomplete="off" formControlName="groupType" required>
+            <mat-error *ngIf="eform.groupType.invalid && (eform.groupType.dirty || eform.groupType.touched)">
+                <span *ngIf="eform.groupType.errors.required" class="alert-danger">
+                    Group Type is required
+                </span>
+                <span *ngIf="eform.groupType.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--groupName-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Group Name" autocomplete="off" formControlName="groupName" required>
+            <mat-error *ngIf="eform.groupName.invalid && (eform.groupName.dirty || eform.groupName.touched)">
+                <span *ngIf="eform.groupName.errors.required" class="alert-danger">
+                    Group Name is required
+                </span>
+                <span *ngIf="eform.groupName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--groupNameArb-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Group Name Arb." autocomplete="off" formControlName="groupNameArb" required>
+            <mat-error *ngIf="eform.groupNameArb.invalid && (eform.groupNameArb.dirty || eform.groupNameArb.touched)">
+                <span *ngIf="eform.groupNameArb.errors.required" class="alert-danger">
+                    Group Name Arb. is required
+                </span>
+                <span *ngIf="eform.groupNameArb.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--platform-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Platform</mat-label>
+            <mat-select [formControlName]='"platform"' multiple [(ngModel)]='selectedPlatforms'>
+                <mat-option *ngFor="let value of platform" [value]="value">
+                    {{value}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.platform.invalid && (eform.platform.dirty || eform.platform.touched)">
+                <span *ngIf="eform.platform.errors.required" class="alert-danger">
+                    Platform is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--category-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let value of category" [value]="value">
+                    {{value}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.category.invalid && (eform.category.dirty || eform.category.touched)">
+                <span *ngIf="eform.category.errors.required" class="alert-danger">
+                    Category is required
+                </span>
+            </mat-error>
+        </mat-form-field>      
+
+        <!--sentNotification-->
+        <!-- <mat-checkbox class="full-width" formControlName="sentNotification">Sent Notification</mat-checkbox> -->
+     
+        <!--notifyBy-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose NotifyBy</mat-label>
+            <mat-select formControlName="notifyBy">
+                <mat-option *ngFor="let value of notifyBy" [value]="value">
+                    {{value}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.notifyBy.invalid && (eform.notifyBy.dirty || eform.notifyBy.touched)">
+                <span *ngIf="eform.notifyBy.errors.required" class="alert-danger">
+                    NotifyBy is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

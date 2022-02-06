@@ -1,0 +1,65 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.offerType.name}}
+    </h1>
+    <mat-dialog-content>
+
+        <!--offerTypeName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Type Name" autocomplete="off" formControlName="offerTypeName" required>
+            <mat-error
+                *ngIf="eform.offerTypeName.invalid && (eform.offerTypeName.dirty || eform.offerTypeName.touched)">
+                <span *ngIf="eform.offerTypeName.errors.required" class="alert-danger">
+                    Type Name is required
+                </span>
+                <span *ngIf="eform.offerTypeName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--offerTypeNameAR-->
+        <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Type Name AR" autocomplete="off" formControlName="offerTypeNameAR" required>
+            <mat-error
+                *ngIf="eform.offerTypeNameAR.invalid && (eform.offerTypeNameAR.dirty || eform.offerTypeNameAR.touched)">
+                <span *ngIf="eform.offerTypeNameAR.errors.required" class="alert-danger">
+                    Type Name is required
+                </span>
+                <span *ngIf="eform.offerTypeNameAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--offerTypeDesc-->
+        <mat-form-field class="full-width">
+            <mat-label>Type Description</mat-label>
+            <textarea matInput formControlName="offerTypeDesc" matTextareaAutosize matAutosizeMinRows='5'
+                matAutosizeMaxRows='6'></textarea>
+            <mat-error
+                *ngIf="eform.offerTypeDesc.invalid && (eform.offerTypeDesc.dirty || eform.offerTypeDesc.touched)">
+                <span *ngIf="eform.offerTypeDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <!--offerTypeDescAR-->
+        <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Type Description AR" autocomplete="off" formControlName="offerTypeDescAR">
+            <mat-error
+                *ngIf="eform.offerTypeDescAR.invalid && (eform.offerTypeDescAR.dirty || eform.offerTypeDescAR.touched)">
+                <span *ngIf="eform.offerTypeDescAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

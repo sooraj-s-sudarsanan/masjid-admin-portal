@@ -1,0 +1,539 @@
+// @version 1.beta.0
+$tags: "m" "margin", "p" "padding";
+
+$space: 5;
+$sides: (
+  "a" "",
+  "t" "-top",
+  "r" "-#{$right}",
+  "b" "-bottom",
+  "l" "-#{$left}",
+  "x" "-#{$left}" "-#{$right}",
+  "y" "-top" "-bottom"
+);
+
+$layout: "N" "Navigation", "T" "Toolbar";
+
+.sr-only {
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+
+  &-focusable {
+    &:active,
+    &:focus {
+      clip: auto;
+      width: auto;
+      height: auto;
+      position: static;
+      overflow: visible;
+      white-space: normal;
+    }
+  }
+}
+
+// FONT
+.f {
+  &-ultralight {
+    @include font($fontUL);
+  }
+  &-light {
+    @include font($fontL);
+  }
+  &-thin {
+    @include font($fontT);
+  }
+  &-regular {
+    @include font($font);
+  }
+  &-medium {
+    @include font($fontM);
+  }
+  &-semibold {
+    @include font($fontSB);
+  }
+  &-bold {
+    @include font($fontB);
+  }
+  &-heavy {
+    @include font($fontH);
+  }
+  &-black {
+    @include font($fontBK);
+  }
+}
+
+// TEXT_ALIGN
+.t {
+  &-l {
+    text-align: #{$left} !important;
+  }
+
+  &-r {
+    text-align: #{$right} !important;
+  }
+
+  &-c {
+    text-align: center !important;
+  }
+
+  &-j {
+    text-align: justify !important;
+  }
+
+  &-normal {
+    text-transform: initial !important;
+  }
+
+  &-AA,
+  &-uppercase {
+    text-transform: uppercase !important;
+  }
+
+  &-aa,
+  &-lowercase {
+    text-transform: lowercase !important;
+  }
+
+  &-Aa,
+  &-capitalize {
+    text-transform: capitalize !important;
+  }
+}
+
+// INLINE_BLOCK
+.ib {
+  vertical-align: middle;
+
+  &,
+  &-t,
+  &-m,
+  &-b,
+  &-l {
+    display: inline-block;
+  }
+
+  &-t {
+    vertical-align: top;
+  }
+
+  &-m {
+    vertical-align: middle;
+  }
+
+  &-b {
+    vertical-align: bottom;
+  }
+
+  &-l {
+    vertical-align: baseline;
+  }
+}
+
+// OPACITY
+.o {
+  @for $i from 0 through 20 {
+    &-#{$i*5} {
+      opacity: $i * 5 / 100;
+    }
+  }
+}
+
+// ICONS
+.i {
+  &-stack {
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    &-1x,
+    &-2x {
+      #{$left}: 0;
+      width: 100%;
+      text-align: center;
+      position: absolute;
+    }
+
+    &-1x {
+      line-height: inherit;
+    }
+
+    &-2x {
+      font-size: 2em;
+    }
+  }
+
+  &-rotate {
+    &-90 {
+      transform: rotate(90deg);
+    }
+    &-180 {
+      transform: rotate(180deg);
+    }
+    &-270 {
+      transform: rotate(270deg);
+    }
+  }
+
+  &-flip {
+    &-horizontal {
+      transform: scale(-1, 1);
+    }
+    &-vertical {
+      transform: scale(1, -1);
+    }
+  }
+
+  &-1_3x {
+    font-size: 1.3em !important;
+  }
+
+  &-1_5x {
+    font-size: 1.5em !important;
+  }
+
+  &-1_7x {
+    font-size: 1.7em !important;
+  }
+
+  &-2x {
+    font-size: 2em !important;
+  }
+
+  &-2_3x {
+    font-size: 2.3em !important;
+  }
+
+  &-2_5x {
+    font-size: 2.5em !important;
+  }
+
+  &-2_7x {
+    font-size: 2.7em !important;
+  }
+
+  &-3x {
+    font-size: 3em !important;
+  }
+
+  &-3_3x {
+    font-size: 3.3em !important;
+  }
+
+  &-3_5x {
+    font-size: 3.5em !important;
+  }
+
+  &-3_7x {
+    font-size: 3.7em !important;
+  }
+
+  &-4x {
+    font-size: 4em !important;
+  }
+
+  &-4_3x {
+    font-size: 4.3em !important;
+  }
+
+  &-4_5x {
+    font-size: 4.5em !important;
+  }
+
+  &-4_7x {
+    font-size: 4.7em !important;
+  }
+
+  &-5x {
+    font-size: 5em !important;
+  }
+}
+
+// MARGIN
+.m {
+  &-a-auto {
+    margin: auto !important;
+  }
+
+  &-x-auto,
+  &-l-auto {
+    margin-#{$left}: auto !important;
+  }
+
+  &-x-auto,
+  &-r-auto {
+    margin-#{$right}: auto !important;
+  }
+
+  &-y-auto {
+    margin-top: auto !important;
+    margin-#{$left}: auto !important;
+  }
+}
+
+@each $tag in $tags {
+  @each $side in $sides {
+    @for $i from 0 through 8 {
+      .#{nth($tag, 1)}-#{nth($side, 1)}-#{$i * $space} {
+        @if nth($side, 1) == "x" or nth($side, 1) == "y" {
+          #{nth($tag, 2)}#{nth($side, 2)}: #{$i * $space}px !important;
+          #{nth($tag, 2)}#{nth($side, 3)}: #{$i * $space}px !important;
+        } @else {
+          #{nth($tag, 2)}#{nth($side, 2)}: #{$i * $space}px !important;
+        }
+      }
+    }
+  }
+}
+
+// /* Negative Margin */
+@each $side in $sides {
+  $prop: "margin";
+  @for $i from 1 through 6 {
+    .m-#{nth($side, 1)}--#{$i * $space} {
+      @if nth($side, 1) == "x" or nth($side, 1) == "y" {
+        #{$prop}#{nth($side, 2)}: #{$i * -$space}px !important;
+        #{$prop}#{nth($side, 3)}: #{$i * -$space}px !important;
+      } @else {
+        #{$prop}#{nth($side, 2)}: #{$i * -$space}px !important;
+      }
+    }
+  }
+}
+
+// Borders
+[class*=" b-"],
+[class^="b-"] {
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(#000, 0.1);
+
+  &.solid {
+    border-style: solid;
+  }
+
+  &.dashed {
+    border-style: dashed;
+  }
+
+  &.dotted {
+    border-style: dotted;
+  }
+
+  &.double {
+    border-style: double;
+  }
+}
+
+@each $side in $sides {
+  $tag: "border";
+
+  @for $i from 0 through 5 {
+    .b-#{nth($side, 1)}-#{$i} {
+      @if nth($side, 1) == "x" or nth($side, 1) == "y" {
+        #{$tag}#{nth($side, 2)}-width: #{$i}px !important;
+        #{$tag}#{nth($side, 3)}-width: #{$i}px !important;
+      } @else {
+        #{$tag}#{nth($side, 2)}-width: #{$i}px !important;
+      }
+    }
+  }
+
+  @each $type in $color {
+    .b-#{nth($side, 1)}-#{nth($type, 1)} {
+      @if nth($side, 1) == "x" or nth($side, 1) == "y" {
+        #{$tag}#{nth($side, 2)}-color: nth($type, 2) !important;
+        #{$tag}#{nth($side, 3)}-color: nth($type, 2) !important;
+      } @else {
+        #{$tag}#{nth($side, 2)}-color: nth($type, 2) !important;
+      }
+    }
+  }
+}
+
+// BACKGROUND
+.bg {
+  @each $type in $bgColor {
+    &-#{nth($type, 1)} {
+      color: nth($type, 3) !important;
+      background: nth($type, 2) !important;
+    }
+  }
+}
+
+@each $type in $color {
+  // text-*
+  .text-#{nth($type, 1)} {
+    color: nth($type, 2) !important;
+
+    a,
+    label {
+      color: nth($type, 2) !important;
+    }
+  }
+
+  // fill-*
+  .fill-#{nth($type, 1)} {
+    fill: nth($type, 2);
+  }
+}
+
+// WIDTH AND HEIGHT
+.w-auto {
+  width: auto !important;
+
+  &.min {
+    min-width: initial;
+  }
+
+  &.max {
+    max-width: initial;
+  }
+}
+
+.h-auto {
+  height: auto !important;
+
+  &.min {
+    min-height: initial;
+  }
+
+  &.max {
+    max-height: initial;
+  }
+}
+
+@for $i from 1 through 20 {
+  .w-#{$i * 5} {
+    width: percentage($i * 5 / 100);
+  }
+
+  .h-#{$i * 5} {
+    height: percentage($i * 5 / 100);
+  }
+
+  @if $i <= 16 {
+    .w-#{$i * 20}px {
+      width: rem($i * 20px) !important;
+      &.min,
+      &.max {
+        width: auto !important;
+      }
+      &.min {
+        overflow: visible;
+        min-width: rem($i * 20px) !important;
+      }
+      &.max {
+        max-width: rem($i * 20px) !important;
+      }
+      &.scroll {
+        overflow: auto;
+        @include scrollbar(8px, map-get($theme, color), rgba(map-get($color, dark), 0));
+        &-x {
+          overflow-y: hidden;
+          @include scrollbar(8px, map-get($theme, color), rgba(map-get($color, dark), 0));
+        }
+        &-y {
+          overflow-x: hidden;
+          @include scrollbar(8px, map-get($theme, color), rgba(map-get($color, dark), 0));
+        }
+      }
+    }
+  }
+
+  $h: $i * 40;
+
+  .h-#{$h}px {
+    overflow: hidden;
+    height: rem($h + 0px) !important;
+
+    &.min,
+    &.max {
+      height: auto !important;
+    }
+
+    &.min {
+      min-height: rem($h + 0px) !important;
+      overflow: visible;
+    }
+
+    &.max {
+      max-height: rem($h + 0px) !important;
+    }
+
+    &.scroll {
+      overflow: auto;
+      @include scrollbar(8px, map-get($theme, color), rgba(map-get($color, dark), 0));
+      &-x {
+        overflow-y: hidden;
+        @include scrollbar(8px, map-get($theme, color), rgba(map-get($color, dark), 0));
+      }
+
+      &-y {
+        overflow-x: hidden;
+        @include scrollbar(8px, map-get($theme, color), rgba(map-get($color, dark), 0));
+      }
+    }
+  }
+}
+
+// .c {
+//   @include clearfix;
+// }
+
+// .r {
+//   @extend .row !optional;
+// }
+
+// .L {
+//   float: #{$left};
+// }
+
+// .R {
+//   float: #{$right};
+// }
+
+// .bar {
+//   @include clearfix;
+
+//   .h1,
+//   .h2,
+//   .h3,
+//   .h4,
+//   .h5,
+//   .h6,
+//   h1,
+//   h2,
+//   h3,
+//   h4,
+//   h5,
+//   h6 {
+//     margin: 0;
+//   }
+
+//   .L,
+//   .R {
+//     & > a {
+//       display: inline-block;
+//     }
+//   }
+
+//   &.transparent {
+//     background: transparent;
+//   }
+
+//   @each $bar in $layout {
+//     &-#{nth($bar, 1)} {
+//       // /* bar: #{nth($bar,2)} */
+//       @extend .bar !optional;
+//     }
+//   }
+// }

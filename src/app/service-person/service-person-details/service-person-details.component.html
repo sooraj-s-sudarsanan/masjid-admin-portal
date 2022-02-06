@@ -1,0 +1,14 @@
+<h1 mat-dialog-title class="dialog-title-h1">{{moduleKeyModel.servicePerson.name}}&nbsp;List</h1>
+<mat-dialog-content>   
+
+    <div class="row m-b-10">
+        <ngx-datatable class="material fullscreen" [rows]="serPersonList" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" rowHeight="auto" columnMode="force">
+        </ngx-datatable>
+    </div>    
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+</div>
+
+

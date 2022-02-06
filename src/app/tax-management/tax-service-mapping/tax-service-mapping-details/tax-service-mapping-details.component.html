@@ -1,0 +1,29 @@
+<h1 mat-dialog-title class="dialog-title-h1">{{moduleKeyModel.taxMapping.name}}&nbsp;List</h1>
+<mat-dialog-content>   
+    <mat-list>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Branch Name :</small>
+                <div class="w-100 font-weight-bold">{{row.data.serviceMappingBean.branch.branchName}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Service Name :</small>
+                <div class="w-100 font-weight-bold">{{row.data.serviceMappingBean.services.serviceName}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+    <div class="row m-b-10">
+        <ngx-datatable class="material fullscreen" [rows]="data" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" rowHeight="auto" columnMode="force">
+        </ngx-datatable>
+    </div>    
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+</div>
+
+

@@ -1,0 +1,85 @@
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Appoinment Details</h1>
+</header>
+<mat-dialog-content>
+    <div fxLayout="row" fxFill>
+        <div fxFlex="50" class="m-r-5">
+            <mat-list>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Booking Number :</small>
+                        <div class="w-100 font-weight-bold">{{row.data.bookingNumber}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Booking Status :</small>
+                        <div class="w-100 font-weight-bold">{{row.data.bookingStatus}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Booking Date :</small>
+                        <div class="w-100 font-weight-bold">{{row.data.bookingDate}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Time :</small>
+                        <div class="w-100 font-weight-bold">{{row.data.bookingStartTime}} - {{row.data.bookingEndTime}}
+                        </div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Service :</small>
+                        <div class="w-100 font-weight-bold">{{row.data.serviceMappingBean.services.serviceName}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Service Person :</small>
+                        <div class="w-100 font-weight-bold">
+                            {{row.data.branchServicePerson.servicePersonDisplayName}}
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div fxFlex="50">
+            <mat-list>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Name :</small>
+                        <div class="w-100 font-weight-bold">{{row.data.guestUserMobile?row.data.guestUserName+'
+                            (Guest)': row.data.users.fullName}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Mob Number :</small>
+                        <div class="w-100 font-weight-bold">
+                            {{row.data.guestUserMobile?row.data.guestUserMobile:row.data.users.mobileNo}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <div class="m-y-10">
+                        <small class="w-100 f-medium d-block m-b-5 o-50">Email :</small>
+                        <div class="w-100 font-weight-bold">{{row.data.guestUserMobile?'Not
+                            Available':row.data.users?row.data.users.email:'Not Available'}}</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</div>

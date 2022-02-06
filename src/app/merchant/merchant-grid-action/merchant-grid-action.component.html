@@ -1,0 +1,188 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.merchant.name}}</h1>
+    <mat-dialog-content>
+
+        <!--merchant Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Name" autocomplete="off" formControlName="merchantName" required>
+            <mat-error *ngIf="eform.merchantName.invalid && (eform.merchantName.dirty || eform.merchantName.touched)">
+                <span *ngIf="eform.merchantName.errors.required" class="alert-danger">
+                    Merchant Name is required
+                </span>
+                <span *ngIf="eform.merchantName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchant Name AR-->
+        <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Merchant Name AR" autocomplete="off" formControlName="merchantNameAR" required>
+            <mat-error
+                *ngIf="eform.merchantNameAR.invalid && (eform.merchantNameAR.dirty || eform.merchantNameAR.touched)">
+                <span *ngIf="eform.merchantNameAR.errors.required" class="alert-danger">
+                    Merchant Name is required
+                </span>
+                <span *ngIf="eform.merchantNameAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantDescription-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Description" autocomplete="off" formControlName="merchantDescription">
+            <mat-error
+                *ngIf="eform.merchantDescription.invalid && (eform.merchantDescription.dirty || eform.merchantDescription.touched)">
+                <span *ngIf="eform.merchantDescription.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactName AR-->
+        <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Merchant Description AR" autocomplete="off"
+                formControlName="merchantDescriptionAR">
+            <mat-error
+                *ngIf="eform.merchantDescriptionAR.invalid && (eform.merchantDescriptionAR.dirty || eform.merchantDescriptionAR.touched)">
+                <span *ngIf="eform.merchantDescriptionAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Contact Name" autocomplete="off" formControlName="merchantContactName"
+                required>
+            <mat-error
+                *ngIf="eform.merchantContactName.invalid && (eform.merchantContactName.dirty || eform.merchantContactName.touched)">
+                <span *ngIf="eform.merchantContactName.errors.required" class="alert-danger">
+                    Contact Name is required
+                </span>
+                <span *ngIf="eform.merchantContactName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactPhone-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Contact Phone" autocomplete="off" formControlName="merchantContactPhone"
+                required>
+            <mat-error
+                *ngIf="eform.merchantContactPhone.invalid && (eform.merchantContactPhone.dirty || eform.merchantContactPhone.touched)">
+                <span *ngIf="eform.merchantContactPhone.errors.required" class="alert-danger">
+                    Merchant Contact Phone is required
+                </span>
+                <span *ngIf="eform.merchantContactPhone.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactMobile-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Contact Mobile" autocomplete="off"
+                formControlName="merchantContactMobile" required>
+            <mat-error
+                *ngIf="eform.merchantContactMobile.invalid && (eform.merchantContactMobile.dirty || eform.merchantContactMobile.touched)">
+                <span *ngIf="eform.merchantContactMobile.errors.required" class="alert-danger">
+                    Merchant Contact Mobile is required
+                </span>
+                <span *ngIf="eform.merchantContactMobile.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactEmail-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Contact Email" autocomplete="off" formControlName="merchantContactEmail"
+                required>
+            <mat-error
+                *ngIf="eform.merchantContactEmail.invalid && (eform.merchantContactEmail.dirty || eform.merchantContactEmail.touched)">
+                <span *ngIf="eform.merchantContactEmail.errors.required" class="alert-danger">
+                    Merchant Contact Email is required
+                </span>
+                <span *ngIf="eform.merchantContactEmail.errors.email" class="alert-danger">
+                    Enter valid email
+                  </span>
+                <span *ngIf="eform.merchantContactEmail.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantLoginPassword-->    
+        <mat-form-field class="full-width" [style.display]="this.row.data ? 'none' : 'block'">
+            <input matInput type="password" placeholder="Password" autocomplete="new-password" formControlName="merchantLoginPassword"
+              [required]='this.row.data==null'>
+            <mat-hint align="start"><strong>Minimum 8 characters, at least one uppercase letter, one lowercase letter, one
+                number and one special character:</strong> </mat-hint>
+            <mat-error *ngIf="eform.merchantLoginPassword.invalid && (eform.merchantLoginPassword.dirty || eform.merchantLoginPassword.touched)">
+              <span *ngIf="eform.merchantLoginPassword.errors.required" class="alert-danger">
+                Password is required
+              </span>
+              <span *ngIf="eform.merchantLoginPassword.errors.pattern" class="alert-danger">
+                Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special
+                character(@.$!%*?&)
+              </span>
+            </mat-error>
+          </mat-form-field>
+
+         <!--Choose Module-->
+         <!-- <mat-form-field class="full-width" formGroupName="category">
+            <mat-label>Choose Category</mat-label>           
+            <mat-select formControlName="categoryId">
+                <mat-option *ngFor="let item of categoryList" [value]="item.categoryId">
+                  {{item.categoryName}}
+                </mat-option>
+              </mat-select>
+            <mat-error
+                *ngIf="form.get('category.categoryId').invalid && (form.get('category.categoryId').dirty || form.get('category.categoryId').touched)">
+                <span *ngIf="form.get('category.categoryId').errors.required" class="alert-danger">
+                    Please choose Category
+                </span>
+            </mat-error>
+        </mat-form-field> -->
+
+        <mat-form-field class=" m-t-20 full-width" appearance="fill">
+            <mat-label>Choose Category</mat-label>
+            <mat-select [formControl]="categoryFC" (selectionChange)="categorySelect($event)"  multiple>
+              <mat-option *ngFor="let item of categoryList" [value]="item.categoryId">{{item.categoryName}}</mat-option>
+            </mat-select>
+            <mat-error
+            *ngIf="eform.category.invalid && (eform.category.dirty || eform.category.touched)">
+            <span *ngIf="eform.category.errors.required" class="alert-danger">
+                Please choose Category
+            </span>
+        </mat-error>
+          </mat-form-field>
+
+          <!--planTypeCode-->
+          <mat-form-field class="full-width">
+            <mat-label>Choose Plan</mat-label>           
+            <mat-select formControlName="planTypeCode" required> 
+                <mat-option *ngFor="let item of planList" [value]="item.planTypeCode">
+                  {{item.planTypeName}}
+                </mat-option>
+              </mat-select>
+            <mat-error
+                *ngIf="eform.planTypeCode.invalid && (eform.planTypeCode.dirty || eform.planTypeCode.touched)">
+                <span *ngIf="eform.planTypeCode.errors.required" class="alert-danger">
+                    Please choose a Plan
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

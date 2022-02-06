@@ -1,0 +1,47 @@
+<form [formGroup]='staticPageNameForm' (ngSubmit)="onSubmit()">
+
+
+  <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.pageName.name}}</h1>
+  <mat-dialog-content>
+
+    <!--Page Name-->
+    <mat-form-field color="accent" class="full-width">
+      <input matInput placeholder="Page Name" autocomplete="off" formControlName="staticPageName" required>
+      <mat-error *ngIf="eform.staticPageName.invalid && (eform.staticPageName.dirty || eform.staticPageName.touched)">
+        <span *ngIf="eform.staticPageName.errors.required" class="alert-danger">
+          Page Name is required
+        </span>
+        <span *ngIf="eform.staticPageName.errors.maxlength" class="alert-danger">
+          length exceeded
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <!--Page Name ARB-->
+    <mat-form-field color="accent" class="full-width matform-rtl">
+      <input matInput placeholder="Page Name Arb." autocomplete="off" formControlName="staticPageNameArb" required>
+      <mat-error
+        *ngIf="eform.staticPageNameArb.invalid && (eform.staticPageNameArb.dirty || eform.staticPageNameArb.touched)">
+        <span *ngIf="eform.staticPageNameArb.errors.required" class="alert-danger">
+          Page Name Arb. is required
+        </span>
+        <span *ngIf="eform.staticPageNameArb.errors.maxlength" class="alert-danger">
+          length exceeded
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <!--isPageDisplay-->
+    <div class="full-width">
+      <mat-checkbox class="example-margin"  formControlName="isPageDisplay">
+        Is Page Display To Home
+      </mat-checkbox>
+    </div>
+
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+  </div>
+
+</form>

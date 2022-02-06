@@ -1,0 +1,87 @@
+$fontFamily: Tahoma, Verdana, sans-serif;
+$icomoon-font-path: "./assets/icons";
+
+// COMMON FONT CHART
+// -----------------
+$fontUL: 100; // 'fontName ultralight', sans-serif;
+$fontT: 200; // 'fontName thin', sans-serif;
+$fontL: 300; // 'fontName light', sans-serif;
+$font: 400; // 'fontName regular', sans-serif;
+$fontM: 500; // 'fontName medium', sans-serif;
+$fontSB: 600; // 'fontName semibold', sans-serif;
+$fontB: 700; // 'fontName bold', sans-serif;
+$fontH: 800; // 'fontName heavy', sans-serif;
+$fontBK: 900; // 'fontName black', sans-serif;
+
+$theme: (
+  fontFamily: $fontFamily,
+  rad: 27px,
+  radL: 35px,
+  bg: #fff,
+  write: #fff,
+  scWrite: #fff,
+  matBg: #f0f1f8,
+  color: #8e1d58,
+  colorL: #e0356a,
+  scColor: #025a91,
+  accent: #025a91,
+  accentL: #dee7f5,
+  accentXL: #eef3fa,
+  accentD: darken(#dee7f5, 6.5%),
+  a1: #aab1b9,
+  a2: #dee7f5,
+  a3: #d0dcef,
+  a4: #c0c8d5,
+  a5: #79879d,
+  warn: #e6ba00,
+  link: #8e1d58,
+  brdr: #dee7f5,
+  trColor: #4ccbac,
+  text: rgba(#000, 0.87),
+  types: (
+    theme: #8e1d58,
+    accent: #025a91,
+    primary: #8e1d58,
+    success: #1a9c00,
+    info: #43bbfb,
+    warning: #e6ba00,
+    danger: #b52154,
+    accentL: #eef3fa,
+    default: #dee7f5,
+    grayed: #c9cbcc,
+    light: #fff,
+    dark: #000,
+  ),
+  contrast: (
+    theme: #fff,
+    accent: #fff,
+    primary: #fff,
+    success: #fff,
+    info: rgba(#000, 0.72),
+    warning: #fff,
+    danger: #fff,
+    accentL: #95a3b9,
+    default: #000,
+    grayed: #000,
+    light: #000,
+    dark: #fff,
+  ),
+);
+
+$baseFontSize: map-get($theme, baseFontSize);
+
+$color: map-get($theme, types);
+$cont: map-get($theme, contrast);
+
+$bgColor: (
+  "default" #fff map-get($theme, text),
+  "primary" map-get($color, primary) #fff,
+  "success" map-get($color, success) #fff,
+  "info" map-get($color, info) #fff,
+  "warning" map-get($color, warning) #fff,
+  "danger" map-get($color, danger) #fff,
+  "theme" map-get($theme, color) #fff,
+  "secondary" map-get($theme, scColor) #fff
+);
+
+$dir: rtl;

@@ -1,0 +1,35 @@
+<div fxLayout="row" fxFill>
+    <div fxFlex="25">
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose Merchant</mat-label>
+            <mat-select [(ngModel)]="selectedMerchant" (selectionChange)="merchantSelectionChange($event.value)">
+                <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div fxFlex="25">
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose Branch</mat-label>
+            <mat-select [(ngModel)]="selectedBranch" (selectionChange)="branchSelectionChange($event.value)">
+                <mat-option *ngFor="let item of branchList" [value]="item">{{item.branchName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div fxFlex="25">
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose Category</mat-label>
+            <mat-select [(ngModel)]="selectedCategory" (selectionChange)="categorySelectionChange($event.value)">
+                <mat-option *ngFor="let item of categoryList" [value]="item">{{item.categoryName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div fxFlex="25">
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose Service</mat-label>
+            <mat-select [(ngModel)]="selectedService" (selectionChange)="serviceSelectionChange($event.value)">
+                <mat-option *ngFor="let item of serviceList" [value]="item.services">{{item.services.serviceName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<h1 mat-dialog-title class="h3 title">
+    <span class="ib-m">{{this.action}}&nbsp;{{moduleKeyModel.mapping.name}}</span>
+</h1>
+<mat-card class="m-t-5 m-b-5">
+    <div class="row">
+        <div fxLayout="row" fxFill>
+            <div fxFlex="30">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Merchant</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedMerchantText" [(ngModel)]="selectedMerchant"
+                        (selectionChange)="merchantSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="30">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Branch</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedBranchText" [(ngModel)]="selectedBranch"
+                        (selectionChange)="branchSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{item.branchName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="30">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Category</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedBranchText" [(ngModel)]="selectedCategory"
+                        (selectionChange)="categorySelectionChange($event.value)">
+                        <mat-option *ngFor="let item of categoryList" [value]="item.categoryId">{{item.categoryName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-dialog-content style="min-height: 200px;" class="p-t-10 p-b-10">
+    <div class="row">
+        <ngx-datatable class="material fullscreen" [rows]="serviceList" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" rowHeight="50px">
+        </ngx-datatable>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button type="submit" mat-raised-button color="primary" (click)="submit($event)">Submit</button>
+    <button mat-raised-button color="warn"  (click)="cancel($event)"  cdkFocusInitial>Cancel</button>
+</div>
+
+
+<ng-template #selectService let-row="row" let-value="value">
+    <mat-checkbox *ngIf="!row.serviceMappingId" class="example-margin" [checked]="row.selected"
+        [(ngModel)]="row.selected">{{row.serviceName}}
+    </mat-checkbox>
+    <span *ngIf="row.serviceMappingId">
+        <mat-icon class="menuIcon">done</mat-icon>&nbsp;{{row.serviceName}}
+    </span>
+
+</ng-template>
+<ng-template #byPerson let-row="row" let-value="value">
+    <mat-checkbox *ngIf="!row.serviceMappingId" class="example-margin" [disabled]="!row.selected"
+        [checked]="row.servicePersonLevelBooking" [(ngModel)]="row.servicePersonLevelBooking"></mat-checkbox>
+
+    <span *ngIf="row.serviceMappingId">
+        <mat-icon class="menuIcon">{{row.servicePersonLevelBooking?'done':'close'}}
+        </mat-icon>
+    </span>
+</ng-template>
+<ng-template #bookingAllowed let-row="row" let-value="value">
+    <input *ngIf="!row.serviceMappingId" class="bb-1" matInput type="number" [disabled]="!row.selected"
+        [value]="row.numberOfBookingAllowed" [(ngModel)]="row.numberOfBookingAllowed" autocomplete="off">
+    <span *ngIf="row.serviceMappingId">{{row.numberOfBookingAllowed}}</span>
+</ng-template>
+<ng-template #allowRepeatedBooking let-row="row" let-value="value">
+    <mat-checkbox *ngIf="!row.serviceMappingId" class="example-margin" [disabled]="!row.selected"
+        [checked]="row.allowRepeatedBooking" [(ngModel)]="row.allowRepeatedBooking"
+        ></mat-checkbox>
+
+    <span *ngIf="row.serviceMappingId">      
+        <mat-icon class="menuIcon">{{row.allowRepeatedBooking=='true'?'done':'close'}}
+        </mat-icon>
+    </span>
+</ng-template>
+<ng-template #startTime let-row="row" let-value="value">
+    <input [class]="!row.serviceMappingId?'':'d-none'" class="w-100" [value]='row.servicePersonStartTime'
+        [(ngModel)]="row.servicePersonStartTime" [disabled]="!row.selected" placeholder="Start Time"
+        aria-label="Start Time" [ngxTimepicker]="appendedToInput" readonly>
+    <span *ngIf="row.serviceMappingId">{{row.servicePersonStartTime}}</span>
+    <ngx-material-timepicker [minutesGap]="5" #appendedToInput [appendToInput]="true"></ngx-material-timepicker>
+</ng-template>
+
+<ng-template #endTime let-row="row" let-value="value">
+    <input [class]="!row.serviceMappingId?'':'d-none'" class="w-100" [value]='row.servicePersonEndTime'
+        [(ngModel)]="row.servicePersonEndTime" [disabled]="!row.selected" placeholder="End Time" aria-label="End Time"
+        [ngxTimepicker]="appendedToInput2" readonly>
+    <span *ngIf="row.serviceMappingId">{{row.servicePersonEndTime}}</span>
+    <ngx-material-timepicker [minutesGap]="5" #appendedToInput2 [appendToInput]="true"></ngx-material-timepicker>
+</ng-template>
+<ng-template #duration let-row="row" let-value="value">
+    <input *ngIf="!row.serviceMappingId" type="number" class="bb-1" matInput [disabled]="!row.selected"
+        [value]="row.servicePersonAvgDuration" [(ngModel)]="row.servicePersonAvgDuration" autocomplete="off">
+    <span *ngIf="row.serviceMappingId">{{row.servicePersonAvgDuration}}</span>
+</ng-template>
+<ng-template #price let-row="row" let-value="value">
+    <input *ngIf="!row.serviceMappingId" type="number" class="bb-1" matInput [disabled]="!row.selected"
+        [value]="row.servicePrice" [(ngModel)]="row.servicePrice" autocomplete="off">
+    <span *ngIf="row.serviceMappingId">{{row.servicePrice}}</span>
+</ng-template>
+<ng-template #mappingAction let-row="row" let-value="value">
+    <a *ngIf="row.serviceMappingId" [matTooltip]="'Edit Mapping'" [matTooltipPosition]="'above'"
+        (click)="editMapping(row)">
+        <mat-icon color="primary" class="menuIcon">edit</mat-icon>
+    </a>
+    <a *ngIf="row.serviceMappingId" [matTooltip]="'Remove Mapping'" [matTooltipPosition]="'above'"
+        (click)="removeMapping(row)">
+        <mat-icon color="warn" class="menuIcon">delete</mat-icon>
+    </a>
+</ng-template>

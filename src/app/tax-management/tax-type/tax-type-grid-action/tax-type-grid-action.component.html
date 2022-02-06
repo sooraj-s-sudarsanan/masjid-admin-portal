@@ -1,0 +1,66 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+        ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.taxType.name}}</h1>
+    <mat-dialog-content>
+
+        <!--taxTypeName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Tax Type Name" autocomplete="off" formControlName="taxTypeName" required>
+            <mat-error *ngIf="eform.taxTypeName.invalid && (eform.taxTypeName.dirty || eform.taxTypeName.touched)">
+                <span *ngIf="eform.taxTypeName.errors.required" class="alert-danger">
+                    Tax Type Name is required
+                </span>
+                <span *ngIf="eform.taxTypeName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--taxTypeDesc-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Type Description" autocomplete="off" formControlName="taxTypeDesc">
+            <mat-error *ngIf="eform.taxTypeDesc.invalid && (eform.taxTypeDesc.dirty || eform.taxTypeDesc.touched)">
+                <span *ngIf="eform.taxTypeDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--taxTypeCode-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Tax Type Code" autocomplete="off" formControlName="taxTypeCode" required>
+            <mat-error *ngIf="eform.taxTypeCode.invalid && (eform.taxTypeCode.dirty || eform.taxTypeCode.touched)">
+                <span *ngIf="eform.taxTypeCode.errors.required" class="alert-danger">
+                    Tax Type Code is required
+                </span>
+                <span *ngIf="eform.taxTypeCode.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+         <!--Choose taxTypeCountryCode-->
+         <mat-form-field class="full-width">
+            <mat-label>Choose Country</mat-label>
+            <mat-select formControlName="taxTypeCountryCode">
+                <mat-option *ngFor="let item of countryList" [value]="item.nationalityCode">
+                    {{item.nationalityName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('taxTypeCountryCode').invalid && (form.get('taxTypeCountryCode').dirty || form.get('taxTypeCountryCode').touched)">
+                <span *ngIf="form.get('taxTypeCountryCode').errors.required" class="alert-danger">
+                    Please choose Country
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

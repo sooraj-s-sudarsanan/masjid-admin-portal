@@ -1,0 +1,140 @@
+<form [formGroup]='adminUserForm' (ngSubmit)="onSubmit()">
+
+
+  <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+    ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.adminUserManagement.name}}</h1>
+  <mat-dialog-content>
+
+    <!--roleName-->
+    <mat-form-field formGroupName="userRole" class="full-width p-t-10">
+      <mat-label>Choose Role</mat-label>
+      <mat-select required formControlName="roleName" (selectionChange)="roleNameChange($event.value)">
+        <mat-option *ngFor="let item of roleTypeList" [value]="item.roleName">{{item.roleName}}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="this.adminUserForm.get('userRole.roleName').invalid && (this.adminUserForm.get('userRole.roleName').dirty || this.adminUserForm.get('userRole.roleName').touched)">
+        <span *ngIf="this.adminUserForm.get('userRole.roleName').errors.required" class="alert-danger">
+          Please choose module
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <!--Merchant-->
+    <mat-form-field class="full-width p-t-10" formGroupName="merchant" *ngIf='this.adminUserForm.get("userRole.roleName").value==="Merchant Admin" ||
+    this.adminUserForm.get("userRole.roleName").value==="Branch Admin" ||
+    this.adminUserForm.get("userRole.roleName").value==="Merchant Employee"'>
+      <mat-label>Choose Merchant</mat-label>
+      <mat-select required formControlName="merchantId" (selectionChange)="merchantChange($event.value)">
+        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="this.adminUserForm.get('merchant.merchantId').invalid && (this.adminUserForm.get('merchant.merchantId').dirty || this.adminUserForm.get('merchant.merchantId').touched)">
+        <span *ngIf="this.adminUserForm.get('merchant.merchantId').errors.required" class="alert-danger">
+          Please choose Merchant
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <!--Branch-->
+    <mat-form-field class="full-width p-t-10" formGroupName="branch" *ngIf='this.adminUserForm.get("userRole.roleName").value==="Branch Admin" ||
+      this.adminUserForm.get("userRole.roleName").value==="Merchant Employee"'>
+      <mat-label>Choose Branch</mat-label>
+      <mat-select required formControlName="branchId">
+        <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{item.branchName}}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="this.adminUserForm.get('branch.branchId').invalid && (this.adminUserForm.get('branch.branchId').dirty || this.adminUserForm.get('branch.branchId').touched)">
+        <span *ngIf="this.adminUserForm.get('branch.branchId').errors.required" class="alert-danger">
+          Please choose Branch
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <!--fullName-->
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Full Name" autocomplete="no" formControlName="fullName" required>
+      <mat-error *ngIf="eform.fullName.invalid && (eform.fullName.dirty || eform.fullName.touched)">
+        <span *ngIf="eform.fullName.errors.required" class="alert-danger">
+          Name is required
+        </span>
+        <span *ngIf="eform.fullName.errors.maxlength" class="alert-danger">
+          length exceeded
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <!--mobileNo-->
+    <div class="flex">
+      <div class="w-30">
+        <mat-form-field class=" full-width" formGroupName="countryCode">
+          <mat-label>Country Code</mat-label>
+          <mat-select required formControlName="nationalityId">
+            <mat-option *ngFor="let item of nationalityList" [value]="item.nationalityId">{{item.countryCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="w-70 m-l-5">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Mobile Number" autocomplete="no" formControlName="mobileNo" required>
+          <mat-error *ngIf="eform.mobileNo.invalid && (eform.mobileNo.dirty || eform.mobileNo.touched)">
+            <span *ngIf="eform.mobileNo.errors.pattern" class="alert-danger">
+              Enter valid Mobile Number
+            </span>
+            <span *ngIf="eform.mobileNo.errors.maxlength" class="alert-danger">
+              length exceeded
+            </span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!--email-->
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Email" autocomplete="no" formControlName="email" required>
+      <!-- <mat-hint>Domain name must be {{emailDomain}}</mat-hint> -->
+      <mat-error *ngIf="eform.email.invalid && (eform.email.dirty || eform.email.touched)">
+        <span *ngIf="eform.email.errors.required" class="alert-danger">
+          Email is required
+        </span>
+        <span *ngIf="eform.email.errors.email" class="alert-danger">
+          Enter valid email
+        </span>
+        <span *ngIf="eform.email.errors.maxlength" class="alert-danger">
+          length exceeded
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <!--Password-->
+    <mat-form-field class="full-width" [style.display]="this.row.data ? 'none' : 'block'">
+      <input matInput type="password" placeholder="Password" autocomplete="new-password" formControlName="password"
+        [required]='this.row.data==null'>
+      <mat-hint align="start"><strong>Minimum 8 characters, at least one uppercase letter, one lowercase letter, one
+          number and one special character:</strong> </mat-hint>
+      <mat-error *ngIf="eform.password.invalid && (eform.password.dirty || eform.password.touched)">
+        <span *ngIf="eform.password.errors.required" class="alert-danger">
+          password is required
+        </span>
+        <span *ngIf="eform.password.errors.pattern" class="alert-danger">
+          Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special
+          character(@.$!%*?&)
+        </span>
+        <span *ngIf="eform.password.errors.maxlength" class="alert-danger">
+          length exceeded
+      </span>
+      </mat-error>
+    </mat-form-field>
+
+
+
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+  </div>
+
+</form>

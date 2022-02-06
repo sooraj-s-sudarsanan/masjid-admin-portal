@@ -1,0 +1,311 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$AdminApp-primary: mat-palette($mat-indigo);
+$AdminApp-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$AdminApp-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$AdminApp-theme: mat-light-theme((
+  color: (
+    primary: $AdminApp-primary,
+    accent: $AdminApp-accent,
+    warn: $AdminApp-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($AdminApp-theme);
+
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+
+@import "./scss/base/typo";
+@import "./scss/base/vars";
+@import "./scss/base/mixins";
+
+// Styles
+@import "./scss/base/base";
+@import "./scss/base/utilities";
+@import "./scss/base/framework";
+@import "./scss/base/animations";
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$RMC-primary: (
+  50 : #e0eaed,
+  100 : #b3ccd3,
+  200 : #80aab5,
+  300 : #4d8797,
+  400 : #266e81,
+  500 : #00546b,
+  600 : #004d63,
+  700 : #004358,
+  800 : #003a4e,
+  900 : #00293c,
+  A100 : #72c8ff,
+  A200 : #3fb5ff,
+  A400 : #0ca1ff,
+  A700 : #0094f1,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #ffffff,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #ffffff,
+      A700 : #ffffff,
+  )
+);
+
+$RMC-accent: (
+  50 : #fde8e4,
+  100 : #f9c6bc,
+  200 : #f6a190,
+  300 : #f27b64,
+  400 : #ef5e42,
+  500 : #ec4221,
+  600 : #ea3c1d,
+  700 : #e73318,
+  800 : #e42b14,
+  900 : #df1d0b,
+  A100 : #ffffff,
+  A200 : #ffd9d6,
+  A400 : #ffa9a3,
+  A700 : #ff918a,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+$RMC-input-primary: (
+  500: #00546b,
+  contrast: (
+    50: white,
+  ),
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$RMC-admin-app-primary: mat-palette($RMC-primary);
+$RMC-admin-app-accent: mat-palette($RMC-accent);
+
+// The warn palette is optional (defaults to red).
+$RMC-admin-app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$RMC-admin-app-theme: mat-light-theme($RMC-admin-app-primary, $RMC-admin-app-accent, $RMC-admin-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($RMC-admin-app-theme);
+
+mat-icon {
+  @extend %nilSelect;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.title {
+  padding: 10px 0;
+  // margin-bottom: 30px;
+  border-bottom: 1px solid map-get($theme, color);
+}
+
+// /* Theme styling */
+.mat-raised-button.mat-accent {
+  color: white;
+  border-radius: 20px;
+  padding: 0px 30px 0px 30px;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 5px !important;
+}
+
+.full-width-80 {
+  width: 95%;
+  margin-top: 5px !important;
+}
+
+.tooltip {
+  color: white !important;
+  font-size: small !important;
+  background: map-get($color, dark);
+}
+
+// .mat-button {
+//   background: #8e1d58 !important;
+//   color: white !important;
+// }
+
+// /* Snackbar */
+.snackbar {
+  &-success {
+    color: #155724;
+    border-color: #c3e6cb;
+    background-color: #d4edda;
+  }
+  &-error {
+    color: #721c24;
+    border-color: #f5c6cb;
+    background-color: #f8d7da;
+  }
+  &-warning {
+    color: #b3a22c;
+    border-color: #f5c6cb;
+    background-color: #f8d7da;
+  }
+}
+
+.text-inside-grid {
+  left: 5px;
+  position: absolute;
+}
+
+.change-rtl {
+  direction: rtl !important;
+}
+.matform-rtl {
+  text-align: right !important;
+}
+.datatable-row-even {
+  background-color: white;
+}
+
+.datatable-row-odd {
+  background-color: map-get($theme, accentXL);
+}
+
+.mat-list-base {
+  .mat-list-item,
+  .mat-list-option {
+    .mat-list-item-content {
+      width: 100%;
+      padding: 8px !important;
+    }
+  }
+}
+
+.ngx-datatable.material {
+  &.fixed-header {
+    .datatable-header {
+      border-radius: 5px 5px 0 0;
+      background: map-get($theme, color);
+      .datatable-header-inner {
+        .datatable-header-cell {
+          font-size: 14px;
+          font-weight: 500;
+          color: white;
+          background: map-get($theme, color);
+          border-right: 1px solid white;
+        }
+      }
+      .resize-handle {
+        border-color: rgba(map-get($color, light), 0.4);
+      }
+    }
+  }
+  .datatable-body {
+    .datatable-body-row {
+      .datatable-body-cell {
+        display: flex;
+        padding: rem(4px) rem(8px);
+        .datatable-body-cell-label {
+          align-self: center;
+        }
+      }
+    }
+  }
+
+  &:not(.cell-selection) {
+    .datatable-body-row {
+      &:hover {
+        .datatable-row-group {
+          background: lighten(map-get($theme, color), 62%);
+        }
+      }
+    }
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-chip-list-stacked .mat-chip-list-wrapper .mat-standard-chip {
+  width: 100px !important;
+}
+
+.mat-chip-list-stacked .mat-chip-list-wrapper {
+  align-items: center !important;
+}
+
+.cdk-overlay-container {
+  z-index: 500 !important;
+}
+
+.dialog-title-h1{
+  border-bottom: 2px solid #00546b;
+  font-size: 25px;
+  color: #00546b;
+}
+
+.d-none{
+  display:none !important;
+}

@@ -1,0 +1,83 @@
+@import "~@angular/material/theming";
+@import "theme";
+
+$img: './assets/images';
+
+// $warn: (
+//   50: #ffebee,
+//   100: #ffcdd2,
+//   200: #ef9a9a,
+//   300: #e57373,
+//   400: #ef5350,
+//   500: map-get($theme, warn),
+//   600: #e53935,
+//   700: #d32f2f,
+//   800: #c62828,
+//   900: #b71c1c,
+//   A100: #ff8a80,
+//   A200: #ff5252,
+//   A400: #ff1744,
+//   A700: #d50000,
+//   contrast: (
+//     50: rgba(map-get($color, dark), 0.87),
+//     100: rgba(map-get($color, dark), 0.87),
+//     200: rgba(map-get($color, dark), 0.87),
+//     300: rgba(map-get($color, dark), 0.87),
+//     400: rgba(map-get($color, dark), 0.87),
+//     500: map-get($color, light),
+//     600: map-get($color, light),
+//     700: map-get($color, light),
+//     800: map-get($color, light),
+//     900: map-get($color, light),
+//     A100: rgba(map-get($color, dark), 0.87),
+//     A200: map-get($color, light),
+//     A400: map-get($color, light),
+//     A700: map-get($color, light)
+//   )
+// );
+
+// $mat-blue: map-merge(
+//   $mat-blue,
+//   (
+//     50: #eef3fa,
+//     100: #dee7f5,
+//     200: #d0dcef,
+//     300: #d0dcef,
+//     400: #dee7f5,
+//     500: map-get($theme, accent),
+//     600: #d0dcef,
+//     700: #C0C8D5,
+//     800: #95A3B9,
+//     900: #79879d,
+//     A100: #c9cbcc,
+//     A200: #d0dcef,
+//     A400: #C0C8D5,
+//     A700: #79879d
+//   )
+// );
+
+// $mat-red: map-merge(
+//   $mat-red,
+//   (
+//     50: #ffebee,
+//     100: #ffcdd2,
+//     200: #ef9a9a,
+//     300: #e57373,
+//     400: #ef5350,
+//     500: map-get($theme, color),
+//     600: #e53935,
+//     700: #d32f2f,
+//     800: #c62828,
+//     900: #b71c1c,
+//     A100: #ff8a80,
+//     A200: #ff5252,
+//     A400: #ff1744,
+//     A700: #d50000
+//   )
+// );
+
+// $app-primary: mat-palette($mat-red);
+// $app-accent: mat-palette($mat-blue, 500);
+// $app-warn: mat-palette($mat-orange, 700);
+
+// $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);

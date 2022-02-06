@@ -1,0 +1,23 @@
+
+
+
+<mat-grid-list cols="2" rowHeight="10:1">
+    <mat-grid-tile>
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose Network</mat-label>
+            <mat-select color="primary" [(ngModel)]="selectedNetwork" (selectionChange)="networkSelectionChange($event.value)">
+                <mat-option *ngFor="let item of networkList" [value]="item">{{item.networkName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose Category</mat-label>
+            <mat-select #category [(ngModel)]="selectedCategory" (selectionChange)="categorySelectionChange($event.value)">
+                <mat-option *ngFor="let item of categoryList" [value]="item">{{item.categoryName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>

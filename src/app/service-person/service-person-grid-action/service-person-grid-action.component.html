@@ -1,0 +1,177 @@
+<h1 mat-dialog-title class="h3 title">
+    <span class="ib-m">Add or Update &nbsp;{{moduleKeyModel.servicePerson.name}}</span>
+</h1>
+<mat-card class="m-t-5 m-b-5">
+    <div class="row">
+        <div fxLayout="row" fxFill>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Merchant</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedMerchantText" [(ngModel)]="selectedMerchant"
+                        (selectionChange)="merchantSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Branch</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedBranchText" [(ngModel)]="selectedBranch"
+                        (selectionChange)="branchSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{item.branchName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Service</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedServiceText" [(ngModel)]="selectedService"
+                        (selectionChange)="serviceSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of serviceList" [value]="item.serviceMappingId">
+                            {{item.services.serviceName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-card class="m-t-10 m-b-5" >
+    <mat-dialog-content *ngIf="this.numberOfBookingAllowed>0">
+        <div class="row">           
+            <div fxLayout="row" fxFill>
+                <div fxFlex="33" *ngFor="let a of servicePersons; let index = index">                    
+                    <mat-form-field appearance="fill" class="full-width-80">
+                        <mat-label>Select Service Person</mat-label>
+                        <mat-select  (selectionChange)="personSelectionChange($event.value,index)" [ngModel]="a?a.servicePersonId:index" [value]="a?a.servicePersonId:null">
+                            <mat-option [disabled]="item.disabled" *ngFor="let item of servicePersonsList;let i=index"  [value]="item.servicePersonId">{{item.servicePersonName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                
+            </div>
+            <!-- 
+            <ngx-datatable class="material fullscreen" [rows]="mappingRow" [columns]="columns" [columnMode]="'force'"
+                [headerHeight]="50" rowHeight="50px"
+                [messages]="{emptyMessage: allDataSelected?'Service Person not found.':'Please choose a service.'}">
+            </ngx-datatable> -->
+        </div>
+
+        <!-- <div class="row m-t-10">
+
+            <h3 mat-dialog-title class="h3 title">
+                <span class="ib-m bold">Add New Service Person</span>
+            </h3>
+            <mat-grid-list cols="2" rowHeight="2:1">
+                <mat-grid-tile>
+                    <div class="row grid-cont">
+
+                       
+                        <mat-form-field color="accent" class="full-width">
+                            <input matInput placeholder="Service Person Name" autocomplete="off"
+                                formControlName="servicePersonName" required>
+                            <mat-error
+                                *ngIf="eform.servicePersonName.invalid && (eform.servicePersonName.dirty || eform.servicePersonName.touched)">
+                                <span *ngIf="eform.servicePersonName.errors.required" class="alert-danger">
+                                    Service Person Name is required
+                                </span>
+                                <span *ngIf="eform.servicePersonName.errors.maxlength" class="alert-danger">
+                                    length exceeded
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                       
+                        <mat-form-field color="accent" class="full-width">
+                            <input matInput placeholder="Service Person Desc." autocomplete="off"
+                                formControlName="servicePersonDesc">
+                            <mat-error
+                                *ngIf="eform.servicePersonDesc.invalid && (eform.servicePersonDesc.dirty || eform.servicePersonDesc.touched)">
+                                <span *ngIf="eform.servicePersonDesc.errors.maxlength" class="alert-danger">
+                                    length exceeded
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                       
+                        <mat-form-field color="accent" class="full-width">
+                            <input matInput placeholder="Start Time" autocomplete="off"
+                                formControlName="servicePersonStartTime" required>
+                            <mat-hint>HH:MM AM/PM</mat-hint>
+                            <mat-error
+                                *ngIf="eform.servicePersonStartTime.invalid && (eform.servicePersonStartTime.dirty || eform.servicePersonStartTime.touched)">
+                                <span *ngIf="eform.servicePersonStartTime.errors.required" class="alert-danger">
+                                    Start Time is required
+                                </span>
+                                <span *ngIf="eform.servicePersonStartTime.errors.maxlength" class="alert-danger">
+                                    length exceeded
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                        
+                        <mat-form-field color="accent" class="full-width">
+                            <input matInput placeholder="End Time" autocomplete="off"
+                                formControlName="servicePersonEndTime" required>
+                            <mat-hint>HH:MM AM/PM</mat-hint>
+                            <mat-error
+                                *ngIf="eform.servicePersonEndTime.invalid && (eform.servicePersonEndTime.dirty || eform.servicePersonEndTime.touched)">
+                                <span *ngIf="eform.servicePersonEndTime.errors.required" class="alert-danger">
+                                    End Time is required
+                                </span>
+                                <span *ngIf="eform.servicePersonEndTime.errors.maxlength" class="alert-danger">
+                                    length exceeded
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                       
+                        <mat-form-field color="accent" class="full-width">
+                            <input type="number" matInput placeholder="Avg Duration" autocomplete="off"
+                                formControlName="servicePersonAvgDuration" required>
+                            <mat-hint>in minutes</mat-hint>
+                            <mat-error
+                                *ngIf="eform.servicePersonAvgDuration.invalid && (eform.servicePersonAvgDuration.dirty || eform.servicePersonAvgDuration.touched)">
+                                <span *ngIf="eform.servicePersonAvgDuration.errors.required" class="alert-danger">
+                                    AvgDuration is required
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="row grid-cont" style="width: 90%;">
+                       
+                        <app-working-days [inRequired]='true' [inValue]='wStartDay' [inDisabled]="wEndDay"
+                            [placeholder]="'Working Day Start'" (change)="onSelectedWDay($event,1)">
+                        </app-working-days>
+                        <app-working-days [inRequired]='false' [inValue]='wEndDay' [inDisabled]="wStartDay"
+                            [placeholder]="'Working Day End'" (change)="onSelectedWDay($event,2)">
+                        </app-working-days>
+                        <span class="mat-error"
+                            *ngIf="eform.servicePersonWorkingDay.invalid && (formDirective.submitted||!eform.servicePersonWorkingDay.invalid)">
+                            <span *ngIf="eform.servicePersonWorkingDay.errors.required" class="alert-danger">
+                                Working Days is required
+                            </span>
+                        </span>
+                    </div>
+
+                </mat-grid-tile>
+            </mat-grid-list>
+
+
+        </div> -->
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button mat-raised-button [disabled]="!(this.numberOfBookingAllowed>0)" (click)="submitClick($event)" color="primary">Submit</button>
+        <button mat-raised-button color="warn" (click)="cancelClick($event)" cdkFocusInitial>Cancel</button>
+    </div>
+</mat-card>
+
+<ng-template #delete let-row="row" let-rowIndex="rowIndex" let-value="value">
+    <a>
+        <mat-icon [color]='"primary"' (click)="editPerson(row,rowIndex)">edit</mat-icon>
+    </a>
+    <a>
+        <mat-icon [color]='"warn"' (click)="removePerson(row,rowIndex)">delete</mat-icon>
+    </a>
+</ng-template>

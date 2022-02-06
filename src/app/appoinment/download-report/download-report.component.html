@@ -1,0 +1,23 @@
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Download</h1>
+</header>
+<mat-dialog-content>
+    <p *ngIf="reportList.length==0">Report are not configured yet.</p>
+    <mat-list>
+        <mat-list-item *ngFor="let conig of reportList">
+            <div fxLayout="row" fxFill class="m-y-10">
+                <div fxFlex="30">
+                    <small class="w-100 f-medium d-block m-b-5 o-50">{{conig.reportType.reportTypeName}}</small>
+                </div>
+                <div fxFlex="70">
+                    <a (click)="download(conig)"><i class="material-icons">download</i></a>
+                </div>             
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</div>

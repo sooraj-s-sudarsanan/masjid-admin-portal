@@ -1,0 +1,53 @@
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Details</h1>
+</header>
+<mat-dialog-content>
+    <mat-list>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Merchant Name :</small>
+                <div class="w-100 font-weight-bold">{{row.data.merchantName}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Merchant Name AR :</small>
+                <div class="w-100 font-weight-bold">{{row.data.merchantNameAR}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Email:</small>
+                <div class="w-100 font-weight-bold">{{row.data.merchantContactEmail}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Mobile No :</small>
+                <div class="w-100 font-weight-bold">{{row.data.merchantContactMobile}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Contact Phone :</small>
+                <div class="w-100 font-weight-bold">{{row.data.merchantContactPhone}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Plan Type :</small>
+                <div class="w-100 font-weight-bold">{{row.data.planTypeCode}}</div>
+            </div>
+        </mat-list-item>
+
+    </mat-list>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</div>

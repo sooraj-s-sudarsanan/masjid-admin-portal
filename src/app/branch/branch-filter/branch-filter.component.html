@@ -1,0 +1,16 @@
+
+
+<mat-grid-list cols="2" rowHeight="10:1">
+    <mat-grid-tile>
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose Merchant</mat-label>
+            <mat-select [(ngModel)]="selectedMerchant" (selectionChange)="merchnatSelectionChange($event.value)">
+                <mat-option *ngFor="let item of merchantList" [value]="item">{{item.merchantName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        
+    </mat-grid-tile>
+  </mat-grid-list>

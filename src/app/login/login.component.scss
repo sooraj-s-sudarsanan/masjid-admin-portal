@@ -1,0 +1,47 @@
+.loginDiv {
+  width: 30%;
+  position: absolute;  
+  top: 40%;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 30%;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  // flex-basis: 100%;
+  flex: 1;
+}
+.login-border{
+  border-left: 2px solid #00546b;
+}
+.content-column{
+  width: 40%;
+  position: absolute;  
+  top: 40%;
+  margin-left: 2%;
+  margin-right: 2%;
+  
+}
+.partner-pgm-content{
+  line-height: 1.8em;
+  font-size: 16px;
+}
+.partner-pgm-div{
+  padding: 20px 10px 20px 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;    
+}
+.mat-card-content-login{
+  margin-left: 2%;
+  margin-right: 10%;
+  max-width: 450px;
+}

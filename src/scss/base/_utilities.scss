@@ -1,0 +1,128 @@
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+%ellipsis {
+  @include ellipsis;
+}
+
+%animateXSlow {
+  @include prefix(
+    (
+      transition: all ease-in 1.3s
+    ),
+    moz ms webkit
+  );
+}
+%animateSlow {
+  @include prefix(
+    (
+      transition: all ease-in 1s
+    ),
+    moz ms webkit
+  );
+}
+%animateNormal {
+  @include prefix(
+    (
+      transition: all ease-in 0.6s
+    ),
+    moz ms webkit
+  );
+}
+%animateFast {
+  @include prefix(
+    (
+      transition: all ease-in 0.3s
+    ),
+    moz ms webkit
+  );
+}
+%animateXFast {
+  @include prefix(
+    (
+      transition: all ease-in 0.1s
+    ),
+    moz ms webkit
+  );
+}
+
+@include keyframes(spin) {
+  0% {
+    transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@mixin nilSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+%nilSelect {
+  @include nilSelect;
+}
+
+@mixin notaList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+%notaList {
+  @include notaList;
+}
+
+%clearfix {
+  @include clearfix();
+}
+
+%inlineSpaceFix {
+  font-size: 0;
+  white-space: nowrap;
+}
+
+%scroll,
+.scrollX,
+.scrollY {
+  overflow: scroll;
+  overflow: auto;
+  @include scrollbar(8px, map-get($theme, color),  rgba(map-get($color, dark), 0));
+}
+%scrollX,
+.scrollX {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+%scrollY,
+.scrollY {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@include keyframes(highlightFocusing) {
+  0% {
+    background: rgba(#ffd741, 0.5);
+  }
+  100% {
+    background: rgba(#ffd741, 0);
+  }
+}
+
+.highlightFocusing {
+  @include animation("highlightFocusing 500ms 1 10ms");
+  @include prefix(
+    (
+      animation-fill-mode: both
+    ),
+    moz webkit ms
+  );
+}

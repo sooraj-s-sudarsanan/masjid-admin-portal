@@ -1,0 +1,74 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.features.name}}</h1>
+    <mat-dialog-content>
+
+        <!--Feature Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Feature Name" autocomplete="off" formControlName="featureName" required>
+            <mat-error *ngIf="eform.featureName.invalid && (eform.featureName.dirty || eform.featureName.touched)">
+                <span *ngIf="eform.featureName.errors.required" class="alert-danger">
+                    Feature Name is required
+                </span>
+                <span *ngIf="eform.featureName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--feature Desc-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Feature Desc" autocomplete="off" formControlName="featureDesc">
+            <mat-error
+                *ngIf="eform.featureDesc.invalid && (eform.featureDesc.dirty || eform.featureDesc.touched)">
+                <span *ngIf="eform.featureDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--featureDisplayOrder-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Display Order" autocomplete="off" formControlName="featureDisplayOrder">
+            <mat-error
+                *ngIf="eform.featureDisplayOrder.invalid && (eform.featureDisplayOrder.dirty || eform.featureDisplayOrder.touched)">
+                <span *ngIf="eform.featureDisplayOrder.errors.required" class="alert-danger">
+                    Display order is required
+                </span>               
+            </mat-error>
+        </mat-form-field>
+
+        <!--planTypePrice-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Feature Price" autocomplete="off"
+                formControlName="planTypePrice" type="number">
+            <!-- <mat-error
+                *ngIf="eform.planTypePrice.invalid && (eform.planTypePrice.dirty || eform.planTypePrice.touched)">
+                <span *ngIf="eform.planTypePrice.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error> -->
+        </mat-form-field>
+
+        <!--planTypes-->
+        <mat-form-field class=" m-t-20 full-width" appearance="fill">
+            <mat-label>Choose Plan</mat-label>
+            <mat-select [formControl]="planTypeFC" (selectionChange)="planTypeSelect($event)" multiple>
+                <mat-option *ngFor="let item of planList" [value]="item.planTypeId">{{item.planTypeName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.planTypes.invalid && (eform.planTypes.dirty || eform.planTypes.touched)">
+                <span *ngIf="eform.planTypes.length==0" class="alert-danger">
+                    Please choose plan type
+                </span>
+            </mat-error>
+        </mat-form-field>       
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

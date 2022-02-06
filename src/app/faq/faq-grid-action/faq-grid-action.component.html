@@ -1,0 +1,90 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.faq.name}}</h1>
+    <mat-dialog-content>
+
+          <!--faqType-->
+          <mat-form-field class="full-width" formGroupName="faqType">
+            <mat-label>Choose FAQ Category</mat-label>           
+            <mat-select formControlName="faqTypeId">
+                <mat-option *ngFor="let item of faqCategoryList" [value]="item.faqTypeId">
+                  {{item.faqTypeName}}
+                </mat-option>
+              </mat-select>
+            <mat-error
+                *ngIf="form.get('faqType.faqTypeId').invalid && (form.get('faqType.faqTypeId').dirty || form.get('faqType.faqTypeId').touched)">
+                <span *ngIf="form.get('faqType.faqTypeId').errors.required" class="alert-danger">
+                    Please choose a FAQ category
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--faqItemName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Question" autocomplete="off" formControlName="faqItemName" required>
+            <mat-error
+                *ngIf="eform.faqItemName.invalid && (eform.faqItemName.dirty || eform.faqItemName.touched)">
+                <span *ngIf="eform.faqItemName.errors.required" class="alert-danger">
+                    Question is required
+                </span>
+                <span *ngIf="eform.faqItemName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--faqItemNameAR-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Question AR" autocomplete="off" formControlName="faqItemNameAR"
+                required>
+            <mat-error
+                *ngIf="eform.faqItemNameAR.invalid && (eform.faqItemNameAR.dirty || eform.faqItemNameAR.touched)">
+                <span *ngIf="eform.faqItemNameAR.errors.required" class="alert-danger">
+                    Question Arb. is required
+                </span>
+                <span *ngIf="eform.faqItemNameAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--faqItemAnswer-->
+        <mat-form-field color="accent" class="full-width">
+            <mat-label>Answer</mat-label>
+            <textarea matInput required formControlName="faqItemAnswer"></textarea>
+            <mat-error
+                *ngIf="eform.faqItemAnswer.invalid && (eform.faqItemAnswer.dirty || eform.faqItemAnswer.touched)">
+                <span *ngIf="eform.faqItemAnswer.errors.required" class="alert-danger">
+                    Answer is required
+                </span>
+                <span *ngIf="eform.faqItemAnswer.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--faqItemAnswerAR-->
+        <mat-form-field color="accent" class="full-width">
+            <mat-label>Answer AR</mat-label>
+            <textarea matInput required formControlName="faqItemAnswerAR"></textarea>
+            <mat-error
+                *ngIf="eform.faqItemAnswerAR.invalid && (eform.faqItemAnswerAR.dirty || eform.faqItemAnswerAR.touched)">
+                <span *ngIf="eform.faqItemAnswerAR.errors.required" class="alert-danger">
+                    Answer Arb. is required
+                </span>
+                <span *ngIf="eform.faqItemAnswerAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+      
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

@@ -1,0 +1,282 @@
+<mat-dialog-content>
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <!-- <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Choose Service</ng-template>
+        
+        <div>
+          <button mat-raised-button matStepperNext color="primary">Next</button>
+          <button mat-raised-button class="m-l-10" color="warn" [mat-dialog-close]="'NO'">Cancel</button>
+        </div>
+      </form>
+    </mat-step> -->
+    <mat-step [stepControl]="secondFormGroup" label="Fill the Form">
+      <form [formGroup]="secondFormGroup">
+        <div [ngClass]="this.row.data?'':'d-none'">
+          <h1 class="h3 title">
+            <span class="ib-m">Add Ons Services</span>
+          </h1>
+          <div class="search-content">
+
+            <mat-list class="w-300px">
+              <mat-list-item>
+                <a href="javascript:;" *ngIf="this.row.data && serviceList.length>0" (click)="AddOneService($event)"
+                  matTooltip="Add One Services" matTooltipPosition="above"><span
+                    class="material-icons">playlist_add</span></a>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <div *ngFor="let item of addonsServiceList">
+                <mat-list-item>{{item.serviceMappingBean.services? item.serviceMappingBean.services.serviceName :
+                  item.serviceName}}</mat-list-item>
+                <mat-divider></mat-divider>
+              </div>
+            </mat-list>
+          </div>
+        </div>
+
+        <div [ngClass]="this.row.data?'d-none':''">
+
+          <h1 class="h3 title">
+            <span class="ib-m">Choose Service</span>
+            <!-- <div style="float: right;"></div> -->
+          </h1>
+          <div class="search-content">
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="full-width-80">
+                <mat-label>Choose Merchant</mat-label>
+                <mat-select [disabled]='row.data' formControlName="merchantId" [value]="selectedMerchant"
+                  [(ngModel)]="selectedMerchant" (selectionChange)="merchantSelectionChange($event.value)">
+                  <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="full-width-80">
+                <mat-label>Choose Branch</mat-label>
+                <mat-select [disabled]='row.data' formControlName="branchId" [(ngModel)]="selectedBranch"
+                  (selectionChange)="branchSelectionChange($event.value)">
+                  <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{item.branchName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="w-100">
+              <mat-form-field appearance="fill" class="full-width-80">
+                <mat-label>Choose Service</mat-label>
+                <mat-select [disabled]='row.data' formControlName="serviceId" [(ngModel)]="selectedService"
+                  (selectionChange)="serviceSelectionChange($event.value)">
+                  <mat-option *ngFor="let item of serviceList" [value]="item">{{item.services.serviceName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="this.row.data?'d-none':''"
+          *ngIf="selectedService && slotList.length>0 && selectedService.servicePersonLevelBooking=='true'">
+          <h1 class="h3 title">
+            <span class="ib-m">Service Person</span>
+          </h1>
+          <div class="search-content">
+            <div class="w-40">
+              <mat-form-field appearance="fill" class="full-width-80">
+                <mat-label>Choose Service Person</mat-label>
+                <mat-select [disabled]='row.data' formControlName="servicePersonId"
+                  (selectionChange)="onSelectServicePerson($event)">
+                  <mat-option *ngFor="let item of selectedService.servicePerson" [value]="item">
+                    {{item.servicePersonName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="slotList.length>0">
+          <h1 class="h3 title">
+            <span class="ib-m">Choose Date</span>
+          </h1>
+          <nav>
+            <button mat-icon-button color="primary" aria-label="Previous">
+              <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <ul *ngFor="let daySlot of slotList">
+              <li>
+                <span>{{daySlot.displayDay}}</span>
+                <span>{{daySlot.displayMonth}}</span>
+              </li>
+            </ul>
+            <button mat-icon-button color="primary" aria-label="Next">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </nav>
+          <div class="slots">
+            <div class="col" *ngFor="let daySlot of slotList">
+              <!-- <pre>{{availableSlots | json}}</pre> -->
+              <!--  [color]="chip.status" [selectable]="true" -->
+              <mat-chip-list class="mat-chip-list-stacked" aria-label="Book a Session" [selectable]="true">
+                <mat-chip multiple *ngFor="let timeSlot of daySlot.hourSlot; index as i"
+                  [selected]="daySlot.status===''" [ngClass]="[viewAllSlot==false&& i>7?'d-none':'',timeSlot.status,
+                  timeSlot.servicePersonAvail?'':'employee-unavail']" (click)="onSelectTimeSlot(timeSlot)">
+                  <span>{{timeSlot.display}}</span>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+          <div class="view-all" *ngIf="slotList.length>0">
+            <a (click)="slotViewOption()">
+              {{viewAllSlot?'View less':'View All'}}
+            </a>
+          </div>
+        </div>
+
+        <div class="m-t-15">
+          <button mat-raised-button matStepperNext class="m-l-10" color="primary">Confirm</button>
+          <button mat-raised-button class="m-l-10" color="warn" [mat-dialog-close]="'NO'">Cancel</button>
+
+        </div>
+      </form>
+    </mat-step>
+    <mat-step label="Confirm">
+      <form [formGroup]="confirmFormGroup" #ngForm="ngForm">
+        <h1 class="h3 title">
+          <span class="ib-m">Guest User Info</span>
+        </h1>
+
+        <div fxLayout="row" fxFill>
+          <div fxFlex="50">
+            <!--guestUserName-->
+            <mat-form-field color="accent" class="full-width">
+              <input matInput placeholder="Name" autocomplete="off" [readonly]="this.row.data?true:false" formControlName="guestUserName" required>
+              <mat-error
+                *ngIf="cnfrmform.guestUserName.invalid && (cnfrmform.guestUserName.dirty || cnfrmform.guestUserName.touched || ngForm.submitted)">
+                <span *ngIf="cnfrmform.guestUserName.errors.required" class="alert-danger">
+                  Name is required
+                </span>
+                <span *ngIf="cnfrmform.guestUserName.errors.maxlength" class="alert-danger">
+                  length exceeded
+                </span>
+              </mat-error>
+            </mat-form-field>
+
+            <!--guestUserMobile-->
+            <mat-form-field color="accent" class="full-width">
+              <input matInput placeholder="Mobile Number" autocomplete="off" [readonly]="this.row.data?true:false" formControlName="guestUserMobile" required>
+              <mat-error
+                *ngIf="cnfrmform.guestUserMobile.invalid && (cnfrmform.guestUserMobile.dirty || cnfrmform.guestUserMobile.touched || ngForm.submitted)">
+                <span *ngIf="cnfrmform.guestUserMobile.errors.required" class="alert-danger">
+                  Mobile Number is required
+                </span>
+                <span *ngIf="cnfrmform.guestUserMobile.errors.pattern" class="alert-danger">
+                  Please enter a valid Mobile Number
+                </span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="m-l-10 m-t-15" *ngIf="selectedService?.allowRepeatedBooking=='true'">
+            <div class="full-width">
+              <mat-checkbox class="example-margin" [disabled]="this.row.data?true:false" [checked]="repeatBooking"
+                [(ngModel)]="repeatBooking" [ngModelOptions]="{standalone: true}">
+                Repeated Booking</mat-checkbox>
+            </div>
+            <div class="full-width" *ngIf="repeatBooking">
+              <span *ngIf="this.row.data">Booking End Date - {{this.row.data.bookingEndDate}}</span>
+              <mat-form-field class="example-full-width full-width" appearance="fill" *ngIf="!this.row.data">
+                <mat-label>Choose End date</mat-label>
+                <input matInput [matDatepicker]="picker" [disabled]="this.row.data?true:false" [min]="repeatBookMinDate"
+                  [max]="repeatBookMaxDate" (click)="picker.open()" readonly
+                  (dateChange)="repeatBookingDateChange($event)">
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <span class="mat-error">
+                {{repeatBookingDateAlert}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+
+        <h1 class="h3 title">
+          <span class="ib-m">Confirmation</span>
+        </h1>
+        <mat-dialog-content>
+          <mat-list>
+            <mat-list-item><span>Branch</span><span
+                class="confirmarion-R">{{branchInfo?branchInfo.branchName:''}}</span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><span>Service</span><span
+                class="confirmarion-R">{{selectedService?selectedService.services.serviceName:''}}</span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><span>Date</span><span class="confirmarion-R">{{selectedSlot?selectedSlot.date:''}}</span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><span>Time</span><span class="confirmarion-R">{{selectedSlot?selectedSlot.time:''}}</span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><span>Location</span><span
+                class="confirmarion-R">{{branchInfo?branchInfo.branchLocationName:''}}</span></mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </mat-dialog-content>
+
+      </form>
+
+      <div class="m-t-15">
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button mat-raised-button type="submit" color="primary" class="m-l-10" (click)="bookNow()">Book Now</button>
+        <button mat-raised-button class="m-l-10" color="warn" [mat-dialog-close]="'NO'">Cancel</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-dialog-content>
+
+<!--Booking Alerts-->
+<ng-template #bookingAlert let-modal>
+
+  <h1 mat-dialog-title>{{alertOnSlots.title}}</h1>
+  <mat-dialog-content>
+    <div class="booking-content modal-alert-content">
+      <p *ngIf="alertOnSlots.type==='unavailserviceperson' && selectedServicePersonId">
+        {{selectedServicePerson.servicePersonName}}&nbsp;<span i18n="@@isNotAvailableAt">is not available
+          at</span>&nbsp;<span *ngIf="alertOnSlots.slot">{{alertOnSlots.slot.time}}</span><span
+          *ngIf="!alertOnSlots.slot" i18n="@@seletedTime">selected time</span>.&nbsp;<span
+          i18n="@@pleaseChooseDiffTime">Please choose a different time or person</span>
+      </p>
+      <p *ngIf="alertOnSlots.type==='unavailserviceperson' && !selectedServicePersonId">
+        Service person is not available on your selected time slot, kindly requesting you to change the time
+        slot or choose another available service person
+      </p>
+      <p *ngIf="alertOnSlots.type==='unmappedserviceperson'" i18n="@@unmappedserviceperson">
+        No service persons are available for taking this appointment,you can directly call to branch for taking
+        an appointment
+      </p>
+      <p *ngIf="alertOnSlots.type==='bookingConfirm'">
+        You are about to change the booked time slot. Selected time slot on &nbsp;
+        <span *ngIf="alertOnSlots.slot">{{alertOnSlots.slot.date}}</span>&nbsp;
+        at <span *ngIf="alertOnSlots.slot">{{alertOnSlots.slot.time}}</span>.<br> Do want to continue?
+      </p>
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button *ngIf="alertOnSlots.type==='unavailserviceperson'" mat-raised-button (click)="closeBookingAlert('ok')"
+      color="warn" cdkFocusInitial>Ok</button>
+    <!--bookingConfirm-->
+    <button *ngIf="alertOnSlots.type==='bookingConfirm'" mat-raised-button (click)="closeBookingAlert('yes')"
+      color="warn" cdkFocusInitial>Yes</button>
+    <button *ngIf="alertOnSlots.type==='bookingConfirm'" mat-raised-button (click)="closeBookingAlert('no')"
+      color="warn" cdkFocusInitial>No</button>
+  </div>
+</ng-template>
+
+<ng-template #bookingConfirm let-moda>
+  <h1 mat-dialog-title>Booked successfully</h1>
+  <div mat-dialog-content>{{repeatBookingDateAlert}}</div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="CloseAllModal()">Close</button>
+  </div>
+</ng-template>

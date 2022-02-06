@@ -1,0 +1,17 @@
+
+
+
+<div mat-dialog-title>
+    <span>{{data.title}}ss</span>  
+  </div>
+  <mat-dialog-content>
+    <figure class="cropper">
+        <image-cropper [maintainAspectRatio]="true" [imageChangedEvent]="data.imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="data.aspectRatio[0]/data.aspectRatio[1]"
+            format="jpg" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+    </figure>
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button matRipple mat-raised-button color="primary" (click)="Close('yes')">Yes</button>
+    <button mat-raised-button color="warn" (click)="Close('no')">No</button>
+  </div>

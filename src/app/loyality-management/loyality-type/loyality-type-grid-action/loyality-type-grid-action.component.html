@@ -1,0 +1,40 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.loyalityType.name}}</h1>
+    <mat-dialog-content>
+
+        <!--loyaltyTypeName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Type Name" autocomplete="off" formControlName="loyaltyTypeName" required>
+            <mat-error
+                *ngIf="eform.loyaltyTypeName.invalid && (eform.loyaltyTypeName.dirty || eform.loyaltyTypeName.touched)">
+                <span *ngIf="eform.loyaltyTypeName.errors.required" class="alert-danger">
+                    Loyalty Type Name is required
+                </span>
+                <span *ngIf="eform.loyaltyTypeName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        
+         <!--loyaltyTypeDesc-->
+         <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Type Description" autocomplete="off" formControlName="loyaltyTypeDesc">
+            <mat-error
+                *ngIf="eform.loyaltyTypeDesc.invalid && (eform.loyaltyTypeDesc.dirty || eform.loyaltyTypeDesc.touched)">
+                <span *ngIf="eform.loyaltyTypeDesc.errors.required" class="alert-danger">
+                    Type Description is required
+                </span>
+                <span *ngIf="eform.loyaltyTypeDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

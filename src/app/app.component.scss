@@ -1,0 +1,123 @@
+.sideNav {
+  width: 250px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(#000, 0.8);
+}
+
+.example-container {
+  left: 0;
+  right: 0;
+  top: 100px;
+  bottom: 60px;
+  position: absolute;
+}
+
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+}
+
+.footer {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  position: fixed;
+  font-size: small;
+  padding-top: 15px;
+  // background: #e1e1e1;
+  // color: #999;
+}
+
+/* Absolute Center Spinner */
+.loading-indicator {
+  position: fixed;
+  z-index: 9999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.loading-indicator:before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/*Material matform theme overwrite*/
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: black !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: black !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: black !important;
+}
+
+/*Side navigation styles*/
+.menu-list-item.mat-list-item .mat-list-item-content {
+  flex: 1 1 100%;
+  color: red;
+}
+
+.loginDiv {
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  margin-top: -50px;
+  margin-left: -50px;
+  width: 400px;
+  height: 100px;
+}
+
+.container {
+  margin: 10px;
+}
+.footer-menu {
+  text-align: right;
+}
+.footer-menu ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  margin-bottom: 5px;
+}
+.footer-menu ul li {
+  display: inline-block;
+  padding-left: 30px;
+  color: #999;
+  font-size: 15px;
+}
+.footer-menu ul li:hover {
+  color: #00546c;
+}
+.footer-menu img {
+  max-width: 110px;
+  margin-left: 20px;
+}
+.footer-menu a {
+  color: white;
+}

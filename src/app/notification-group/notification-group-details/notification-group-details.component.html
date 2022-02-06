@@ -1,0 +1,23 @@
+
+<h1 class="h3 title" mat-dialog-title>Details</h1>
+<mat-dialog-content>
+  <p>Group Id:{{row.data.groupId}}</p>
+  <p>Group Name:{{row.data.groupName}}</p>
+  <p>Category:{{row.data.category}}</p> 
+  <p>GroupName Arb:{{row.data.groupNameArb}}</p> 
+  <p>Group Type:{{row.data.groupType}}</p> 
+  <p>Notify By:{{row.data.notifyBy}}</p> 
+  <p>Platform:{{row.data.platform}}</p> 
+  <p>Next Push After NMin:{{row.data.nextPushAfterNMin}}</p> 
+  <p>Push From NMeter:{{row.data.pushFromNMeter}}</p> 
+  <p>Sent Notification:{{row.data.sentNotification}}</p> 
+  <p>Sorting Order:{{row.data.sortingOrder}}</p> 
+  <!-- <p>Created By:{{row.data.createdBy}}</p>
+  <p>Created On:{{row.data.createdOn}}</p>
+  <p>Modified By:{{row.data.modifiedBy}}</p>
+  <p>Modified On:{{row.data.modifiedOn}}</p> -->
+  
+</mat-dialog-content>
+<div mat-dialog-actions>  
+  <button mat-button [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</div>

@@ -1,0 +1,13 @@
+<mat-grid-list cols="2" rowHeight="13:1">
+    <mat-grid-tile>
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose File Category</mat-label>
+            <mat-select [(ngModel)]="selectedCategory" (selectionChange)="categorySelectionChange($event.value)">
+                <mat-option *ngFor="let item of categoryList" [value]="item.categoryName">{{item.categoryName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>        
+    </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,61 @@
+<form [formGroup]='staticPageDataForm' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.pageData.name}}</h1>
+    <mat-dialog-content style="height: 500px;">
+
+        <!--Page Type List-->
+        <mat-form-field formGroupName="staticPageName" class="full-width">
+            <mat-label>Choose Page Name</mat-label>
+            <mat-select formControlName="staticPageNameId" required [disabled]="this.row.data"
+                (selectionChange)="selectPage($event)">
+                <mat-option *ngFor="let page of pageNameList" [value]="page.staticPageNameId">
+                    {{page.staticPageName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="staticPageDataForm.get('staticPageName.staticPageNameId').invalid && (staticPageDataForm.get('staticPageName.staticPageNameId').dirty || staticPageDataForm.get('staticPageName.staticPageNameId').touched)">
+                <span *ngIf="staticPageDataForm.get('staticPageName.staticPageNameId').errors.required"
+                    class="alert-danger">
+                    Page Name is required
+                </span>
+            </mat-error>
+
+        </mat-form-field>
+
+        <!--Content-->
+        <mat-tab-group [(selectedIndex)]="activeTab" backgroundColor="primary">
+            <mat-tab label="English">
+                <div class="full-width">
+                    <ckeditor [config]="{ language: { ui: 'en',content: 'en'}}" formControlName="staticPageContent"
+                        data="test" [editor]="Editor"></ckeditor>
+                    <!-- <span
+                        *ngIf="staticPageDataForm.get('staticPageContent').invalid && (staticPageDataForm.get('staticPageContent').dirty || staticPageDataForm.get('staticPageContent').touched)">
+                        <span *ngIf="staticPageDataForm.get('staticPageContent').errors.required" class="alert-danger">
+                            Static Page Content is required
+                        </span>
+                    </span> -->
+                </div>
+            </mat-tab>
+            <mat-tab label="Arabic">
+                <div class="full-width">
+                    <ckeditor [config]="{ language: { ui: 'en',content: 'ar'}}" formControlName="staticPageContentArb"
+                        data="test" [editor]="Editor"></ckeditor>
+                    <!-- <span
+                        *ngIf="staticPageDataForm.get('staticPageContentArb').invalid && (staticPageDataForm.get('staticPageContentArb').dirty || staticPageDataForm.get('staticPageContentArb').touched)">
+                        <span *ngIf="staticPageDataForm.get('staticPageContentArb').errors.required" class="alert-danger">
+                            Arabic Static Page Content is required
+                        </span>
+                    </span> -->
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

@@ -1,0 +1,57 @@
+@import "../plugins/animate";
+
+.animated {
+  &._fast {
+    @include prefix(
+      (
+        animation-duration: 0.21s
+      ),
+      webkit ms
+    );
+  }
+
+  &._1s {
+    @include prefix(
+      (
+        animation-duration: 1s
+      ),
+      webkit ms
+    );
+  }
+
+  &._1-5s {
+    @include prefix(
+      (
+        animation-duration: 1.5s
+      ),
+      webkit ms
+    );
+  }
+
+  &._2s {
+    @include prefix(
+      (
+        animation-duration: 2.1s
+      ),
+      webkit ms
+    );
+  }
+
+  &._2-5s {
+    @include prefix(
+      (
+        animation-duration: 2.5s
+      ),
+      webkit ms
+    );
+  }
+
+  &.loop {
+    @include prefix(
+      (
+        animation-iteration-count: infinite
+      ),
+      webkit ms
+    );
+  }
+}

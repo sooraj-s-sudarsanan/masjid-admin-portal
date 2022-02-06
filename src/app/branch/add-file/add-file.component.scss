@@ -1,0 +1,22 @@
+.m-a-10{
+    margin: 10px !important;
+}
+
+::ng-deep .mat-dialog-content {
+    overflow-y: hidden !important;
+}
+
+.matcard-file{
+        overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 425px;
+}
+
+.file-delete{
+    position: absolute;
+    color: white;
+    top: 0;
+    right: 0;
+    box-shadow: -7px 8px 15px #d84338;
+    background: #f44336;
+}

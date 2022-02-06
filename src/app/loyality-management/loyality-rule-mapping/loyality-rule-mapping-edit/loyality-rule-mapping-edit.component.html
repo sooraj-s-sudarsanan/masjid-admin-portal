@@ -1,0 +1,61 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+    <h1 mat-dialog-title class="h3 title">Edit Mapping</h1>
+    <mat-dialog-content>
+
+        <!--rewardPointStartDate-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="text" [matDatepicker]="picker1" readonly (click)="picker1.open()" matInput placeholder="Start Date" autocomplete="off"
+                formControlName="rewardPointStartDate" required>
+            <mat-error
+                *ngIf="eform.rewardPointStartDate.invalid && (eform.rewardPointStartDate.dirty || eform.rewardPointStartDate.touched)">
+                <span *ngIf="eform.rewardPointStartDate.errors.required" class="alert-danger">
+                    Start Date is required
+                </span>.
+            </mat-error>
+        </mat-form-field>
+        <mat-datepicker #picker1></mat-datepicker>
+
+        
+        <!--rewardPointEndDate-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="text" matInput [matDatepicker]="picker2" readonly (click)="picker2.open()" placeholder="End Date" autocomplete="off"
+                formControlName="rewardPointEndDate" required>
+            <mat-error
+                *ngIf="eform.rewardPointEndDate.invalid && (eform.rewardPointEndDate.dirty || eform.rewardPointEndDate.touched)">
+                <span *ngIf="eform.rewardPointEndDate.errors.required" class="alert-danger">
+                    End Date is required
+                </span>.
+            </mat-error>
+        </mat-form-field>  
+        <mat-datepicker #picker2></mat-datepicker>      
+
+        <!--servicePrice-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Service Price" autocomplete="off"
+                formControlName="servicePrice" required>
+            <mat-error
+                *ngIf="eform.servicePrice.invalid && (eform.servicePrice.dirty || eform.servicePrice.touched)">
+                <span *ngIf="eform.servicePrice.errors.required" class="alert-danger">
+                    Service Price is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--rewardPointApplicable-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" required matInput placeholder="Point Applicable" autocomplete="off" formControlName="rewardPointApplicable">
+            <mat-error *ngIf="eform.rewardPointApplicable.invalid && (eform.rewardPointApplicable.dirty || eform.rewardPointApplicable.touched)">
+                <span *ngIf="eform.rewardPointApplicable.errors.required" class="alert-danger">
+                    Point Applicable is required
+                </span>.
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button type="button" mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

@@ -1,0 +1,76 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.service.name}}</h1>
+    <mat-dialog-content>
+
+        <!--serviceName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Service Name" autocomplete="off" formControlName="serviceName" required>
+            <mat-error *ngIf="eform.serviceName.invalid && (eform.serviceName.dirty || eform.serviceName.touched)">
+                <span *ngIf="eform.serviceName.errors.required" class="alert-danger">
+                    Service Name is required
+                </span>
+                <span *ngIf="eform.serviceName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Service Name AR-->
+        <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Service Name AR" autocomplete="off" formControlName="serviceNameAR" required>
+            <mat-error *ngIf="eform.serviceNameAR.invalid && (eform.serviceNameAR.dirty || eform.serviceNameAR.touched)">
+                <span *ngIf="eform.serviceNameAR.errors.required" class="alert-danger">
+                    Service Name is required
+                </span>
+                <span *ngIf="eform.serviceNameAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Service Description-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Service Description" autocomplete="off" formControlName="ServiceDescription">
+            <mat-error
+                *ngIf="eform.ServiceDescription.invalid && (eform.ServiceDescription.dirty || eform.ServiceDescription.touched)">
+                <span *ngIf="eform.ServiceDescription.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+          <!--Service Description AR-->
+          <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Service Description AR" autocomplete="off" formControlName="serviceDescriptionAR">
+            <mat-error
+                *ngIf="eform.serviceDescriptionAR.invalid && (eform.serviceDescriptionAR.dirty || eform.serviceDescriptionAR.touched)">
+                <span *ngIf="eform.serviceDescriptionAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Category-->
+        <mat-form-field class="full-width" formGroupName="category">
+            <mat-label>Choose Category</mat-label>
+            <mat-select formControlName="categoryId">
+                <mat-option *ngFor="let item of categoryList" [value]="item.categoryId">
+                    {{item.categoryName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('category.categoryId').invalid && (form.get('category.categoryId').dirty || form.get('category.categoryId').touched)">
+                <span *ngIf="form.get('category.categoryId').errors.required" class="alert-danger">
+                    Please choose category
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

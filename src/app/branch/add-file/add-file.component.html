@@ -1,0 +1,48 @@
+<h1 class="dialog-title-h1" mat-dialog-title>Add Branch image</h1>
+<mat-dialog-content>
+
+    <!--Upload Image Content-->
+    <mat-card class="example-card m-a-10">
+        <mat-card-header>
+            <mat-card-title>Upload Image</mat-card-title>
+            <mat-card-subtitle>Image file dimension (H 500 x W 750)</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <input #imgFile type="file" (change)="fileChangeEvent($event)" accept=".png, .jpg, .jpeg" />
+        </mat-card-content>
+        <mat-card-actions>
+            <!-- <button type="button" [disabled]="!this.croppedImage" (click)="submit($event)" mat-raised-button
+            color="primary">Upload</button>
+            <button mat-raised-button color="warn" (click)="cancel($event)" cdkFocusInitial>Close</button> -->
+        </mat-card-actions>
+    </mat-card>
+
+
+    <mat-card class="m-a-10" *ngIf="imageChoosed">
+        <mat-card-title>Crop Image</mat-card-title>
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [aspectRatio]="16 / 9" format="jpg"
+            (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"></image-cropper>
+    </mat-card>
+
+    <mat-card class="m-a-10 matcard-file">
+        <mat-card-title>Uploaded Images</mat-card-title>
+        <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile *ngFor="let item of uploadedBranchImgList;let i=index">
+                <img alt="Branch Images" [src]="item.fileURL">
+                <a href="javascript:;" class="file-delete" color="warn" (click)="delete(item,i)"><span
+                        class="material-icons">delete</span></a>
+            </mat-grid-tile>
+        </mat-grid-list>     
+
+    </mat-card>
+
+
+
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <!-- <button type="button" [disabled]="!this.croppedImage" (click)="submit($event)" mat-raised-button
+        color="primary">Upload</button> -->
+    <button mat-raised-button color="warn" (click)="cancel($event)" cdkFocusInitial>Close</button>
+</div>

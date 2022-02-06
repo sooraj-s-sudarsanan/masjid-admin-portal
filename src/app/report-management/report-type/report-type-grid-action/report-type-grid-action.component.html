@@ -1,0 +1,52 @@
+
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.reportType.name}}</h1>
+    <mat-dialog-content>
+
+        <!--reportTypeName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Report Type" autocomplete="off" formControlName="reportTypeName" required>
+            <mat-error
+                *ngIf="eform.reportTypeName.invalid && (eform.reportTypeName.dirty || eform.reportTypeName.touched)">
+                <span *ngIf="eform.reportTypeName.errors.required" class="alert-danger">
+                     Report Type is required
+                </span>
+                <span *ngIf="eform.reportTypeName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        
+         <!--reportTypeDesc-->
+         <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Type Description" autocomplete="off" formControlName="reportTypeDesc">
+            <mat-error
+                *ngIf="eform.reportTypeDesc.invalid && (eform.reportTypeDesc.dirty || eform.reportTypeDesc.touched)">
+                <span *ngIf="eform.reportTypeDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+           <!--reportTypeCode-->
+           <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Report Type Code" autocomplete="off" formControlName="reportTypeCode" required>
+            <mat-error
+                *ngIf="eform.reportTypeCode.invalid && (eform.reportTypeCode.dirty || eform.reportTypeCode.touched)">
+                <span *ngIf="eform.reportTypeCode.errors.required" class="alert-danger">
+                     Report Type Code is required
+                </span>
+                <span *ngIf="eform.reportTypeCode.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

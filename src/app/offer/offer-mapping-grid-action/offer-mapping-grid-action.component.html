@@ -1,0 +1,59 @@
+<h1 mat-dialog-title class="dialog-title-h1">
+    <span class="ib-m">Update&nbsp;{{moduleKeyModel.offerMapping.name}}</span>
+</h1>
+<mat-card class="m-t-5 m-b-5">
+    <div class="row">
+        <mat-grid-list cols="2" rowHeight="10:1">
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Merchant</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedMerchantText" [(ngModel)]="selectedMerchant"
+                        (selectionChange)="merchantSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Branch</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedBranchText" [(ngModel)]="selectedBranch"
+                        (selectionChange)="branchSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{item.branchName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</mat-card>
+<mat-dialog-content style="min-height: 200px;" class="p-t-10 p-b-10">
+    <div class="row">
+        <ngx-datatable class="material fullscreen" [rows]="serviceList" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" rowHeight="50px">
+        </ngx-datatable>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <!-- <button type="submit" mat-raised-button color="primary" (click)="submit($event)">Submit</button> -->
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+</div>
+
+
+<ng-template #selectService let-row="row" let-value="value">
+    {{row.services.serviceName}}
+</ng-template>
+<ng-template #byPerson let-row="row" let-value="value">
+    <mat-form-field appearance="fill" class="full-width-80">
+        <mat-label>Choose Offer</mat-label>
+        <mat-select [ngModel]="row.offers?row.offers.offerId:''"
+            (selectionChange)="offerSelectionChange($event.value,row)">
+            <mat-option [value]="">--</mat-option>
+            <mat-option *ngFor="let item of offerList" [value]="item.offerId">{{item.offerName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</ng-template>
+<ng-template #action let-row="row" let-value="value">
+    <button type="button" mat-raised-button color="primary" (click)="submit(row)">Update</button>
+</ng-template>

@@ -1,0 +1,175 @@
+<form [formGroup]='notificationForm' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.notifications.name}}</h1>
+    <mat-dialog-content>
+
+        <!--notifGroup-->
+        <mat-form-field class="full-width" formGroupName="notifGroup">
+            <mat-label>Choose Notification Group</mat-label>
+            <mat-select formControlName="groupId" required>
+                <mat-option *ngFor="let group of notificationGroupList" [value]="group.groupId">
+                    {{group.groupName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="this.notificationForm.get('notifGroup.groupId').invalid && (this.notificationForm.get('notifGroup.groupId').dirty || this.notificationForm.get('notifGroup.groupId').touched)">
+                <span *ngIf="this.notificationForm.get('notifGroup.groupId').errors.required" class="alert-danger">
+                    Notification Group is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Notification Name-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Notification Name" autocomplete="off" formControlName="notifName" required>
+            <mat-error *ngIf="eform.notifName.invalid && (eform.notifName.dirty || eform.notifName.touched)">
+                <span *ngIf="eform.notifName.errors.required" class="alert-danger">
+                    Notification Name is required
+                </span>
+                <span *ngIf="eform.notifName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <!--notifOn-->
+        <!-- <mat-form-field class="full-width">
+            <mat-label>Choose Notification On</mat-label>
+            <mat-select formControlName="notifOn" required>
+                <mat-option *ngFor="let notificationOn of notifTriggerOnList" [value]="notificationOn">
+                    {{notificationOn}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.notifOn.invalid && (eform.notifOn.dirty || eform.notifOn.touched)">
+                <span *ngIf="eform.notifOn.errors.required" class="alert-danger">
+                    Notification On is required
+                </span>
+            </mat-error>
+        </mat-form-field> -->
+
+        <!--notifChannel-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Channel</mat-label>
+            <mat-select formControlName="notifChannel" (selectionChange)="channelSelected($event)" required>
+                <mat-option *ngFor="let notificationOn of notifChannelList" [value]="notificationOn">
+                    {{notificationOn}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.notifChannel.invalid && (eform.notifChannel.dirty || eform.notifChannel.touched)">
+                <span *ngIf="eform.notifChannel.errors.required" class="alert-danger">
+                    Channel is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--notifTemplateEnglish-->
+        <div class="full-width">
+            <span>Notification Template English</span>
+            <!-- <textarea matInput placeholder="Notification Template English" autocomplete="off"
+                formControlName="notifTemplateEnglish" required></textarea> -->
+            <ckeditor [config]="{ language: { ui: 'en',content: 'en'}}" formControlName="notifTemplateEnglish"
+                [editor]="Editor"></ckeditor>
+            <span
+                *ngIf="eform.notifTemplateEnglish.invalid && (eform.notifTemplateEnglish.dirty || eform.notifTemplateEnglish.touched)">
+                <span *ngIf="eform.notifTemplateEnglish.errors.required" class="alert-danger">
+                    Notification Template in English is required
+                </span>
+            </span>
+        </div>
+
+        <!--notifTemplateArabic-->
+        <div class="full-width">
+            <span>Notification Template Arabic</span>
+            <!-- <textarea matInput placeholder="Notification Template Arabic" autocomplete="off"
+                formControlName="notifTemplateArabic" required></textarea> -->
+            <ckeditor [config]="{ language: { ui: 'en',content: 'ar'}}" formControlName="notifTemplateArabic"
+                placeholder="Type the content here!" [editor]="Editor">
+            </ckeditor>
+            <span
+                *ngIf="eform.notifTemplateArabic.invalid && (eform.notifTemplateArabic.dirty || eform.notifTemplateArabic.touched)">
+                <span *ngIf="eform.notifTemplateArabic.errors.required" class="alert-danger">
+                    Notification Template in Arabic is required
+                </span>
+            </span>
+        </div>
+
+        <!--notifSubjectEnglish-->
+        <mat-form-field class="full-width" *ngIf="eform.notifChannel.value==='EMAIL'">
+            <input matInput placeholder="Notification Subject English" autocomplete="off"
+                formControlName="notifSubjectEnglish" required>
+            <mat-error
+                *ngIf="eform.notifSubjectEnglish.invalid && (eform.notifSubjectEnglish.dirty || eform.notifSubjectEnglish.touched)">
+                <span *ngIf="eform.notifSubjectEnglish.errors.required" class="alert-danger">
+                    Notification Subject in English is required
+                </span>
+                <span *ngIf="eform.notifSubjectEnglish.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--notifSubjectArabic-->
+        <mat-form-field class="full-width matform-rtl" *ngIf="eform.notifChannel.value==='EMAIL'">
+            <input matInput placeholder="Notification Subject Arabic" autocomplete="off"
+                formControlName="notifSubjectArabic" required>
+            <mat-error
+                *ngIf="eform.notifSubjectArabic.invalid && (eform.notifSubjectArabic.dirty || eform.notifSubjectArabic.touched)">
+                <span *ngIf="eform.notifSubjectArabic.errors.required" class="alert-danger">
+                    Notification Subject Arabic is required
+                </span>
+                <span *ngIf="eform.notifSubjectArabic.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--notifTriggerOn-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Notification Trigger On</mat-label>
+            <mat-select formControlName="notifTriggerOn" required>
+                <mat-option *ngFor="let notificationOn of notifTriggerOnList" [value]="notificationOn">
+                    {{notificationOn}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="eform.notifTriggerOn.invalid && (eform.notifTriggerOn.dirty || eform.notifTriggerOn.touched)">
+                <span *ngIf="eform.notifTriggerOn.errors.required" class="alert-danger">
+                    Notification Trigger On is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--scheduleTime-->
+        <mat-form-field class="full-width" [ngStyle]="{'display': eform.sendNow.value==false ?'block':'none'}">
+            <input matInput [readonly]="true" formControlName="scheduleTime" placeholder="Notification Schedule Time"
+                [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" [min]='min' (dateTimeChange)="dateTimeChange($event)"
+                required>
+                <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="clearDateTime()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+            <mat-error *ngIf="eform.scheduleTime.invalid && (eform.scheduleTime.dirty || eform.scheduleTime.touched)">
+                <span *ngIf="eform.scheduleTime.errors.required" class="alert-danger">
+                    Notification Schedule Time is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <owl-date-time #dt1 [hour12Timer]='false'></owl-date-time>
+
+        <!--sendNow-->
+        <div *ngIf='eform.scheduleTime.value==null'>
+            <mat-checkbox #checkbox (change)='sendNowChange(checkbox.checked)' class="full-width"
+                formControlName="sendNow">sendNow</mat-checkbox>
+            <span *ngIf="eform.sendNow.invalid && (eform.sendNow.dirty || eform.sendNow.touched)">
+                <span *ngIf="eform.sendNow.errors.required" class="alert-danger">
+                    Send Now is required
+                </span>
+            </span>
+        </div>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

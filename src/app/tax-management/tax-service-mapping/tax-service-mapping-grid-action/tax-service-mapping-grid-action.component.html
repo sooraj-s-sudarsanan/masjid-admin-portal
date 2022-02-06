@@ -1,0 +1,70 @@
+
+<h1 mat-dialog-title class="h3 title">
+    <span class="ib-m">{{moduleKeyModel.taxMapping.name}}</span>
+</h1>
+<mat-card class="m-t-5 m-b-5">
+    <div class="row">
+        <div fxLayout="row" fxFill>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Merchant</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedMerchantText" [(ngModel)]="selectedMerchant"
+                        (selectionChange)="merchantSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Branch</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedBranchText" [(ngModel)]="selectedBranch"
+                        (selectionChange)="branchSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{item.branchName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Service</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedServiceText" [(ngModel)]="selectedService"
+                        (selectionChange)="serviceSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of serviceList" [value]="item.serviceMappingId">
+                            {{item.services.serviceName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-dialog-content style="min-height: 200px;" class="p-t-10 p-b-10">
+    <div class="row">
+        <ngx-datatable class="material fullscreen" [rows]="taxComponentList" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" rowHeight="50px">
+        </ngx-datatable>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions>  
+    <button type="submit" mat-raised-button color="primary" (click)="submit($event)">Submit</button>
+    <button mat-raised-button color="warn" (click)="cancel($event)" cdkFocusInitial>Cancel</button>
+</div>
+
+
+<ng-template #selectService let-row="row" let-value="value">
+    <mat-checkbox *ngIf="!row.taxServiceMappingId" class="example-margin" [checked]="row.selected"
+        [(ngModel)]="row.selected">{{row.serviceName}}
+    </mat-checkbox>
+    <span *ngIf="row.taxServiceMappingId">
+        <mat-icon class="menuIcon">done</mat-icon>&nbsp;{{row.serviceName}}
+    </span>
+
+</ng-template>
+
+<ng-template #mappingAction let-row="row" let-value="value">    
+    <a *ngIf="row.taxServiceMappingId" [matTooltip]="'Remove Mapping'" [matTooltipPosition]="'above'"
+        (click)="removeMapping(row)">
+        <mat-icon color="warn" class="menuIcon">delete</mat-icon>
+    </a>
+</ng-template>

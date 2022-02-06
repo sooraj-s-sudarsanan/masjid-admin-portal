@@ -1,0 +1,66 @@
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Details</h1>
+</header>
+<mat-dialog-content>
+    <mat-list>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Loyalty Rule Name :</small>
+                <div class="w-100 font-weight-bold">{{row.data.loyaltyRuleName}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Loyalty Rule Code :</small>
+                <div class="w-100 font-weight-bold">{{row.data.loyaltyRuleCode}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Loyalty Rule Desc:</small>
+                <div class="w-100 font-weight-bold">{{row.data.loyaltyRuleDesc}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Loyalty Start Date :</small>
+                <div class="w-100 font-weight-bold">{{row.data.loyaltyStartDate}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Loyalty End Date :</small>
+                <div class="w-100 font-weight-bold">{{row.data.loyaltyEndDate}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Loyalty Code :</small>
+                <div class="w-100 font-weight-bold">{{row.data.loyaltyCode}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Loyalty Type :</small>
+                <div class="w-100 font-weight-bold">{{row.data.loyaltyType.loyaltyTypeName}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Loyalty Scheme :</small>
+                <div class="w-100 font-weight-bold">{{row.data.loyaltyScheme.loyaltySchemeName}}</div>
+            </div>
+        </mat-list-item>
+    </mat-list>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</div>

@@ -1,0 +1,164 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 class="dialog-title-h1" mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.offer.name}}</h1>
+    <mat-dialog-content>
+
+        <!--Choose Mechant-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Merchant</mat-label>
+            <mat-select [disabled]='row.data' formControlName="merchantId"
+                (selectionChange)="merchantSelectionChange($event.value)">
+                <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">
+                    {{item.merchantName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('merchantId').invalid && (form.get('merchantId').dirty || form.get('merchantId').touched)">
+                <span *ngIf="form.get('merchantId').errors.required" class="alert-danger">
+                    Please choose Merchant
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Branch-->
+        <mat-form-field class="full-width" formGroupName="branch">
+            <mat-label>Choose Branch</mat-label>
+            <mat-select formControlName="branchId" [disabled]='row.data'
+                (selectionChange)="branchSelectionOnChange($event.value)">
+                <mat-option *ngFor="let item of branchList" [value]="item.branchId">
+                    {{item.branchName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('branch.branchId').invalid && (form.get('branch.branchId').dirty || form.get('branch.branchId').touched)">
+                <span *ngIf="form.get('branch.branchId').errors.required" class="alert-danger">
+                    Please choose Branch
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--offerName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Offer Name" autocomplete="off" formControlName="offerName" required>
+            <mat-error *ngIf="eform.offerName.invalid && (eform.offerName.dirty || eform.offerName.touched)">
+                <span *ngIf="eform.offerName.errors.required" class="alert-danger">
+                    Offer Name is required
+                </span>
+                <span *ngIf="eform.offerName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--offerNameAR-->
+        <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Offer Name AR" autocomplete="off" formControlName="offerNameAR" required>
+            <mat-error *ngIf="eform.offerNameAR.invalid && (eform.offerNameAR.dirty || eform.offerNameAR.touched)">
+                <span *ngIf="eform.offerNameAR.errors.required" class="alert-danger">
+                    Offer Name AR is required
+                </span>
+                <span *ngIf="eform.offerNameAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--offerDesc-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Offer Description" autocomplete="off" formControlName="offerDesc">
+            <mat-error *ngIf="eform.offerDesc.invalid && (eform.offerDesc.dirty || eform.offerDesc.touched)">
+                <span *ngIf="eform.offerDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <!--offerDescAR-->
+        <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Offer Description AR" autocomplete="off" formControlName="offerDescAR">
+            <mat-error *ngIf="eform.offerDescAR.invalid && (eform.offerDescAR.dirty || eform.offerDescAR.touched)">
+                <span *ngIf="eform.offerDescAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Category-->
+        <mat-form-field class="full-width" formGroupName="offerType">
+            <mat-label>Choose Category</mat-label>
+            <mat-select formControlName="offerTypeId" (selectionChange)="offerTypeChange($event.value)">
+                <mat-option *ngFor="let item of offerTypeList" [value]="item.offerTypeId">
+                    {{item.offerTypeName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('offerType.offerTypeId').invalid && (form.get('offerType.offerTypeId').dirty || form.get('offerType.offerTypeId').touched)">
+                <span *ngIf="form.get('offerType.offerTypeId').errors.required" class="alert-danger">
+                    Please choose Type
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--offerValue-->
+        <mat-form-field color="accent" class="full-width" *ngIf=" selectedOfferTypeName==='Percentage Offer' ">
+            <input type="number"  matInput placeholder="Offer Value (%)" autocomplete="off" formControlName="offerValue"
+                required>
+            <mat-error *ngIf="eform.offerValue.invalid && (eform.offerValue.dirty || eform.offerValue.touched)">
+                <span *ngIf="eform.offerValue.errors.required" class="alert-danger">
+                    Offer Value is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose other service-->
+        <mat-form-field class="full-width" *ngIf=" selectedOfferTypeName==='Comobo Offer'">
+            <mat-label>Choose Combo Service</mat-label>
+            <mat-select formControlName="offerOtherService">
+                <mat-option *ngFor="let item of serviceList" [value]="item.serviceMappingId">
+                    {{item.services.serviceName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="eform.offerOtherService.invalid && (eform.offerOtherService.dirty || eform.offerOtherService.touched)">
+                <span *ngIf="eform.offerOtherService.errors.required" class="alert-danger">
+                    Please choose Combo service
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--offerStartDate-->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Start Date</mat-label>
+            <input readonly matInput [matDatepicker]="dp3" (click)="dp3.open()" [min]="minDate" autocomplete="off"
+                formControlName="offerStartDate" required>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            <mat-error
+                *ngIf="eform.offerStartDate.invalid && (eform.offerStartDate.dirty || eform.offerStartDate.touched)">
+                <span *ngIf="eform.offerStartDate.errors.required" class="alert-danger">
+                    Start Date is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--offerEndDate-->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>End Date</mat-label>
+            <input readonly matInput [matDatepicker]="dp4"  (click)="dp4.open()" autocomplete="off" formControlName="offerEndDate" required>
+            <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+            <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+            <mat-error *ngIf="eform.offerEndDate.invalid && (eform.offerEndDate.dirty || eform.offerEndDate.touched)">
+                <span *ngIf="eform.offerEndDate.errors.required" class="alert-danger">
+                    End Date is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

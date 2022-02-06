@@ -1,0 +1,16 @@
+<a *ngIf="authenticationService.userIsValid" mat-list-item (click)="onItemSelected(item)" [ngClass]="{    
+    active: expanded
+  }" [ngStyle]="{'padding-left': (depth * 12) + 'px'}" class="menu-list-item" 
+  [ngStyle]="depth>0 ? {'font-size': '.8em'}:{'font-size': '.9em'}">
+  <mat-icon class="menuIcon">{{item.iconName}}</mat-icon>
+  {{item.displayName | uppercase}}
+  <span fxFlex class="m-l-auto" *ngIf="item.children && item.children.length">
+    <mat-icon  [@indicatorRotate]="expanded ? 'expanded': 'collapsed'" >
+      expand_more
+    </mat-icon>
+  </span>
+</a>
+<div class="subMenu" *ngIf="expanded" [ngClass]="{expanded: expanded}">
+  <app-sidebar-navigation *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
+  </app-sidebar-navigation>
+</div>

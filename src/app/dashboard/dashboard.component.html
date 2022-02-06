@@ -1,0 +1,4 @@
+<h1 class="h3 title">Dashboard</h1>
+<div class="info" *ngIf="!authService.userIsValid">
+    <p><mat-icon [color]='"warn"' class="icon">info</mat-icon> Error ! Merchant Or Branch informations are missing, please contact zerveazy Admin</p>
+</div>

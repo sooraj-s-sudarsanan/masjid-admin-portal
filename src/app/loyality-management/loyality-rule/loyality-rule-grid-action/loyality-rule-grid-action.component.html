@@ -1,0 +1,138 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.loyalityRule.name}}
+    </h1>
+    <mat-dialog-content>
+
+        <!--loyaltyRuleName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Rule Name" autocomplete="off" formControlName="loyaltyRuleName" required>
+            <mat-error
+                *ngIf="eform.loyaltyRuleName.invalid && (eform.loyaltyRuleName.dirty || eform.loyaltyRuleName.touched)">
+                <span *ngIf="eform.loyaltyRuleName.errors.required" class="alert-danger">
+                    Rule Name is required
+                </span>
+                <span *ngIf="eform.loyaltyRuleName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>       
+
+        <!--loyaltyCode-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="loyalty Code" autocomplete="off" formControlName="loyaltyCode">
+            <mat-error *ngIf="eform.loyaltyCode.invalid && (eform.loyaltyCode.dirty || eform.loyaltyCode.touched)">
+                <span *ngIf="eform.loyaltyCode.errors.required" class="alert-danger">
+                    loyalty Code is required
+                </span>
+                <span *ngIf="eform.loyaltyCode.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--loyaltyRuleDesc-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Rule Code Desc" autocomplete="off" formControlName="loyaltyRuleDesc">
+            <mat-error
+                *ngIf="eform.loyaltyRuleDesc.invalid && (eform.loyaltyRuleDesc.dirty || eform.loyaltyRuleDesc.touched)">
+                <span *ngIf="eform.loyaltyRuleDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+         <!--rewardExpiryDays-->
+         <mat-form-field class="full-width">
+            <input type="number" min="1" matInput placeholder="Reward Expiry Days" autocomplete="off" formControlName="rewardExpiryDays" required>
+            <mat-error
+                *ngIf="eform.rewardExpiryDays.invalid && (eform.rewardExpiryDays.dirty || eform.rewardExpiryDays.touched)">
+                <span *ngIf="eform.rewardExpiryDays.errors.required" class="alert-danger">
+                    Reward Expiry Days is required
+                </span>              
+            </mat-error>
+        </mat-form-field>
+
+        <!--loyaltyStartDate-->
+        <!-- <mat-form-field class="full-width">
+            <input matInput [min]='min' [matDatepicker]="picker1" readonly (click)="picker1.open()"  placeholder="Start Date" autocomplete="off" formControlName="loyaltyStartDate">
+            <mat-error
+                *ngIf="eform.loyaltyStartDate.invalid && (eform.loyaltyStartDate.dirty || eform.loyaltyStartDate.touched)">
+                <span *ngIf="eform.loyaltyStartDate.errors.required" class="alert-danger">
+                    Start Date is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-datepicker #picker1></mat-datepicker> -->
+
+        <!--loyaltyEndDate-->
+        <!-- <mat-form-field class="full-width">
+            <input matInput [min]='min' [matDatepicker]="picker2" readonly (click)="picker2.open()" placeholder="End Date" autocomplete="off" formControlName="loyaltyEndDate">
+            <mat-error
+                *ngIf="eform.loyaltyEndDate.invalid && (eform.loyaltyEndDate.dirty || eform.loyaltyEndDate.touched)">
+                <span *ngIf="eform.loyaltyEndDate.errors.required" class="alert-danger">
+                    End Date is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-datepicker #picker2></mat-datepicker> -->
+        <!--Choose loyalty-->
+        <mat-form-field class="full-width" formGroupName="loyaltyType">
+            <mat-label>Choose Loyality</mat-label>          
+            <mat-select formControlName="loyaltyTypeId">
+                <mat-option *ngFor="let item of loyaltyList" [value]="item.loyaltyTypeId">
+                    {{item.loyaltyTypeName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('loyaltyType.loyaltyTypeId').invalid && (form.get('loyaltyType.loyaltyTypeId').dirty || form.get('loyaltyType.loyaltyTypeId').touched)">
+                <span *ngIf="form.get('loyaltyType.loyaltyTypeId').errors.required" class="alert-danger">
+                    Please choose loyality
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Scheme-->
+        <mat-form-field class="full-width" formGroupName="loyaltyScheme">
+            <mat-label>Choose Scheme</mat-label>          
+            <mat-select formControlName="loyaltySchemeId">
+                <mat-option *ngFor="let item of SchemeList" [value]="item.loyaltySchemeId">
+                    {{item.loyaltySchemeName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('loyaltyScheme.loyaltySchemeId').invalid && (form.get('loyaltyScheme.loyaltySchemeId').dirty || form.get('loyaltyScheme.loyaltySchemeId').touched)">
+                <span *ngIf="form.get('loyaltyScheme.loyaltySchemeId').errors.required" class="alert-danger">
+                    Please choose Scheme
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+         <!--Choose merchant-->
+         <mat-form-field class="full-width">
+            <mat-label>Choose Merchant</mat-label>
+            <mat-select (selectionChange)="merchantSelectionChange($event.value)" formControlName="merchantId">
+                <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">
+                    {{item.merchantName}}
+                </mat-option>
+            </mat-select>           
+        </mat-form-field>
+
+        <!--Choose branch-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Branch</mat-label>
+            <mat-select formControlName="branchId">
+                <mat-option *ngFor="let item of branchList" [value]="item.branchId">
+                    {{item.branchName}}
+                </mat-option>
+            </mat-select>           
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

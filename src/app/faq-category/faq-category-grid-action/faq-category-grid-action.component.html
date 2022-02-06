@@ -1,0 +1,61 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.faqCategoryModule.name}}</h1>
+    <mat-dialog-content>
+
+        <!--faqTypeName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="faqTypeName" autocomplete="off" formControlName="faqTypeName" required>
+            <mat-error *ngIf="eform.faqTypeName.invalid && (eform.faqTypeName.dirty || eform.faqTypeName.touched)">
+                <span *ngIf="eform.faqTypeName.errors.required" class="alert-danger">
+                    Faq Category Name is required
+                </span>
+                <span *ngIf="eform.faqTypeName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--faqTypeNameAR-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="faqTypeNameAR" autocomplete="off" formControlName="faqTypeNameAR" required>
+            <mat-error
+                *ngIf="eform.faqTypeNameAR.invalid && (eform.faqTypeNameAR.dirty || eform.faqTypeNameAR.touched)">
+                <span *ngIf="eform.faqTypeNameAR.errors.required" class="alert-danger">
+                    Faq Category Name is required
+                </span>
+                <span *ngIf="eform.faqTypeNameAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--faqTypeDesc-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="faqTypeDesc" autocomplete="off" formControlName="faqTypeDesc" required>
+            <mat-error *ngIf="eform.faqTypeDesc.invalid && (eform.faqTypeDesc.dirty || eform.faqTypeDesc.touched)">
+                <span *ngIf="eform.faqTypeDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--faqTypeDescAR-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="faqTypeDescAR" autocomplete="off" formControlName="faqTypeDescAR" required>
+            <mat-error
+                *ngIf="eform.faqTypeDescAR.invalid && (eform.faqTypeDescAR.dirty || eform.faqTypeDescAR.touched)">
+                <span *ngIf="eform.faqTypeDescAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

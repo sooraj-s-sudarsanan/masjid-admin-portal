@@ -1,0 +1,337 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit($event)">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.employee.name}}
+    </h1>
+    <mat-dialog-content>
+
+        <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
+            <mat-tab label="Personal Info.">
+                <!--Choose merchant-->
+                <mat-form-field class="full-width">
+                    <mat-label>Choose Merchant</mat-label>
+                    <mat-select (selectionChange)="merchantSelectionChange($event.value)" formControlName="merchantId">
+                        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">
+                            {{item.merchantName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="eform.merchantId.invalid && (eform.merchantId.dirty || eform.merchantId.touched)">
+                        <span *ngIf="eform.merchantId.errors.required" class="alert-danger">
+                            Please choose Merchant
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Choose branch-->
+                <mat-form-field class="full-width">
+                    <mat-label>Choose Branch</mat-label>
+                    <mat-select formControlName="branchId">
+                        <mat-option *ngFor="let item of branchList" [value]="item.branchId">
+                            {{item.branchName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="eform.branchId.invalid && (eform.branchId.dirty || eform.branchId.touched)">
+                        <span *ngIf="eform.branchId.errors.required" class="alert-danger">
+                            Please choose Branch
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--service Person Name-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Service Person Name" autocomplete="off"
+                        formControlName="servicePersonName" required>
+                    <mat-error
+                        *ngIf="eform.servicePersonName.invalid && (eform.servicePersonName.dirty || eform.servicePersonName.touched)">
+                        <span *ngIf="eform.servicePersonName.errors.required" class="alert-danger">
+                            Service Person Name is required
+                        </span>
+                        <span *ngIf="eform.servicePersonName.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--servicePersonNameAR-->
+                <mat-form-field color="accent" class="full-width matform-rtl">
+                    <input matInput placeholder="Service Person NameAR" autocomplete="off"
+                        formControlName="servicePersonNameAR">
+                    <mat-error
+                        *ngIf="eform.servicePersonNameAR.invalid && (eform.servicePersonNameAR.dirty || eform.servicePersonNameAR.touched)">
+                        <!-- <span *ngIf="eform.servicePersonNameAR.errors.required" class="alert-danger">
+                            Service Person Name is required
+                        </span> -->
+                        <span *ngIf="eform.servicePersonNameAR.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+                <!--service Person Desc.-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Service Person Desc." autocomplete="off"
+                        formControlName="servicePersonDesc">
+                    <mat-error
+                        *ngIf="eform.servicePersonDesc.invalid && (eform.servicePersonDesc.dirty || eform.servicePersonDesc.touched)">
+                        <span *ngIf="eform.servicePersonDesc.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="full-width">
+                    <mat-checkbox class="example-margin" [checked]="false"
+                        formControlName="servicePersonBookingAllowed">
+                        Personal level booking
+                    </mat-checkbox>
+                </div>
+                <!--mobileNo-->
+                <mat-form-field class="full-width">
+                    <!-- <span matPrefix>+974 &nbsp;</span> -->
+                    <input matInput placeholder="Mobile Number" autocomplete="no" formControlName="mobileNo" required>
+                    <mat-error *ngIf="eform.mobileNo.invalid && (eform.mobileNo.dirty || eform.mobileNo.touched)">
+                        <span *ngIf="eform.mobileNo.errors.pattern" class="alert-danger">
+                            Enter valid Mobile Number
+                        </span>
+                        <span *ngIf="eform.mobileNo.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--email-->
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Email" autocomplete="no" formControlName="email" required>
+                    <!-- <mat-hint>Domain name must be {{emailDomain}}</mat-hint> -->
+                    <mat-error *ngIf="eform.email.invalid && (eform.email.dirty || eform.email.touched)">
+                        <span *ngIf="eform.email.errors.required" class="alert-danger">
+                            Email is required
+                        </span>
+                        <span *ngIf="eform.email.errors.email" class="alert-danger">
+                            Enter valid email
+                        </span>
+                        <span *ngIf="eform.email.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--serviceAtCustomerLocation -->
+                <div class="full-width">
+                    <mat-checkbox class="example-margin"
+                        formControlName="serviceAtCustomerLocation">Service At Customer
+                        Location </mat-checkbox>
+                </div>
+
+                <!--numberOfBookingAllowed-->
+                <mat-form-field color="accent" class="full-width">
+                    <input type="number" matInput placeholder="Number of booking allowed" autocomplete="off"
+                        formControlName="numberOfBookingAllowed">                    
+                </mat-form-field>
+
+                <!--service Person Start Time-->
+                <!-- <mat-form-field color="accent" class="full-width">
+                    <input matInput readonly [ngxTimepicker]="StartTime" placeholder="Start Time" autocomplete="off"
+                        formControlName="servicePersonStartTime" required>
+                    <ngx-material-timepicker [minutesGap]="5" #StartTime [appendToInput]="true">
+                    </ngx-material-timepicker>
+                    <mat-hint>HH:MM AM/PM</mat-hint>
+                    <mat-error
+                        *ngIf="eform.servicePersonStartTime.invalid && (eform.servicePersonStartTime.dirty || eform.servicePersonStartTime.touched)">
+                        <span *ngIf="eform.servicePersonStartTime.errors.required" class="alert-danger">
+                            Start Time is required
+                        </span>
+                        <span *ngIf="eform.servicePersonStartTime.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field> -->
+                <!--service Person End Time-->
+                <!-- <mat-form-field color="accent" class="full-width">
+                    <input matInput readonly [ngxTimepicker]="EndTime" placeholder="End Time" autocomplete="off"
+                        formControlName="servicePersonEndTime" required>
+                    <ngx-material-timepicker [minutesGap]="5" #EndTime [appendToInput]="true"></ngx-material-timepicker>
+                    <mat-hint>HH:MM AM/PM</mat-hint>
+                    <mat-error
+                        *ngIf="eform.servicePersonEndTime.invalid && (eform.servicePersonEndTime.dirty || eform.servicePersonEndTime.touched)">
+                        <span *ngIf="eform.servicePersonEndTime.errors.required" class="alert-danger">
+                            End Time is required
+                        </span>
+                        <span *ngIf="eform.servicePersonEndTime.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field> -->
+                <!--servicePersonAvgDuration-->
+                <!-- <mat-form-field color="accent" class="full-width">
+                    <input type="number" matInput placeholder="Avg Duration" autocomplete="off"
+                        formControlName="servicePersonAvgDuration" required>
+                    <mat-hint>in minutes</mat-hint>
+                    <mat-error
+                        *ngIf="eform.servicePersonAvgDuration.invalid && (eform.servicePersonAvgDuration.dirty || eform.servicePersonAvgDuration.touched)">
+                        <span *ngIf="eform.servicePersonAvgDuration.errors.required" class="alert-danger">
+                            AvgDuration is required
+                        </span>
+                    </mat-error>
+                </mat-form-field> -->
+
+                <!--servicePersonWorkingDay-->
+                <!-- <app-working-days [inRequired]='true' [inValue]='wStartDay' [inDisabled]="wEndDay"
+                    [placeholder]="'Working Day Start'" (change)="onSelectedWDay($event,1)">
+                </app-working-days>
+                <app-working-days [inRequired]='false' [inValue]='wEndDay' [inDisabled]="wStartDay"
+                    [placeholder]="'Working Day End'" (change)="onSelectedWDay($event,2)">
+                </app-working-days>
+                <span class="mat-error"
+                    *ngIf="eform.servicePersonWorkingDay.invalid && (eform.submitted||!eform.servicePersonWorkingDay.invalid)">
+                    <span *ngIf="eform.servicePersonWorkingDay.errors.required" class="alert-danger">
+                        Working Days is required
+                    </span>
+                </span> -->
+            </mat-tab>
+            <mat-tab label="Working Time">
+
+                <mat-card class="m-a-10">
+                    <div>
+                        <mat-list>
+                            <mat-list-item>
+                                <h3>Upcoming Leaves</h3>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <ng-container *ngFor="let item of holidayArray;let i=index">
+                                <mat-list-item>
+                                    <div class="breakTime-row">
+                                        <div class="w-100">
+                                            <h4>{{item}}</h4>
+                                        </div>
+                                        <div class="w-20">
+                                            <a href="javascript:;" (click)="clearHoliday(i)" class="w-20 p-l-10">
+                                                <mat-icon [color]='"warn"'>delete</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                            </ng-container>
+                            <mat-list-item class="m-t-10">
+                                <mat-form-field color="accent">
+                                    <input matInput (dateInput)="holidaySelected($event.value)"
+                                        placeholder="Upcoming Leave" autocomplete="off" [matDatepicker]="dp3"
+                                        [min]="minDate" disabled>
+                                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                    <mat-datepicker-toggle matSuffix (click)="clearBranchHolidays()">
+                                        <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                                </mat-form-field>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </mat-card>
+                <!--Break Time-->
+                <mat-card class="m-a-10">
+                    <div>
+                        <mat-list>
+                            <mat-list-item>
+                                <h3>Working Time</h3>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <ng-container *ngFor="let item of workingTimes;let i=index">
+                                <mat-list-item>
+                                    <div class="breakTime-row">
+                                        <div class="w-40">
+                                            <mat-checkbox class="example-margin" [checked]="item.available"
+                                                (change)="onSelectWorkingDay($event,i)">
+                                                {{item.day.display}}
+                                            </mat-checkbox>
+
+                                        </div>
+                                        <div class="w-100">
+                                            <div fxLayout="row" fxFill>
+                                                <div fxFlex="30">
+                                                    <input class="w-100" [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="item.start" placeholder="Start Time"
+                                                        aria-label="Start Time" [ngxTimepicker]="start"
+                                                        [ngxTimepicker]="appendedToInput" readonly
+                                                        [disabled]="!item.available">
+                                                    <ngx-material-timepicker (timeSet)="setTime($event,item,'s')"
+                                                        [minutesGap]="5" #start [appendToInput]="true">
+                                                    </ngx-material-timepicker>
+                                                </div>
+                                                <div fxFlex="30">
+                                                    <input class="w-100" [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="item.end" placeholder="End Time"
+                                                        aria-label="End Time" [ngxTimepicker]="end"
+                                                        [ngxTimepicker]="appendedToInput" readonly
+                                                        [disabled]="!item.available">
+                                                    <ngx-material-timepicker (timeSet)="setTime($event,item,'e')"
+                                                        [minutesGap]="5" #end [appendToInput]="true">
+                                                    </ngx-material-timepicker>
+                                                </div>
+                                                <div fxFlex="40">
+                                                    <a href="javascript:;" (click)="clear(item,'wt')"
+                                                        class="w-20 p-l-10" [disabled]="!item.available">
+                                                        <mat-icon [color]='"warn"'>delete</mat-icon>
+                                                    </a>
+                                                    <a href="javascript:;" (click)="copyToAll(item,'wt')"
+                                                        class="w-20 p-l-10"
+                                                        matTooltip='Copy timing to all following days'
+                                                        matTooltipPosition='above' [disabled]="!item.available">
+                                                        <mat-icon [color]='"warn"'>copy_all</mat-icon>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-100">
+                                            <div fxLayout="row" fxFill>
+                                                <div fxFlex="30">
+                                                    <input class="w-100" [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="item.breakstart" placeholder="Break Start Time"
+                                                        aria-label="Start Time" [ngxTimepicker]="startBreak"
+                                                        [ngxTimepicker]="appendedToInput" readonly
+                                                        [disabled]="!item.available">
+                                                    <ngx-material-timepicker (timeSet)="setTime($event,item,'s')"
+                                                        [minutesGap]="5" #startBreak [appendToInput]="true">
+                                                    </ngx-material-timepicker>
+                                                </div>
+                                                <div fxFlex="30">
+                                                    <input class="w-100" [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="item.breakend" placeholder="Break End Time"
+                                                        aria-label="End Time" [ngxTimepicker]="endBreak"
+                                                        [ngxTimepicker]="appendedToInput" readonly
+                                                        [disabled]="!item.available">
+                                                    <ngx-material-timepicker (timeSet)="setTime($event,item,'e')"
+                                                        [minutesGap]="5" #endBreak [appendToInput]="true">
+                                                    </ngx-material-timepicker>
+                                                </div>
+                                                <div fxFlex="40">
+                                                    <a href="javascript:;" (click)="clear(item,'bt')"
+                                                        class="w-20 p-l-10" [disabled]="!item.available">
+                                                        <mat-icon [color]='"warn"'>delete</mat-icon>
+                                                    </a>
+                                                    <a href="javascript:;" (click)="copyToAll(item,'bt')"
+                                                        class="w-20 p-l-10"
+                                                        matTooltip='Copy timing to all following days'
+                                                        matTooltipPosition='above' [disabled]="!item.available">
+                                                        <mat-icon [color]='"warn"'>copy_all</mat-icon>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                            </ng-container>
+                        </mat-list>
+                    </div>
+                </mat-card>
+            </mat-tab>
+        </mat-tab-group>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

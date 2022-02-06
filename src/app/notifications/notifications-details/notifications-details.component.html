@@ -1,0 +1,30 @@
+<h1 class="h3 title" mat-dialog-title>Details</h1>
+<mat-dialog-content>
+    <p>Id:{{row.data.notifId}}</p>
+    <p>Name:{{row.data.notifName}}</p>
+    <p>On:{{row.data.notifOn}}</p>
+    <p>Channel:{{row.data.notifChannel}}</p>
+    <!-- <p>Created By:{{row.data.createdBy}}</p> -->
+    <p>Trigger On:{{row.data.notifTriggerOn}}</p>
+    <p>Trigger Value:{{row.data.notifTriggerValue}}</p>
+    <p>Schedule Time:{{row.data.notifScheduleTime}}</p>
+    <p>Send Now:{{row.data.sendNow}}</p>
+    <p>Group Name:{{row.data.notifGroup.groupName}}</p>
+    <br>
+    <p><b>Template English</b></p>
+    <div [innerHTML]="row.data.notifTemplateEnglish"></div>
+    <p><b>Template Arabic</b></p>
+    <div [innerHTML]="row.data.notifTemplateArabic"></div>
+    <br>
+
+    <p>Subject English:{{row.data.notifSubjectEnglish}}</p>
+    <p>Subject Arabic:{{row.data.notifSubjectArabic}}</p>
+
+    <!-- <p>Created On:{{row.data.createdOn}}</p>
+    <p>Modified By:{{row.data.modifiedBy}}</p>
+    <p>Modified On:{{row.data.modifiedOn}}</p> -->
+    <div [innerHTML]="row.data.staticPageContent"></div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</div>

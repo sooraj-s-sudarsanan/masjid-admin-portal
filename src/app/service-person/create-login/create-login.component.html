@@ -1,0 +1,62 @@
+<form [formGroup]='adminUserForm' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">Create Login Details</h1>
+    <mat-dialog-content>  
+  
+      <!--mobileNo-->
+      <!-- <mat-form-field class="full-width">
+        <span matPrefix>+974 &nbsp;</span>
+        <input matInput placeholder="Mobile Number" autocomplete="no" formControlName="mobileNo" required>
+        <mat-error *ngIf="eform.mobileNo.invalid && (eform.mobileNo.dirty || eform.mobileNo.touched)">
+          <span *ngIf="eform.mobileNo.errors.pattern" class="alert-danger">
+            Enter valid Mobile Number
+          </span>
+          <span *ngIf="eform.mobileNo.errors.maxlength" class="alert-danger">
+            length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field> -->
+  
+      <!--email-->
+      <!-- <mat-form-field class="full-width">
+        <input matInput placeholder="Email" autocomplete="no" formControlName="email" required>
+        <mat-hint>Domain name must be {{emailDomain}}</mat-hint>
+        <mat-error *ngIf="eform.email.invalid && (eform.email.dirty || eform.email.touched)">
+          <span *ngIf="eform.email.errors.required" class="alert-danger">
+            Email is required
+          </span>
+          <span *ngIf="eform.email.errors.email" class="alert-danger">
+            Enter valid email
+          </span>
+          <span *ngIf="eform.email.errors.maxlength" class="alert-danger">
+            length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field> -->
+  
+      <!--Password-->
+      <mat-form-field class="full-width">
+        <input matInput type="password" placeholder="Password" autocomplete="new-password" formControlName="password">
+        <mat-hint align="start"><strong>Minimum 8 characters, at least one uppercase letter, one lowercase letter, one
+            number and one special character:</strong> </mat-hint>
+        <mat-error *ngIf="eform.password.invalid && (eform.password.dirty || eform.password.touched)">
+          <span *ngIf="eform.password.errors.required" class="alert-danger">
+            password is required
+          </span>
+          <span *ngIf="eform.password.errors.pattern" class="alert-danger">
+            Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special
+            character(@.$!%*?&)
+          </span>
+        </mat-error>
+      </mat-form-field>
+  
+  
+  
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+  
+  </form>

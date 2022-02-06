@@ -1,0 +1,58 @@
+<h1 mat-dialog-title class="dialog-title-h1">Set Permission for {{row?row.data.roleName:''}}</h1>
+<mat-dialog-content style="height: 400px;">
+
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <!-- This is the tree node template for leaf nodes -->
+        <mat-tree-node *matTreeNodeDef="let menu" matTreeNodePadding>
+            <!-- use a disabled button to provide padding for tree leaf -->
+            <button mat-icon-button disabled></button>
+            <span style="min-width: 200px;"> {{menu.name}}</span>
+
+            <div style="width: 100%;" align="end">
+
+                <mat-checkbox color="warn" class="example-margin"
+                    [checked]='menu.node.hasCreatePermission && menu.node.hasViewPermission && menu.node.hasUpdatePermission && menu.node.hasDeletePermission'
+                    (change)="selectAll($event,menu)" matTooltipClass="tooltip" matTooltipPosition="above"
+                    matTooltip="Select All" style="padding-right: 10px;">
+                </mat-checkbox>
+
+                <mat-checkbox class="example-margin" [checked]='menu.node.hasCreatePermission'
+                    (change)="menuItemChecked($event,'C',menu)" matTooltipClass="tooltip" matTooltipPosition="above"
+                    matTooltip="Create Permission">
+                </mat-checkbox>
+
+                <mat-checkbox class="example-margin" [checked]='menu.node.hasViewPermission'
+                    (change)="menuItemChecked($event,'R',menu)" matTooltipClass="tooltip" matTooltipPosition="above"
+                    matTooltip="Read Permission" style="padding-left: 10px;">
+                </mat-checkbox>
+
+
+                <mat-checkbox class="example-margin" [checked]='menu.node.hasUpdatePermission'
+                    (change)="menuItemChecked($event,'U',menu)" matTooltipClass="tooltip" matTooltipPosition="above"
+                    matTooltip="Update Permission" style="padding-left: 10px;">
+                </mat-checkbox>
+
+
+                <mat-checkbox class="example-margin" [checked]='menu.node.hasDeletePermission'
+                    (change)="menuItemChecked($event,'D',menu)" matTooltipClass="tooltip" matTooltipPosition="above"
+                    matTooltip="Delete Permission" style="padding-left: 10px;">
+                </mat-checkbox>
+            </div>
+
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+            </button>
+            {{node.name}}
+        </mat-tree-node>
+    </mat-tree>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="updatePermission()">Update</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+</div>

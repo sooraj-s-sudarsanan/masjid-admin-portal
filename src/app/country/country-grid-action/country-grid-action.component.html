@@ -1,0 +1,82 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.countryModule.name}}</h1>
+    <mat-dialog-content>
+
+        <!--nationalityNameArb-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Nationality Name" autocomplete="off" formControlName="nationalityName" required>
+            <mat-error
+                *ngIf="eform.nationalityName.invalid && (eform.nationalityName.dirty || eform.nationalityName.touched)">
+                <span *ngIf="eform.nationalityName.errors.required" class="alert-danger">
+                    Nationality Name is required
+                </span>
+                <span *ngIf="eform.nationalityName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--nationalityNameArb-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Nationality Name Arb" autocomplete="off" formControlName="nationalityNameArb"
+                required>
+            <mat-error
+                *ngIf="eform.nationalityNameArb.invalid && (eform.nationalityNameArb.dirty || eform.nationalityNameArb.touched)">
+                <span *ngIf="eform.nationalityNameArb.errors.required" class="alert-danger">
+                    Nationality Name Arb. is required
+                </span>
+                <span *ngIf="eform.nationalityNameArb.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--nationalityCode-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Nationality Code" autocomplete="off" formControlName="nationalityCode" required>
+            <mat-error
+                *ngIf="eform.nationalityCode.invalid && (eform.nationalityCode.dirty || eform.nationalityCode.touched)">
+                <span *ngIf="eform.nationalityCode.errors.required" class="alert-danger">
+                    Nationality Code is required
+                </span>
+                <span *ngIf="eform.nationalityCode.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--countryCode-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Country Code" autocomplete="off" formControlName="countryCode" required>
+            <mat-error *ngIf="eform.countryCode.invalid && (eform.countryCode.dirty || eform.countryCode.touched)">
+                <span *ngIf="eform.countryCode.errors.required" class="alert-danger">
+                    Country Code is required
+                </span>
+                <span *ngIf="eform.countryCode.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+         <!--currency-->
+         <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="currency" autocomplete="off" formControlName="currency" required>
+            <mat-error *ngIf="eform.currency.invalid && (eform.currency.dirty || eform.currency.touched)">
+                <span *ngIf="eform.currency.errors.required" class="alert-danger">
+                    currency is required
+                </span>
+                <span *ngIf="eform.currency.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" style="min-height: 100px;">
+  <button mat-icon-button id="menu" (click)="headerService.toggleNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a [routerLink]="['/']"><img src="./assets/images/logo2.png" style="width: 130px;"></a>
+  <button mat-button [matMenuTriggerFor]="menu" class="LoggedInBtn" *ngIf="isLoggedIn && userInfo">Welcome {{userInfo.fullName}}</button>
+  
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onClickChangePswd($event)">Change Password</button>
+  <button mat-menu-item (click)="logOut()">LogOut</button>
+</mat-menu>

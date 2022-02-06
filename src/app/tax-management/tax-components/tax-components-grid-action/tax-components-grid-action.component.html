@@ -1,0 +1,96 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+        ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.taxComponents.name}}</h1>
+    <mat-dialog-content>
+
+        <!--taxComponentName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Component Name" autocomplete="off" formControlName="taxComponentName" required>
+            <mat-error
+                *ngIf="eform.taxComponentName.invalid && (eform.taxComponentName.dirty || eform.taxComponentName.touched)">
+                <span *ngIf="eform.taxComponentName.errors.required" class="alert-danger">
+                    Component Name is required
+                </span>
+                <span *ngIf="eform.taxComponentName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--taxComponentDesc-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Component Description" autocomplete="off" formControlName="taxComponentDesc">
+            <mat-error
+                *ngIf="eform.taxComponentDesc.invalid && (eform.taxComponentDesc.dirty || eform.taxComponentDesc.touched)">
+                <span *ngIf="eform.taxComponentDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--taxComponentCode-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Component Code" autocomplete="off" formControlName="taxComponentCode" required>
+            <mat-error
+                *ngIf="eform.taxComponentCode.invalid && (eform.taxComponentCode.dirty || eform.taxComponentCode.touched)">
+                <span *ngIf="eform.taxComponentCode.errors.required" class="alert-danger">
+                    Component Code is required
+                </span>
+                <span *ngIf="eform.taxComponentCode.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--valuationType-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Valuation Type" autocomplete="off" formControlName="valuationType" required>
+            <mat-error
+                *ngIf="eform.valuationType.invalid && (eform.valuationType.dirty || eform.valuationType.touched)">
+                <span *ngIf="eform.valuationType.errors.required" class="alert-danger">
+                    Valuation Type is required
+                </span>
+                <span *ngIf="eform.valuationType.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--taxRate-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Tax Rate (%)" autocomplete="off" formControlName="taxRate" required>
+            <mat-error *ngIf="eform.taxRate.invalid && (eform.taxRate.dirty || eform.taxRate.touched)">
+                <span *ngIf="eform.taxRate.errors.required" class="alert-danger">
+                    Tax Rate is required
+                </span>
+                <span *ngIf="eform.taxRate.errors.max" class="alert-danger">
+                    Max value exceeded
+                </span>              
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Tax Type-->
+        <mat-form-field class="full-width" formGroupName="taxType">
+            <mat-label>Choose Tax Type</mat-label>
+            <mat-select formControlName="taxTypeId">
+                <mat-option *ngFor="let item of typeList" [value]="item.taxTypeId">
+                    {{item.taxTypeName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('taxType.taxTypeId').invalid && (form.get('taxType.taxTypeId').dirty || form.get('taxType.taxTypeId').touched)">
+                <span *ngIf="form.get('taxType.taxTypeId').errors.required" class="alert-danger">
+                    Please choose Tax Type
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

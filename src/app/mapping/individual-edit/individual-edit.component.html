@@ -1,0 +1,80 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+    <h1 mat-dialog-title class="h3 title">Edit Mapping</h1>
+    <mat-dialog-content>
+
+        <!--numberOfBookingAllowed-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Number of booking allowed" autocomplete="off"
+                formControlName="numberOfBookingAllowed" required>
+            <mat-error
+                *ngIf="eform.numberOfBookingAllowed.invalid && (eform.numberOfBookingAllowed.dirty || eform.numberOfBookingAllowed.touched)">
+                <span *ngIf="eform.numberOfBookingAllowed.errors.required" class="alert-danger">
+                    Number of booking allowed is required
+                </span>.
+            </mat-error>
+        </mat-form-field>
+
+        <!--servicePersonLevelBooking-->
+        <div class="full-width">
+            <mat-checkbox class="example-margin"  formControlName="servicePersonLevelBooking">Personal level booking</mat-checkbox>
+        </div>
+
+         <!--allowRepeatedBooking-->
+         <div class="full-width">
+             <mat-checkbox class="example-margin"  formControlName="allowRepeatedBooking">Allow Repeated Booking</mat-checkbox>
+         </div>
+
+        <!--servicePersonStartTime-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput [ngxTimepicker]="appendedToInput" readonly placeholder="Start Time" autocomplete="off" formControlName="servicePersonStartTime" required>
+            <mat-error
+                *ngIf="eform.servicePersonStartTime.invalid && (eform.servicePersonStartTime.dirty || eform.servicePersonStartTime.touched)">
+                <span *ngIf="eform.servicePersonStartTime.errors.required" class="alert-danger">
+                    Start time is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <ngx-material-timepicker [minutesGap]="5" #appendedToInput [appendToInput]="true"></ngx-material-timepicker>
+
+        <!--servicePersonEndTime-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="End Time" autocomplete="off" formControlName="servicePersonEndTime" required  [ngxTimepicker]="appendedToInput2" readonly>
+            <mat-error
+                *ngIf="eform.servicePersonEndTime.invalid && (eform.servicePersonEndTime.dirty || eform.servicePersonEndTime.touched)">
+                <span *ngIf="eform.servicePersonEndTime.errors.required" class="alert-danger">
+                    End time is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <ngx-material-timepicker [minutesGap]="5" #appendedToInput2 [appendToInput]="true"></ngx-material-timepicker>
+
+        <!--servicePersonAvgDuration-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Avg. Duration" autocomplete="off"
+                formControlName="servicePersonAvgDuration" required>
+            <mat-error
+                *ngIf="eform.servicePersonAvgDuration.invalid && (eform.servicePersonAvgDuration.dirty || eform.servicePersonAvgDuration.touched)">
+                <span *ngIf="eform.servicePersonAvgDuration.errors.required" class="alert-danger">
+                    Avg. Duration is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--servicePrice-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Service Price" autocomplete="off" formControlName="servicePrice">
+            <mat-error *ngIf="eform.servicePrice.invalid && (eform.servicePrice.dirty || eform.servicePrice.touched)">
+                <span *ngIf="eform.servicePrice.errors.required" class="alert-danger">
+                    Service Price is required
+                </span>.
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button type="button" mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

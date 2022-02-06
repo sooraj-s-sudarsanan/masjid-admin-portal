@@ -1,0 +1,38 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.menuManagement.name}}</h1>
+    <mat-dialog-content>
+  
+        <!--Menu Name-->
+        <mat-form-field color="accent" class="full-width">
+          <input matInput placeholder="Menu Name" autocomplete="off" formControlName="menuName" required>
+          <mat-error *ngIf="eform.menuName.invalid && (eform.menuName.dirty || eform.menuName.touched)">
+            <span *ngIf="eform.menuName.errors.required" class="alert-danger">
+              Menu Name is required
+            </span>
+            <span *ngIf="eform.menuName.errors.maxlength" class="alert-danger">
+             length exceeded
+            </span>
+          </mat-error>
+        </mat-form-field>
+      <!--Menu URL-->
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Menu URL" autocomplete="off" formControlName="menuUrl" required>
+        <mat-error *ngIf="eform.menuUrl.invalid && (eform.menuUrl.dirty || eform.menuUrl.touched)">
+          <span *ngIf="eform.menuUrl.errors.required" class="alert-danger">
+            Menu URL is required
+          </span>
+          <span *ngIf="eform.menuUrl.errors.maxlength" class="alert-danger">
+           length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field>
+  
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+  
+  </form>

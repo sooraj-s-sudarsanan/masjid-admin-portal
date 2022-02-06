@@ -1,0 +1,120 @@
+<h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Details</h1>
+
+<mat-dialog-content>
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Basic Info">
+      <div class="">
+        <mat-list>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Name :</small>
+              <div class="w-100 font-weight-bold">{{row.data.branchName}}</div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Name AR :</small>
+              <div class="w-100 font-weight-bold">{{row.data.branchNameAR}}</div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Description :</small>
+              <div class="w-100 font-weight-bold">{{row.data.branchDescription}}</div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Description AR :</small>
+              <div class="w-100 font-weight-bold">{{row.data.branchDescriptionAR}}</div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Location :</small>
+              <div class="w-100 font-weight-bold">{{row.data.locality?row.data.locality.localityName:null}}</div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Land Phone :</small>
+              <div class="w-100 font-weight-bold">{{row.data.branchContactLandPhone1}}</div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Contact Mobile :</small>
+              <div class="w-100 font-weight-bold">{{row.data.branchContactMobile}}</div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Address Line 1:</small>
+              <div class="w-100 font-weight-bold">{{row.data.branchAddress1}}</div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="m-y-10">
+              <small class="w-100 f-medium d-block m-b-5 o-50">Address Line 2:</small>
+              <div class="w-100 font-weight-bold">{{row.data.branchAddress2}}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-tab>
+    <mat-tab label="HoliDays">
+      <div class="">
+        <mat-list>
+          <div class="m-y-10">
+            <small class="w-100 f-medium d-block m-b-5 o-50">Holidays :</small>
+            <div class="w-100 font-weight-bold">{{row.data.branchHolidays}}</div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="m-y-10">
+            <small class="w-100 f-medium d-block m-b-5 o-50">Off Days:</small>
+            <div class="w-100 font-weight-bold">{{row.data.branchWeeklyOff}}</div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="m-y-10">
+            <small class="w-100 f-medium d-block m-b-5 o-50">Break Time:</small>
+            <div class="w-100 font-weight-bold" *ngFor="let item of branchbreakTime">{{item.day.display}} :
+              {{item.start}} - {{item.end}}</div>
+          </div>
+        </mat-list>
+      </div>
+    </mat-tab>
+    <mat-tab label="Other Info">
+      <div class="">
+        <mat-list>
+          <div class="m-y-10">
+            <small class="w-100 f-medium d-block m-b-5 o-50">What Is Included :</small>
+            <div class="w-100 font-weight-bold">{{row.data.whatIsIncluded}}</div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="m-y-10">
+            <small class="w-100 f-medium d-block m-b-5 o-50">What To Expect :</small>
+            <div class="w-100 font-weight-bold">{{row.data.whatToExpect}}</div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="m-y-10">
+            <small class="w-100 f-medium d-block m-b-5 o-50">Cancellation Policy :</small>
+            <div class="w-100 font-weight-bold">{{row.data.cancellationPolicy}}</div>
+          </div>
+        </mat-list>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</mat-dialog-actions>

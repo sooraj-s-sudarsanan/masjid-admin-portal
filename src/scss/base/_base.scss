@@ -1,0 +1,134 @@
+::-moz-selection {
+  background-color: rgba(map-get($theme, color), 0.3);
+}
+
+::selection {
+  background-color: rgba(map-get($theme, color), 0.3);
+}
+
+html,
+body,
+input,
+select,
+button {
+  font-family: map-get($theme, fontFamily);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-size: $baseFontSize;
+  @include scrollbar(8px, map-get($theme, color), rgba(map-get($color, dark), 0));
+}
+
+body {
+  font-weight: 400;
+  overflow-x: hidden;
+  line-height: 1.4em;
+  color: map-get($theme, text);
+  a {
+    color: map-get($theme, link);
+    &,
+    & > * {
+      outline: none;
+    }
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      cursor: pointer;
+      text-decoration: none;
+      color: map-get($theme, link);
+    }
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto !important;
+}
+
+p {
+  padding: 0;
+  margin: sides(0 0 10px);
+}
+
+figure {
+  margin: 0;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  line-height: 1.2em;
+  font-weight: normal;
+  margin: sides(0 0 0.5em);
+  font-family: map-get($theme, fontFamily);
+
+  // &.bold {
+  // 	font-weight: 700;
+  // }
+  // &.light { font-weight: 300; }
+  // &.medium { font-weight: 600; }
+}
+
+h1,
+.h1 {
+  font-size: em(36px);
+}
+
+h2,
+.h2 {
+  font-size: em(28px);
+}
+
+h3,
+.h3 {
+  font-size: em(24px);
+}
+
+h4,
+.h4 {
+  font-size: em(20px);
+}
+
+h5,
+.h5 {
+  font-size: em(18px);
+}
+
+h6,
+.h6 {
+  font-size: em(16px);
+}
+
+video,
+img {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.fw,
+.fh {
+  display: block;
+  position: relative;
+}
+
+.fw {
+  width: 100%;
+}
+
+.fh {
+  height: 100%;
+}

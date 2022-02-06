@@ -1,0 +1,10 @@
+
+<!--Delete Dialog-->
+<h1 mat-dialog-title>Confirmation</h1>
+<mat-dialog-content>
+  <p>Do you want remove mapping?</p>  
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="deleteRowData()"  color="primary">Yes</button>
+  <button mat-raised-button [mat-dialog-close]="'NO'"  color="warn" cdkFocusInitial>No</button>
+</div>

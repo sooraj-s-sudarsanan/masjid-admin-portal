@@ -1,0 +1,58 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.module.name}}</h1>
+    <mat-dialog-content>
+  
+        <!--Module Name-->
+        <mat-form-field color="accent" class="full-width">
+          <input matInput placeholder="Module Name" autocomplete="off" formControlName="moduleName" required>
+          <mat-error *ngIf="eform.moduleName.invalid && (eform.moduleName.dirty || eform.moduleName.touched)">
+            <span *ngIf="eform.moduleName.errors.required" class="alert-danger">
+              Module Name is required
+            </span>
+            <span *ngIf="eform.moduleName.errors.maxlength" class="alert-danger">
+             length exceeded
+            </span>
+          </mat-error>
+        </mat-form-field>
+      <!--Module URL-->
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Module URL" autocomplete="off" formControlName="moduleUrl" required>
+        <mat-error *ngIf="eform.moduleUrl.invalid && (eform.moduleUrl.dirty || eform.moduleUrl.touched)">
+          <span *ngIf="eform.moduleUrl.errors.required" class="alert-danger">
+            Module URL is required
+          </span>
+          <span *ngIf="eform.moduleUrl.errors.maxlength" class="alert-danger">
+           length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field>
+       <!--module CSS Link-->
+       <mat-form-field color="accent" class="full-width">
+        <input matInput placeholder="Icon CSS" autocomplete="off" formControlName="moduleCSSLink">
+        <mat-error
+            *ngIf="eform.moduleCSSLink.invalid && (eform.moduleCSSLink.dirty || eform.moduleCSSLink.touched)">
+            <span *ngIf="eform.moduleCSSLink.errors.maxlength" class="alert-danger">
+                length exceeded
+            </span>
+        </mat-error>
+    </mat-form-field>
+      <!--submodule Sort Order-->
+      <mat-form-field color="accent" class="full-width">
+        <input type="number" matInput placeholder="Sort Order" autocomplete="off" formControlName="moduleSortOrder">
+        <mat-error
+            *ngIf="eform.moduleSortOrder.invalid && (eform.moduleSortOrder.dirty || eform.moduleSortOrder.touched)">
+            <span *ngIf="eform.moduleSortOrder.errors.required" class="alert-danger">
+                Sort Order is required
+            </span>
+        </mat-error>
+    </mat-form-field>
+  
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+  
+  </form>

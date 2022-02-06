@@ -1,0 +1,37 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.loyalityScheme.name}}</h1>
+    <mat-dialog-content>
+
+        <!--loyaltySchemeName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Scheme Name" autocomplete="off" formControlName="loyaltySchemeName" required>
+            <mat-error
+                *ngIf="eform.loyaltySchemeName.invalid && (eform.loyaltySchemeName.dirty || eform.loyaltySchemeName.touched)">
+                <span *ngIf="eform.loyaltySchemeName.errors.required" class="alert-danger">
+                    Loyalty Scheme Name is required
+                </span>
+                <span *ngIf="eform.loyaltySchemeName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        
+         <!--loyaltySchemeDesc-->
+         <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Description" autocomplete="off" formControlName="loyaltySchemeDesc">
+            <mat-error
+                *ngIf="eform.loyaltySchemeDesc.invalid && (eform.loyaltySchemeDesc.dirty || eform.loyaltySchemeDesc.touched)">
+                <span *ngIf="eform.loyaltySchemeDesc.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

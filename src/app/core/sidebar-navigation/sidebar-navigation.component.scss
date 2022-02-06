@@ -1,0 +1,53 @@
+@import "../../../scss/base/theme";
+
+:host {
+  width: 100%;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-list-item {
+  color: #dee7f5;
+  &.active {
+    color: rgba(#000, 0.8);
+    background-color: #dee7f5;
+  }
+}
+
+:hover,
+:focus {
+  & > .mat-list-item:not(.expanded) {
+    // color: rgba(#000, 0.8);
+    background-color: rgba(map-get($color, primary), 0.16);
+  }
+}
+
+.mat-list-item {
+  width: auto;
+  display: flex;
+  border-bottom: 1px solid rgba(map-get($color, light), 0.2);
+  .menuIcon {
+    margin-right: 10px;
+    color: rgba(#fff, 0.7);
+  }
+  &.active {
+    color: map-get($cont, accent);
+    background: #52bcce;
+  }
+}
+
+.subMenu {
+  &.expanded {
+    background: rgba(map-get($color, light), 0.1);
+  }
+  .mat-list-item {
+    &.active {
+      background: rgba(map-get($color, primary), 0.6);
+    }
+  }
+}
+
+.sm-font {
+  font: small !important;
+}

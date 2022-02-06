@@ -1,0 +1,72 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.localityModule.name}}</h1>
+    <mat-dialog-content>
+
+        <!--localityName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Locality Name" autocomplete="off" formControlName="localityName" required>
+            <mat-error
+                *ngIf="eform.localityName.invalid && (eform.localityName.dirty || eform.localityName.touched)">
+                <span *ngIf="eform.localityName.errors.required" class="alert-danger">
+                    Locality Name is required
+                </span>
+                <span *ngIf="eform.localityName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--localityNameAR-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Locality Name AR" autocomplete="off" formControlName="localityNameAR"
+                required>
+            <mat-error
+                *ngIf="eform.localityNameAR.invalid && (eform.localityNameAR.dirty || eform.localityNameAR.touched)">
+                <span *ngIf="eform.localityNameAR.errors.required" class="alert-danger">
+                    Locality Name Arb. is required
+                </span>
+                <span *ngIf="eform.localityNameAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--localityCode-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Locality Code" autocomplete="off" formControlName="localityCode" required>
+            <mat-error
+                *ngIf="eform.localityCode.invalid && (eform.localityCode.dirty || eform.localityCode.touched)">
+                <span *ngIf="eform.localityCode.errors.required" class="alert-danger">
+                    Locality Code is required
+                </span>
+                <span *ngIf="eform.localityCode.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--nationalityBean-->
+        <mat-form-field class="full-width" formGroupName="nationalityBean">
+            <mat-label>Choose Country</mat-label>           
+            <mat-select formControlName="nationalityId">
+                <mat-option *ngFor="let item of nationalityList" [value]="item.nationalityId">
+                  {{item.nationalityName}}
+                </mat-option>
+              </mat-select>
+            <mat-error
+                *ngIf="form.get('nationalityBean.nationalityId').invalid && (form.get('nationalityBean.nationalityId').dirty || form.get('nationalityBean.nationalityId').touched)">
+                <span *ngIf="form.get('nationalityBean.nationalityId').errors.required" class="alert-danger">
+                    Please choose Nationality
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

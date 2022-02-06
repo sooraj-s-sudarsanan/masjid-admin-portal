@@ -1,0 +1,115 @@
+@import "../../../scss/base/vars";
+@import "../../../scss/base/mixins";
+@import "../../../scss/base/utilities";
+
+$img: "../../../#{$img}";
+
+:host {
+    display: block;
+}
+
+header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px 4px 0 0;
+    color: map-get($cont, primary);
+    background: map-get($color, primary);
+}
+
+footer {
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    border-radius: 0 0 4px 4px;
+    border-color: map-get($color, primary);
+    background: rgba(map-get($color, primary), 0.1);
+    & > * {
+        flex-grow: 1;
+        flex-basis: 0;
+        max-width: 100%;
+    }
+}
+
+main {
+    padding: 0;
+    background: #fff;
+    border: map-get($color, primary) 1px solid;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(map-get($color, primary), 0.2);
+    ul {
+        @include notaList;
+        display: flex;
+        width: calc(100% - 80px);
+        li {
+            padding: 7px;
+            flex-grow: 1;
+            margin: 0 2px;
+            font-size: 16px;
+            text-align: center;
+            @include font($fontM);
+            // background: rgba(map-get($color, dark), 0.12);
+            span {
+                display: block;
+            }
+        }
+    }
+}
+
+.slots {
+    display: flex;
+    padding: 10px 30px;
+    align-items: center;
+    .col {
+        flex-grow: 1;
+    }
+}
+
+mat-chip {
+    // text-align: center;
+    // display: inline-block;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    text-overflow: ellipsis;
+    &.BOOKED {
+        opacity: 0.5;
+        background: rgba(map-get($color, dark), 0.5);
+    }
+    &.OPEN {
+        opacity: 0.5;
+        background: rgba(map-get($color, primary), 1);
+        &.SELECTED {
+            background: green;
+        }
+    }
+}
+
+.book-a-slot-select {
+    margin-bottom: 0px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.confirmarion-R {
+    right: 0;
+    display: block;
+    position: absolute;
+}
+.search-content{
+    display: flex !important;
+    width: 100%;
+}
+.d-none{
+    display: none;
+}
+.employee-unavail {
+    background: #ebebeb !important;
+    color: #000 !important;
+}

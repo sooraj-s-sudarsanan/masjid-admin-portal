@@ -1,0 +1,65 @@
+<div fxLayout="row" fxFill>
+  <div fxFlex="20">
+    <mat-form-field appearance="fill" class="full-width-80">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="selectedStatus" (selectionChange)="statusChange($event.value)">
+        <mat-option *ngFor="let item of getBookingStatusText.list" [value]="item">{{item}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxFlex="20">
+
+    <mat-form-field appearance="fill" class="full-width-80">
+      <mat-label>Choose Merchant</mat-label>
+      <mat-select [(ngModel)]="selectedMerchant" (selectionChange)="merchantSelectionChange($event.value)">
+        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div fxFlex="20">
+
+    <mat-form-field appearance="fill" class="full-width-80">
+      <mat-label>Choose Branch</mat-label>
+      <mat-select [(ngModel)]="selectedBranch" (selectionChange)="branchSelectionChange($event.value)">
+        <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{item.branchName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div fxFlex="20">
+
+    <mat-form-field appearance="fill" class="full-width-80">
+      <mat-label>Choose Service</mat-label>
+      <mat-select [(ngModel)]="selectedService" (selectionChange)="serviceSelectionChange($event.value)">
+        <mat-option *ngFor="let item of serviceList" [value]="item.serviceMappingId">{{item.services.serviceName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div fxFlex="20">
+    <mat-form-field appearance="fill" class="full-width-80">
+      <mat-label>Search By</mat-label>
+      <mat-select [(ngModel)]="selectedSearchBy" (selectionChange)="searchByChange()">
+        <mat-option *ngFor="let item of searchBy" [value]="item.value">{{item.Display}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div fxLayout="row" fxFill>
+  
+  <div fxFlex="25" class="p-t-10">
+    <mat-form-field color="accent" class="full-width" *ngIf="selectedSearchBy">
+      <input matInput [(ngModel)]="selectedSearchValue" placeholder="Search here" autocomplete="off">
+    </mat-form-field>
+  </div>
+  <div fxFlex="25" class="p-t-10">
+    <button mat-raised-button type="submit" color="primary" *ngIf="selectedSearchBy" (click)="onSearch($event)">Seach</button>
+    <button mat-raised-button type="submit" color="primary" *ngIf="selectedSearchBy" (click)="onClear($event)" class="m-l-5">Clear</button>
+  </div>
+</div>

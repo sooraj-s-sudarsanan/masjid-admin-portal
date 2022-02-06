@@ -1,0 +1,106 @@
+
+<h1 mat-dialog-title class="h3 title">
+    <span class="ib-m">Add or Update {{moduleKeyModel.loyalityRuleMapping.name}}</span>
+</h1>
+<mat-card class="m-t-5 m-b-5">
+    <div class="row">
+        <div fxLayout="row" fxFill>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Merchant</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedMerchantText" [(ngModel)]="selectedMerchant"
+                        (selectionChange)="merchantSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">{{item.merchantName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Branch</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedBranchText" [(ngModel)]="selectedBranch"
+                        (selectionChange)="branchSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{item.branchName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="33">
+                <mat-form-field appearance="fill" class="full-width-80">
+                    <mat-label>Choose Service</mat-label>
+                    <mat-select [disabled]='row.data' [matTooltip]="selectedServiceText" [(ngModel)]="selectedService"
+                        (selectionChange)="serviceSelectionChange($event.value)">
+                        <mat-option *ngFor="let item of serviceList" [value]="item.serviceMappingId">
+                            {{item.services.serviceName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-dialog-content style="min-height: 200px;" class="p-t-10 p-b-10">
+    <div class="row">
+        <ngx-datatable class="material fullscreen" [rows]="loyaltyRules" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" rowHeight="50px">
+        </ngx-datatable>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions>  
+    <button type="submit" mat-raised-button color="primary" (click)="submit($event)">Submit</button>
+    <button mat-raised-button color="warn" (click)="cancel($event)" cdkFocusInitial>Cancel</button>
+</div>
+
+
+<ng-template #selectService let-row="row" let-value="value">
+    <mat-checkbox *ngIf="!row.loyaltyRuleMappingId" class="example-margin" [checked]="row.selected"
+        [(ngModel)]="row.selected">{{row.serviceName}}
+    </mat-checkbox>
+    <span *ngIf="row.loyaltyRuleMappingId">
+        <mat-icon class="menuIcon">done</mat-icon>&nbsp;{{row.serviceName}}
+    </span>
+
+</ng-template>
+<ng-template #loyaltyRuleName let-row="row" let-value="value"> 
+    <span>
+        {{row.loyaltyRuleName}}
+    </span>
+</ng-template>
+<ng-template #loyaltyRuleCode let-row="row" let-value="value">
+    <span>
+        {{row.loyaltyCode}}
+    </span>
+</ng-template>
+<ng-template #rewardPointStartDate let-row="row" let-value="value">
+    <input [class]="!row.loyaltyRuleMappingId?'':'d-none'" class="w-100" [value]='row.rewardPointStartDate'
+        [(ngModel)]="row.rewardPointStartDate" [disabled]="!row.selected" placeholder="Start Date"
+        aria-label="Start Time"  [matDatepicker]="picker1" (click)="picker1.open()" readonly>
+    <span *ngIf="row.loyaltyRuleMappingId">{{row.rewardPointStartDate}}</span>
+    <mat-datepicker #picker1></mat-datepicker>
+</ng-template>
+
+<ng-template #rewardPointEndDate let-row="row" let-value="value">
+    <input [class]="!row.loyaltyRuleMappingId?'':'d-none'" class="w-100" [value]='row.rewardPointEndDate'
+        [(ngModel)]="row.rewardPointEndDate" [disabled]="!row.selected" placeholder="End Date" aria-label="End Time"
+        [matDatepicker]="picker2" (click)="picker2.open()" readonly>
+    <span *ngIf="row.loyaltyRuleMappingId">{{row.rewardPointEndDate}}</span>
+    <mat-datepicker #picker2></mat-datepicker>
+</ng-template>
+<ng-template #servicePrice let-row="row" let-value="value">   
+    <span>{{row.servicePrice}}</span>
+</ng-template>
+<ng-template #rewardPointApplicable let-row="row" let-value="value">
+    <input [placeholder]="row.loyaltyType.loyaltyTypeName" *ngIf="!row.loyaltyRuleMappingId" type="number" class="bb-1" matInput [disabled]="!row.selected"
+        [value]="row.rewardPointApplicable" [(ngModel)]="row.rewardPointApplicable" autocomplete="off">
+    <span *ngIf="row.loyaltyRuleMappingId">{{row.rewardPointApplicable}}</span>
+</ng-template>
+<ng-template #mappingAction let-row="row" let-value="value">
+    <a *ngIf="row.loyaltyRuleMappingId" [matTooltip]="'Edit Mapping'" [matTooltipPosition]="'above'"
+        (click)="editMapping(row)">
+        <mat-icon color="primary" class="menuIcon">edit</mat-icon>
+    </a>
+    <a *ngIf="row.loyaltyRuleMappingId" [matTooltip]="'Remove Mapping'" [matTooltipPosition]="'above'"
+        (click)="removeMapping(row)">
+        <mat-icon color="warn" class="menuIcon">delete</mat-icon>
+    </a>
+</ng-template>

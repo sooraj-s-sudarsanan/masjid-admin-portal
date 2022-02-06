@@ -1,0 +1,475 @@
+<form [formGroup]='form' #ngForm="ngForm" (ngSubmit)="onSubmit()">
+
+
+    <h1 class="dialog-title-h1" mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.branch.name}}
+    </h1>
+    <mat-dialog-content>
+
+        <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
+            <mat-tab label="Branch Info.">
+                <!--First tab Sec-->
+                <!--Choose merchant-->
+                <mat-form-field class="full-width" formGroupName="merchantBean">
+                    <mat-label>Choose Merchant</mat-label>
+                    <mat-select formControlName="merchantId">
+                        <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">
+                            {{item.merchantName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="form.get('merchantBean.merchantId').invalid && (form.get('merchantBean.merchantId').dirty || form.get('merchantBean.merchantId').touched)">
+                        <span *ngIf="form.get('merchantBean.merchantId').errors.required" class="alert-danger">
+                            Please choose Merchant
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--branch Name-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Branch Name" autocomplete="off" formControlName="branchName" required>
+                    <mat-error *ngIf="eform.branchName.invalid && (eform.branchName.dirty || eform.branchName.touched)">
+                        <span *ngIf="eform.branchName.errors.required" class="alert-danger">
+                            Branch Name is required
+                        </span>
+                        <span *ngIf="eform.branchName.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Branch Name AR-->
+                <mat-form-field color="accent" class="full-width matform-rtl">
+                    <input matInput placeholder="Branch Name AR" autocomplete="off" formControlName="branchNameAR"
+                        required>
+                    <mat-error
+                        *ngIf="eform.branchNameAR.invalid && (eform.branchNameAR.dirty || eform.branchNameAR.touched)">
+                        <span *ngIf="eform.branchNameAR.errors.required" class="alert-danger">
+                            Branch Name is required
+                        </span>
+                        <span *ngIf="eform.branchNameAR.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Branch Description-->
+                <mat-form-field color="accent" class="full-width">
+                    <mat-label>Branch Description</mat-label>
+                    <textarea matInput formControlName="branchDescription" rows="4"></textarea>
+                    <mat-error
+                        *ngIf="eform.branchDescription.invalid && (eform.branchDescription.dirty || eform.branchDescription.touched)">
+                        <span *ngIf="eform.branchDescription.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Branch branchDescriptionAR-->
+                <mat-form-field color="accent" class="full-width matform-rtl">
+                    <mat-label>Branch Description AR.</mat-label>
+                    <textarea matInput formControlName="branchDescriptionAR" rows="4"></textarea>
+                    <mat-error
+                        *ngIf="eform.branchDescriptionAR.invalid && (eform.branchDescriptionAR.dirty || eform.branchDescriptionAR.touched)">
+                        <span *ngIf="eform.branchDescriptionAR.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--branchLocationName-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Location Name" autocomplete="off" formControlName="branchLocationName">
+                    <mat-hint align="start"><strong>This should be visible on card view on Home & Search page</strong>
+                    </mat-hint>
+                    <mat-error
+                        *ngIf="eform.branchLocationName.invalid && (eform.branchLocationName.dirty || eform.branchLocationName.touched)">
+                        <span *ngIf="eform.branchLocationName.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Choose locality-->
+                <div class="flex w-100">
+                    <div class="full-width" formGroupName="nationality">
+                        <ng-select (change)="onSelectCountry($event)" [appendTo]="'body'" [items]="nationalityList"
+                            formControlName="nationalityId" bindValue="nationalityId" bindLabel="nationalityName"
+                            [searchable]="true" [searchFn]="searchForCountry" [clearable]="true"
+                            placeholder="Search Country *" class="m-r-5" required>
+                        </ng-select>
+                        <span class="validation-error"
+                            *ngIf="form.get('nationality.nationalityId').invalid && (form.get('nationality.nationalityId').dirty || form.get('nationality.nationalityId').touched || ngForm.submitted)">
+                            <span *ngIf="form.get('nationality.nationalityId').errors.required" class="alert-danger">
+                                Please choose country
+                            </span>
+                        </span>
+                    </div>
+                    <div class="full-width" formGroupName="locality">
+                        <ng-select [appendTo]="'body'" [items]="locationList" formControlName="localityId"
+                            bindValue="localityId" bindLabel="localityName" [searchable]="true" [searchFn]="searchIcon"
+                            [clearable]="true" placeholder="Search Locality *">
+                        </ng-select>
+                        <span class="validation-error"
+                            *ngIf="form.get('locality.localityId').invalid && (form.get('locality.localityId').dirty || form.get('locality.localityId').touched || ngForm.submitted)">
+                            <span *ngIf="form.get('locality.localityId').errors.required">
+                                Please choose locality
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <!--branchContactMobile-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Branch Contact Mobile" autocomplete="off"
+                        formControlName="branchContactMobile" required>
+                    <mat-error
+                        *ngIf="eform.branchContactMobile.invalid && (eform.branchContactMobile.dirty || eform.branchContactMobile.touched)">
+                        <span *ngIf="eform.branchContactMobile.errors.pattern" class="alert-danger">
+                            Branch Contact Mobile is invalid
+                        </span>
+                        <span *ngIf="eform.branchContactMobile.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+                <!--branchContactLandPhone1-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Whatsapp Number" autocomplete="off"
+                        formControlName="branchContactLandPhone1">
+                    <mat-error
+                        *ngIf="eform.branchContactLandPhone1.invalid && (eform.branchContactLandPhone1.dirty || eform.branchContactLandPhone1.touched)">
+                        <span *ngIf="eform.branchContactLandPhone1.errors.pattern" class="alert-danger">
+                            Whatsapp Number is invalid
+                        </span>
+                        <span *ngIf="eform.branchContactLandPhone1.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+                <!--branchLatitude-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Branch Latitude" autocomplete="off" formControlName="branchLatitude"
+                        required>
+                    <mat-error
+                        *ngIf="eform.branchLatitude.invalid && (eform.branchLatitude.dirty || eform.branchLatitude.touched)">
+                        <span *ngIf="eform.branchLatitude.errors.required" class="alert-danger">
+                            Latitude is required
+                        </span>
+                        <span *ngIf="eform.branchLatitude.errors.pattern" class="alert-danger">
+                            Latitude is invalid
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--branchLatitude-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Branch Longitude" autocomplete="off" formControlName="branchLongitude"
+                        required>
+                    <mat-error
+                        *ngIf="eform.branchLongitude.invalid && (eform.branchLongitude.dirty || eform.branchLongitude.touched)">
+                        <span *ngIf="eform.branchLongitude.errors.required" class="alert-danger">
+                            Longitude is required
+                        </span>
+                        <span *ngIf="eform.branchLongitude.errors.pattern" class="alert-danger">
+                            Longitude is invalid
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--embedMap-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Embed Map from Google map" autocomplete="off" formControlName="embedMap"
+                        > 
+                        <mat-hint align="start"><strong>Copy embeded map from google map</strong>
+                        </mat-hint>                  
+                </mat-form-field>
+
+                <!--branchAddress1-->
+                <mat-form-field class="full-width">
+                    <mat-label>Branch Address 1</mat-label>
+                    <textarea formControlName="branchAddress1" rows="4" matInput></textarea>
+                    <mat-error
+                        *ngIf="eform.branchAddress1.invalid && (eform.branchAddress1.dirty || eform.branchAddress1.touched)">
+                        <span *ngIf="eform.branchAddress1.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+                <!--branchAddress1AR-->
+                <mat-form-field class="full-width matform-rtl">
+                    <mat-label>Branch Address Arb. 1</mat-label>
+                    <textarea formControlName="branchAddress1AR" rows="4" matInput></textarea>
+                    <mat-error
+                        *ngIf="eform.branchAddress1AR.invalid && (eform.branchAddress1AR.dirty || eform.branchAddress1AR.touched)">
+                        <span *ngIf="eform.branchAddress1AR.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+                <!--branchAddress2-->
+                <mat-form-field class="full-width">
+                    <mat-label>Branch Address 2</mat-label>
+                    <textarea formControlName="branchAddress2" rows="4" matInput></textarea>
+                    <mat-error
+                        *ngIf="eform.branchAddress2.invalid && (eform.branchAddress2.dirty || eform.branchAddress2.touched)">
+                        <span *ngIf="eform.branchAddress2.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+                <!--branchAddress2AR-->
+                <mat-form-field class="full-width matform-rtl">
+                    <mat-label>Branch Address Arb. 2</mat-label>
+                    <textarea formControlName="branchAddress2AR" rows="4" matInput></textarea>
+                    <mat-error
+                        *ngIf="eform.branchAddress2AR.invalid && (eform.branchAddress2AR.dirty || eform.branchAddress2AR.touched)">
+                        <span *ngIf="eform.branchAddress2AR.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+            </mat-tab>
+            <mat-tab label="Holidays" style="padding-top: 10px;">
+                <!--Second tab Sec-->
+                <!--Holidays Days-->
+                <!--Break Time-->
+                <mat-card class="m-a-10">
+                    <div>
+                        <mat-list>
+                            <mat-list-item>
+                                <h3>Upcoming Holidays</h3>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <ng-container *ngFor="let item of holidayArray;let i=index">
+                                <mat-list-item>
+                                    <div class="breakTime-row">
+                                        <div class="w-100">
+                                            <h4>{{item}}</h4>
+                                        </div>
+                                        <div class="w-20">
+                                            <a href="javascript:;" (click)="clearHoliday(i)" class="w-20 p-l-10">
+                                                <mat-icon [color]='"warn"'>delete</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                            </ng-container>
+                            <mat-list-item class="m-t-10">
+                                <mat-form-field color="accent">
+                                    <input matInput (dateInput)="holidaySelected($event.value)"
+                                        placeholder="Upcoming Branch Holiday" autocomplete="off" [matDatepicker]="dp3"
+                                        [min]="minDate" disabled>
+                                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                    <mat-datepicker-toggle matSuffix (click)="clearBranchHolidays()">
+                                        <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                                </mat-form-field>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </mat-card>
+
+
+                <!--Branch Weekly Off-->
+                <div>
+                    <h4 class="example-h2">Branch Weekly Off</h4>
+                    <span class="example-list-section">
+                        <ul>
+                            <li *ngFor="let subtask of workingDays">
+                                <mat-checkbox [checked]="isSelected(subtask.value)"
+                                    (change)="updateWeeklyOff($event,subtask.value)">
+                                    {{subtask.display}}
+                                </mat-checkbox>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+                <!--Break Time-->
+                <mat-card class="m-a-10">
+                    <div>
+                        <mat-list>
+                            <mat-list-item>
+                                <h3>Break Time</h3>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <ng-container *ngFor="let item of breakTime;let i=index">
+                                <mat-list-item>
+                                    <div class="breakTime-row">
+                                        <div class="w-100">
+                                            <h4>{{item.day.display}}</h4>
+                                        </div>
+                                        <div class="w-100">
+                                            <input class="w-100" [ngModelOptions]="{standalone: true}"
+                                                [(ngModel)]="item.start" placeholder="Start Time"
+                                                aria-label="Start Time" [ngxTimepicker]="start"
+                                                [ngxTimepicker]="appendedToInput" readonly>
+                                            <ngx-material-timepicker (timeSet)="setTime($event,item,'s')"
+                                                [minutesGap]="5" #start [appendToInput]="true">
+                                            </ngx-material-timepicker>
+                                        </div>
+                                        <div class="w-100">
+                                            <input class="w-100" [ngModelOptions]="{standalone: true}"
+                                                [(ngModel)]="item.end" placeholder="End Time" aria-label="End Time"
+                                                [ngxTimepicker]="end" [ngxTimepicker]="appendedToInput" readonly>
+                                            <ngx-material-timepicker (timeSet)="setTime($event,item,'e')"
+                                                [minutesGap]="5" #end [appendToInput]="true">
+                                            </ngx-material-timepicker>
+                                        </div>
+                                        <div class="w-40">
+                                            <a href="javascript:;" (click)="clear(item)" class="w-20 p-l-10">
+                                                <mat-icon [color]='"warn"'>delete</mat-icon>
+                                            </a>
+                                            <a href="javascript:;" *ngIf="i==0" (click)="copyToAll(item,'bt')"
+                                                class="w-20 p-l-10" matTooltip='Copy timing to all working days'
+                                                matTooltipPosition='above'>
+                                                <mat-icon [color]='"warn"'>copy_all</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                            </ng-container>
+                        </mat-list>
+                    </div>
+                </mat-card>
+
+                <!--Operation Time-->
+                <mat-card class="m-a-10">
+                    <div>
+                        <mat-list>
+                            <mat-list-item>
+                                <h3>Operation Time</h3>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <ng-container *ngFor="let item of OperationTime;let i=index">
+                                <mat-list-item>
+                                    <div class="breakTime-row">
+                                        <div class="w-100">
+                                            <h4>{{item.day.display}}</h4>
+                                        </div>
+                                        <div class="w-100">
+                                            <input class="w-100" [ngModelOptions]="{standalone: true}"
+                                                [(ngModel)]="item.start" placeholder="Start Time"
+                                                aria-label="Start Time" [ngxTimepicker]="start"
+                                                [ngxTimepicker]="appendedToInput" readonly>
+                                            <ngx-material-timepicker (timeSet)="setTime($event,item,'s')"
+                                                [minutesGap]="5" #start [appendToInput]="true">
+                                            </ngx-material-timepicker>
+                                        </div>
+                                        <div class="w-100">
+                                            <input class="w-100" [ngModelOptions]="{standalone: true}"
+                                                [(ngModel)]="item.end" placeholder="End Time" aria-label="End Time"
+                                                [ngxTimepicker]="end" [ngxTimepicker]="appendedToInput" readonly>
+                                            <ngx-material-timepicker (timeSet)="setTime($event,item,'e')"
+                                                [minutesGap]="5" #end [appendToInput]="true">
+                                            </ngx-material-timepicker>
+                                        </div>
+                                        <div class="w-40">
+                                            <a href="javascript:;" (click)="clear(item)" class="w-20 p-l-10">
+                                                <mat-icon [color]='"warn"'>delete</mat-icon>
+                                            </a>
+                                            <a href="javascript:;" *ngIf="i==0" (click)="copyToAll(item,'ot')"
+                                                class="w-20 p-l-10" matTooltip='Copy timing to all working days'
+                                                matTooltipPosition='above'>
+                                                <mat-icon [color]='"warn"'>copy_all</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                            </ng-container>
+                        </mat-list>
+                    </div>
+                </mat-card>
+
+            </mat-tab>
+            <mat-tab label="Other Info." style="padding-top: 10px;">
+                <!--Third tab Sec-->
+                <!--branch Logo Content-->
+                <div class="full-width" style="padding: 2%;">
+                    <mat-checkbox class="example-margin" 
+                        formControlName="bookingAccepting">
+                         Accept Booking 
+                    </mat-checkbox>
+                </div>
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title>Branch Logo</mat-card-title>
+                    </mat-card-header>
+                    <img *ngIf="logo" mat-card-image [src]="logo" alt="Photo of a Shiba Inu">
+                    <p *ngIf="!logo">Not found any branch logo</p>
+
+                    <mat-card-actions>
+                        <button type="button" mat-button (click)="logoFile.click()">{{logo?'Change Logo':'Upload
+                            Logo'}}</button>
+                        <button class="d-none" mat-button>Remove</button>
+                    </mat-card-actions>
+                </mat-card>
+
+
+                <!-- <span>Branch Logo</span><br> -->
+                <input class="d-none" type="file" #logoFile (change)="fileChangeEvent($event)"
+                    accept=".png, .jpg, .jpeg, .pdf" />
+                <br />
+                <!-- <span class="mat-error"
+            *ngIf="eform.branchLogoContent.invalid && (ngForm.submitted||!eform.branchLogoContent.invalid)">
+            <span *ngIf="eform.branchLogoContent.errors.required" class="alert-danger">
+                Logo content is required
+            </span>
+        </span> -->
+
+                <div class="full-width">
+                    <!-- <mat-label>What Is Included</mat-label> -->
+                    <!-- <textarea matInput formControlName="whatIsIncluded" rows="4"></textarea> -->
+                    <span>What Is Included</span>
+                    <ckeditor [config]="{ language: { ui: 'en',content: 'en'}}" formControlName="whatIsIncluded"
+                        data="test" [editor]="Editor"></ckeditor>
+                    <p class="mat-error"
+                        *ngIf="eform.whatIsIncluded.invalid && (eform.whatIsIncluded.dirty || eform.whatIsIncluded.touched)">
+                        <span *ngIf="eform.whatIsIncluded.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </p>
+                </div>
+
+                <div class="full-width">
+                    <span>What To Expect</span>
+                    <ckeditor [config]="{ language: { ui: 'en',content: 'en'}}" formControlName="whatToExpect"
+                        data="test" [editor]="Editor"></ckeditor>
+                    <p class="mat-error"
+                        *ngIf="eform.whatToExpect.invalid && (eform.whatToExpect.dirty || eform.whatToExpect.touched)">
+                        <span *ngIf="eform.whatToExpect.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </p>
+                </div>
+
+                <div class="full-width">
+                    <span>Cancellation Policy</span>
+                    <ckeditor [config]="{ language: { ui: 'en',content: 'en'}}" formControlName="cancellationPolicy"
+                        data="test" [editor]="Editor"></ckeditor>
+                    <p class="mat-error"
+                        *ngIf="eform.whatToExpect.invalid && (eform.whatToExpect.dirty || eform.whatToExpect.touched)">
+                        *ngIf="eform.cancellationPolicy.invalid && (eform.cancellationPolicy.dirty ||
+                        eform.cancellationPolicy.touched)">
+                        <span *ngIf="eform.cancellationPolicy.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </p>
+                </div>
+
+
+            </mat-tab>
+        </mat-tab-group>
+
+
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

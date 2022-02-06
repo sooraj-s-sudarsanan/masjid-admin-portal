@@ -1,0 +1,72 @@
+<div fxLayout="row" fxLayoutAlign=" start" fxFill>
+    <div fxFlex="20">
+    </div>
+    <div fxFlex="60">
+        <mat-card class="example-card m-t-20">
+            <mat-card-header>
+                <mat-card-title>Sign In</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="mat-card-content-login">
+    
+                <form [formGroup]='signInForm' (ngSubmit)="onSubmitSignInForm()">
+                    <!--Email / Mobile-->
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="User Name" autocomplete="off" formControlName="username" required>
+                        <mat-error
+                            *ngIf="frmSignIn.username.invalid && (frmSignIn.username.dirty || frmSignIn.username.touched)">
+                            <span *ngIf="frmSignIn.username.errors.required" class="alert-danger">
+                                User Name is required
+                            </span>
+                            <span *ngIf="frmSignIn.username.errors.maxlength" class="alert-danger">
+                                length exceeded
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field class="full-width">
+                        <input type="password" matInput placeholder="Password" autocomplete="off" formControlName="password"
+                            required>
+                        <mat-error
+                            *ngIf="frmSignIn.password.invalid && (frmSignIn.password.dirty || frmSignIn.password.touched)">
+                            <span *ngIf="frmSignIn.password.errors.required" class="alert-danger">
+                                Password is required
+                            </span>
+                            <span *ngIf="frmSignIn.password.errors.maxlength && !frmSignIn.password.errors.pattern" class="alert-danger">
+                                length exceeded
+                            </span>
+                            <span *ngIf="frmSignIn.password.errors.pattern" class="alert-danger">
+                                Invalid password
+                              </span>
+                        </mat-error>
+                    </mat-form-field>
+    
+                    <div class="action">
+                        <button type="submit" [disabled]="signInForm.invalid" mat-raised-button color="primary"
+                            class="btn-lg w-100">Submit</button>
+                    </div>
+    
+                    <p><a href="javascript:;" (click)="forgotPassword($event)"><u>Forgot password?</u></a></p>
+                </form>
+    
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card m-t-20">
+            <mat-card-header>
+                <mat-card-title>Partner Program</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div fxFlex="20">
+    </div>
+</div>
+
+
+
+
+
+<!-- <div class="loginDiv">
+   
+
+</div> -->

@@ -1,0 +1,63 @@
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+ul > li {
+  margin-top: 4px;
+}
+
+.breakTime-row {
+  display: flex !important;
+  width: 100%;
+}
+
+::ng-deep .timepicker {
+  .timepicker__header {
+    background-color: #00546b !important;
+  }
+
+  .clock-face__clock-hand {
+    background-color: #00546b !important;
+
+    &::after {
+      background-color: #00546b !important;
+    }
+
+    &::before {
+      border-color: #00546b !important;
+    }
+  }
+
+  .clock-face__number {
+    > span.active {
+      background-color: #00546b !important;
+    }
+  }
+
+  button:not(.timepicker-dial__item) {
+    color: #00546b !important;
+  }
+}
+
+.flex {
+  display: flex !important;
+}
+
+.validation-error {
+  color: #f44336;
+  font-size: 75%;
+}
+
+.example-card {
+  max-width: 50%;
+  margin: 10px;
+}
+
+.example-card .mat-card-image {
+  margin: 0px !important;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 200px;  
+}

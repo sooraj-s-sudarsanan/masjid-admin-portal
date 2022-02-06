@@ -1,0 +1,15 @@
+
+<mat-grid-list cols="2" rowHeight="10:1">
+    <mat-grid-tile>
+        <mat-form-field appearance="fill" class="full-width-80">
+            <mat-label>Choose Module</mat-label>
+            <mat-select [(ngModel)]="selectedModule" (selectionChange)="selectionChange($event.value)">
+                <mat-option *ngFor="let item of moduleList" [value]="item">{{item.moduleName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        
+    </mat-grid-tile>
+  </mat-grid-list>

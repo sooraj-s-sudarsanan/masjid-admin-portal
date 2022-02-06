@@ -1,0 +1,41 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.roleManagement.name}}</h1>
+    <mat-dialog-content>
+  
+        <!--Role Name-->
+        <mat-form-field color="accent" class="full-width">
+          <input matInput placeholder="Role Name" autocomplete="off" formControlName="roleName" required>
+          <mat-error *ngIf="eform.roleName.invalid && (eform.roleName.dirty || eform.roleName.touched)">
+            <span *ngIf="eform.roleName.errors.required" class="alert-danger">
+              Module Name is required
+            </span>
+            <span *ngIf="eform.roleName.errors.maxlength" class="alert-danger">
+             length exceeded
+            </span>
+          </mat-error>
+        </mat-form-field>
+      <!--Role desc-->
+      <mat-form-field class="full-width">
+        <mat-label>Type Description</mat-label>
+        <textarea matInput formControlName="roleDesc" matTextareaAutosize matAutosizeMinRows='5'
+            matAutosizeMaxRows='6'></textarea>
+        <!-- <input matInput placeholder="Role desc." autocomplete="off" formControlName="roleDesc" required> -->
+        <mat-error *ngIf="eform.roleDesc.invalid && (eform.roleDesc.dirty || eform.roleDesc.touched)">
+          <span *ngIf="eform.roleDesc.errors.required" class="alert-danger">
+            Module URL is required
+          </span>
+          <span *ngIf="eform.roleDesc.errors.maxlength" class="alert-danger">
+           length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field>
+  
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+  
+  </form>

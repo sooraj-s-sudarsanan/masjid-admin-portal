@@ -1,0 +1,8 @@
+<app-manage-grid [inSection]='moduleKeyModel.appointment.key' [inColumns]='columns' [inactionButtons]='actionButtons'
+    [moduleDisplayName]='moduleKeyModel.appointment.name' [inDialogSize]='dialogSize' [filterSction]='filterComponent'
+    [loadDataInitial]='true' [inListFilter]='filter'>
+</app-manage-grid>
+
+<ng-template #editTmpl let-row="row" let-value="value">
+    {{row.bookingDate}}  {{row.bookingStartTime}}
+</ng-template>

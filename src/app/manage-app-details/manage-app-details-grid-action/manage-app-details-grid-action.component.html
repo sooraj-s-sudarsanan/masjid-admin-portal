@@ -1,0 +1,78 @@
+<form [formGroup]='form' #ngForm="ngForm" (ngSubmit)="onSubmit()">
+
+
+    <h1 class="dialog-title-h1" mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.branch.name}}
+    </h1>
+    <mat-dialog-content>
+
+
+        <!--Choose Device Type-->
+        <mat-form-field class="full-width" formGroupName="deviceType">
+            <mat-label>Choose Device Type</mat-label>
+            <mat-select formControlName="deviceTypeId">
+                <mat-option *ngFor="let item of deviceTypeList" [value]="item.deviceTypeId">
+                    {{item.deviceType}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('deviceType.deviceTypeId').invalid && (form.get('deviceType.deviceTypeId').dirty || form.get('deviceType.deviceTypeId').touched)">
+                <span *ngIf="form.get('deviceType.deviceTypeId').errors.required" class="alert-danger">
+                    Please choose Device Type
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="latest Version" autocomplete="off" formControlName="latestVersion">
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Download Url" autocomplete="off" formControlName="downloadUrl">
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Description" autocomplete="off" formControlName="description">
+        </mat-form-field>
+
+        <div color="accent" class="full-width">
+            <mat-checkbox formControlName="appStatus">Active</mat-checkbox>
+        </div>
+
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Downtime Starts At" disabled [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+                autocomplete="off" formControlName="downtimeStartsAt">
+        </mat-form-field>
+        <owl-date-time #dt1 [hour12Timer]='false'></owl-date-time>
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Downtime Ends At" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" disabled autocomplete="off"
+                formControlName="downtimeEndsAt">           
+        </mat-form-field>
+        <owl-date-time #dt2 [hour12Timer]='false'></owl-date-time>
+
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Down time Message" autocomplete="off" formControlName="downtimeMessage">
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Upgrade Message" autocomplete="off" formControlName="upgradeMessage">
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Upgrade Message Arabic" autocomplete="off" formControlName="upgradeMessageArb">
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Downtime Message Arabic" autocomplete="off"
+                formControlName="downtimeMessageArb">
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

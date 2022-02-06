@@ -1,0 +1,72 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.subModule.name}}</h1>
+    <mat-dialog-content>
+
+        <!--Sub Module Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Sub Module Name" autocomplete="off" formControlName="submoduleName" required>
+            <mat-error
+                *ngIf="eform.submoduleName.invalid && (eform.submoduleName.dirty || eform.submoduleName.touched)">
+                <span *ngIf="eform.submoduleName.errors.required" class="alert-danger">
+                    Sub Module Name is required
+                </span>
+                <span *ngIf="eform.submoduleName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <!--Sub Module URL-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Sub Module URL" autocomplete="off" formControlName="submoduleUrl" required>
+            <mat-error *ngIf="eform.submoduleUrl.invalid && (eform.submoduleUrl.dirty || eform.submoduleUrl.touched)">
+                <span *ngIf="eform.submoduleUrl.errors.required" class="alert-danger">
+                    Sub Module URL is required
+                </span>
+                <span *ngIf="eform.submoduleUrl.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Module-->
+        <mat-form-field class="full-width" formGroupName="modules">
+            <mat-label>Choose Module</mat-label>
+            <select matNativeControl required formControlName="moduleId">
+                <option [value]="module.moduleId" *ngFor="let module of moduleList"> {{module.moduleName}}</option>
+            </select>
+            <mat-error
+                *ngIf="form.get('modules.moduleId').invalid && (form.get('modules.moduleId').dirty || form.get('modules.moduleId').touched)">
+                <span *ngIf="form.get('modules.moduleId').errors.required" class="alert-danger">
+                    Please choose module
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <!--module CSS Link-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Icon css" autocomplete="off" formControlName="subModuleCSSLink">
+            <mat-error
+                *ngIf="eform.subModuleCSSLink.invalid && (eform.subModuleCSSLink.dirty || eform.subModuleCSSLink.touched)">
+                <span *ngIf="eform.subModuleCSSLink.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <!--submodule Sort Order-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Sort Order" autocomplete="off" formControlName="submoduleSortOrder">
+            <mat-error
+                *ngIf="eform.submoduleSortOrder.invalid && (eform.submoduleSortOrder.dirty || eform.submoduleSortOrder.touched)">
+                <span *ngIf="eform.submoduleSortOrder.errors.required" class="alert-danger">
+                    Sort Order is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

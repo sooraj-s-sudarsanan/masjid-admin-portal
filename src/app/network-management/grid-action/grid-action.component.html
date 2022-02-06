@@ -1,0 +1,77 @@
+<form [formGroup]='networkManageForm' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.networkManagement.name}}</h1>
+    <mat-dialog-content>
+  
+      <!--Network Name-->
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Network Name" autocomplete="off" formControlName="networkName" required>
+        <mat-error
+          *ngIf="eform.networkName.invalid && (eform.networkName.dirty || eform.networkName.touched)">
+          <span *ngIf="eform.networkName.errors.required" class="alert-danger">
+            Network Name is required
+          </span>
+          <span *ngIf="eform.networkName.errors.maxlength" class="alert-danger">
+            length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+       <!--network Description EN-->
+       <mat-form-field class="full-width">
+        <mat-label>Type Description EN.</mat-label>
+        <textarea matInput formControlName="networkDescription" matTextareaAutosize matAutosizeMinRows='3'
+            matAutosizeMaxRows='6'></textarea>
+        <!-- <input matInput placeholder="Description" autocomplete="off" formControlName="networkDescription"> -->
+        <mat-error *ngIf="eform.networkDescription.invalid && (eform.networkDescription.dirty || eform.networkDescription.touched)">
+          <span *ngIf="eform.networkDescription.errors.maxlength" class="alert-danger">
+            length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field>
+  
+      <!--Network Name AR-->
+      <mat-form-field class="full-width matform-rtl">
+        <input matInput placeholder="Network Name Arabic" autocomplete="off" formControlName="networkNameAR" required>
+        <mat-error
+          *ngIf="eform.networkNameAR.invalid && (eform.networkNameAR.dirty || eform.networkNameAR.touched)">
+          <span *ngIf="eform.networkNameAR.errors.required" class="alert-danger">
+            Arabic Network Name is required
+          </span>
+          <span *ngIf="eform.networkNameAR.errors.maxlength" class="alert-danger">
+            length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field>  
+  
+      <!--networkDescriptionAR-->
+      <mat-form-field class="full-width matform-rtl">
+        <mat-label>Type Description AR.</mat-label>
+        <textarea matInput formControlName="networkDescriptionAR" matTextareaAutosize matAutosizeMinRows='3'
+            matAutosizeMaxRows='6'></textarea>
+        <!-- <input matInput placeholder="Description" autocomplete="off" formControlName="networkDescriptionAR"> -->
+        <mat-error *ngIf="eform.networkDescriptionAR.invalid && (eform.networkDescriptionAR.dirty || eform.networkDescriptionAR.touched)">
+          <span *ngIf="eform.description.errors.maxlength" class="alert-danger">
+            length exceeded
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+        <!--networkDisplayPriority-->
+        <mat-form-field class="full-width">
+          <input type="number" matInput placeholder="Display Order" autocomplete="off" formControlName="networkDisplayPriority">
+          <!-- <mat-error *ngIf="eform.networkDisplayPriority.invalid && (eform.networkDisplayPriority.dirty || eform.networkDisplayPriority.touched)">
+            <span *ngIf="eform.description.errors.maxlength" class="alert-danger">
+              length exceeded
+            </span>
+          </mat-error> -->
+        </mat-form-field>
+  
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+      <button type="submit"  mat-raised-button color="primary">Submit</button>
+      <button  mat-raised-button [mat-dialog-close]="'NO'" color="warn" cdkFocusInitial>Cancel</button>
+    </div>
+  
+  </form>

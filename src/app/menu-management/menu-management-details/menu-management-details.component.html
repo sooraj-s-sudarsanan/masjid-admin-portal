@@ -1,0 +1,27 @@
+
+
+<header class="title">
+    <h1 class="h3 m-b-0 w-100 m-r-auto" mat-dialog-title>Details</h1>
+    <button mat-mini-fab color="warn" [mat-dialog-close]="'NO'">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+  <mat-dialog-content>
+    <mat-list>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Menu Name:</small>
+          <div class="w-100 font-weight-bold">{{row.data.menuName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Menu URL:</small>
+          <div class="w-100 font-weight-bold">{{row.data.menuUrl}}</div>
+        </div>
+      </mat-list-item>     
+    </mat-list>
+  
+  </mat-dialog-content>
+  

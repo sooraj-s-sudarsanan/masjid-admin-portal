@@ -1,0 +1,33 @@
+<form [formGroup]='form' #ngForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <h1 mat-dialog-title>Web Link</h1>
+    <mat-dialog-content>
+
+
+        <mat-form-field color="accent" class="full-width">
+            <span matPrefix>{{customerWebBaseUrl}}</span>
+            <input matInput placeholder="Type Link Name Here" autocomplete="off" formControlName="branchLink" required>
+            <mat-hint align="start"><strong>It should be a single word. Eg: branch_name                 
+                </strong> </mat-hint>
+            <mat-error *ngIf="eform.branchLink.invalid && (eform.branchLink.dirty || eform.branchLink.touched)">
+                <span *ngIf="eform.branchLink.errors.required" class="alert-danger">
+                    Invalid branch url
+                </span>
+                <span *ngIf="eform.branchLink.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+                <span *ngIf="eform.branchLink.errors.pattern" class="alert-danger">
+                    Link Should be single word and only underscore (_) is allowed as special character
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <p></p>
+
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit" color="primary">Confirm</button>
+        <button mat-raised-button type="button" [mat-dialog-close]="'NO'" color="warn" cdkFocusInitial>Close</button>
+    </div>
+</form>

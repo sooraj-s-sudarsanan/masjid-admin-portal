@@ -1,0 +1,157 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.category.name}}</h1>
+    <mat-dialog-content>
+
+        <mat-tab-group dynamicHeight>
+            <mat-tab label="Basic Info.">
+                <!--Choose Module-->
+                <mat-form-field class="full-width" formGroupName="networkType">
+                    <mat-label>Choose Network</mat-label>
+                    <select matNativeControl required formControlName="networkId">
+                        <option [value]="module.networkId" *ngFor="let module of categoryList"> {{module.networkName}}
+                        </option>
+                    </select>
+                    <mat-error
+                        *ngIf="form.get('networkType.networkId').invalid && (form.get('networkType.networkId').dirty || form.get('networkType.networkId').touched)">
+                        <span *ngIf="form.get('networkType.networkId').errors.required" class="alert-danger">
+                            Please choose Network
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Sub Module Name-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Category Name" autocomplete="off" formControlName="categoryName"
+                        required>
+                    <mat-error
+                        *ngIf="eform.categoryName.invalid && (eform.categoryName.dirty || eform.categoryName.touched)">
+                        <span *ngIf="eform.categoryName.errors.required" class="alert-danger">
+                            Category Name is required
+                        </span>
+                        <span *ngIf="eform.categoryName.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Sub Module Name-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Category Name(Arabic)" autocomplete="off"
+                        formControlName="categoryNameAR" required>
+                    <mat-error
+                        *ngIf="eform.categoryNameAR.invalid && (eform.categoryNameAR.dirty || eform.categoryNameAR.touched)">
+                        <span *ngIf="eform.categoryNameAR.errors.required" class="alert-danger">
+                            Categorye Name(Arabic) is required
+                        </span>
+                        <span *ngIf="eform.categoryNameAR.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+                <!--categoryDescription-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Category Description" autocomplete="off"
+                        formControlName="categoryDescription" required>
+                    <mat-error
+                        *ngIf="eform.categoryDescription.invalid && (eform.categoryDescription.dirty || eform.categoryDescription.touched)">
+                        <span *ngIf="eform.categoryDescription.errors.required" class="alert-danger">
+                            Categorye Name(Arabic) is required
+                        </span>
+                        <span *ngIf="eform.categoryDescription.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Category Description(Arabic)-->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Category Description(Arabic)" autocomplete="off"
+                        formControlName="categoryDescriptionAR" required>
+                    <mat-error
+                        *ngIf="eform.categoryDescriptionAR.invalid && (eform.categoryDescriptionAR.dirty || eform.categoryDescriptionAR.touched)">
+                        <span *ngIf="eform.categoryDescriptionAR.errors.required" class="alert-danger">
+                            Categorye Name(Arabic) is required
+                        </span>
+                        <span *ngIf="eform.categoryDescriptionAR.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Category Display Name -->
+                <mat-form-field color="accent" class="full-width">
+                    <input matInput placeholder="Category DisplayName" autocomplete="off"
+                        formControlName="categoryDisplayName" required>
+                    <mat-error
+                        *ngIf="eform.categoryDisplayName.invalid && (eform.categoryDisplayName.dirty || eform.categoryDisplayName.touched)">
+                        <span *ngIf="eform.categoryDisplayName.errors.required" class="alert-danger">
+                            Categorye Name(Arabic) is required
+                        </span>
+                        <span *ngIf="eform.categoryDisplayName.errors.maxlength" class="alert-danger">
+                            length exceeded
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </mat-tab>
+            <mat-tab label="Other Info.">
+                <!--categoryPriority -->
+                <mat-form-field color="accent" class="full-width">
+                    <input type="number" matInput placeholder="Priority on Slider" autocomplete="off"
+                        formControlName="categoryPriority">
+                </mat-form-field>
+
+                <!--Web Selected Icon -->
+                <div formGroupName="categorySelectedIconWeb">
+                    <ng-select  [appendTo]="'body'"  [items]="iconList" formControlName="fileId" bindValue="fileId" bindLabel="fileName"
+                        [searchable]="true" [searchFn]="searchIcon" [clearable]="true"
+                        placeholder="Slider Icon for Web">
+                        <ng-template ng-option-tmp let-icon="item">
+                            <span class="ico">
+                                <img [src]='icon.fileURL' width="30px" />
+                            </span>
+                            {{icon.fileName}}
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <!--Mob Selected Icon -->
+                <div formGroupName="categorySelectedIconMob">
+                    <ng-select  [appendTo]="'body'"  [items]="iconList" formControlName="fileId" bindValue="fileId" bindLabel="fileName"
+                        [searchable]="true" [searchFn]="searchIcon" [clearable]="true"
+                        placeholder="Slider Icon for Mobile">
+                        <ng-template ng-option-tmp let-icon="item">
+                            <span class="ico">
+                                <img [src]='icon.fileURL' width="30px" />
+                            </span>
+                            {{icon.fileName}}
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <!--Mob Deselected Selected Icon -->
+                <div formGroupName="categoryDeselectedIconMob">
+                    <ng-select  [appendTo]="'body'"  [items]="iconList" formControlName="fileId" bindValue="fileId" bindLabel="fileName"
+                        [searchable]="true" [searchFn]="searchIcon" [clearable]="true"
+                        placeholder="Slider DeSelected Icon for Mobile">
+                        <ng-template ng-option-tmp let-icon="item">
+                            <span class="ico">
+                                <img [src]='icon.fileURL' width="30px" />
+                            </span>
+                            {{icon.fileName}}
+                        </ng-template>
+                    </ng-select>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+
+
+
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

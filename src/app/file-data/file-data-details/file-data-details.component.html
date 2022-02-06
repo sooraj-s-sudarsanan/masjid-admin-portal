@@ -1,0 +1,15 @@
+<h1 class="title" mat-dialog-title>Details</h1>
+<mat-dialog-content>
+    <p>Icon Preview</p>
+    <img [src]='row.data.fileURL' style="width: 50px;">
+    <p>File Name:{{row.data.fileName}}</p>
+    <p>File Icon CSS:{{row.data.fileIconCss}}</p>
+    <p>File Category:{{row.data.fileCategory}}</p>
+    <!-- <p>Created By:{{row.data.createdBy}}</p>
+    <p>Created On:{{row.data.createdOn}}</p>
+    <p>Modified By:{{row.data.modifiedBy}}</p>
+    <p>Modified On:{{row.data.modifiedOn}}</p> -->
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</div>

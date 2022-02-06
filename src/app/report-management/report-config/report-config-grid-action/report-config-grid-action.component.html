@@ -1,0 +1,67 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+        ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.reportConfig.name}}
+    </h1>
+    <mat-dialog-content>
+
+        <!--merchantId-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Merchant</mat-label>
+            <mat-select formControlName="merchantId" (selectionChange)="merchantSelectionChange($event.value)">
+                <mat-option *ngFor="let item of merchantList" [value]="item.merchantId">
+                    {{item.merchantName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('merchantId').invalid && (form.get('merchantId').dirty || form.get('merchantId').touched)">
+                <span *ngIf="form.get('merchantId').errors.required" class="alert-danger">
+                    Please choose Merchant
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose branch-->
+        <mat-form-field class="full-width" >
+            <mat-label>Choose Branch</mat-label>
+            <mat-select formControlName="branchId">
+                <mat-option *ngFor="let item of branchList" [value]="item.branchId">
+                    {{item.branchName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('branchId').invalid && (form.get('branchId').dirty || form.get('branchId').touched)">
+                <span *ngIf="form.get('branchId').errors.required" class="alert-danger">
+                    Please choose Branch
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Report Type-->
+        <mat-form-field class="full-width" formGroupName="reportType">
+            <mat-label>Choose Report Type</mat-label>
+            <mat-select formControlName="reportTypeId">
+                <mat-option *ngFor="let item of typeList" [value]="item.reportTypeId">
+                    {{item.reportTypeName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+            *ngIf="form.get('reportType.reportTypeId').invalid && (form.get('reportType.reportTypeId').dirty || form.get('reportType.reportTypeId').touched)">
+            <span *ngIf="form.get('reportType.reportTypeId').errors.required" class="alert-danger">
+                Please choose Report Type
+            </span>
+        </mat-error>
+        </mat-form-field>
+
+        <div color="accent" class="full-width">
+            <mat-checkbox formControlName="reportEnbleStatus">Enable</mat-checkbox>
+        </div>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

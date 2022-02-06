@@ -1,0 +1,52 @@
+<form [formGroup]='fileDataForm' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title>{{this.row.data ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.fileData.name}}</h1>
+    <mat-dialog-content style="height: 200px;">
+
+        <!--fileCategory-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose File Category</mat-label>
+            <mat-select formControlName="fileCategory" required>
+                <mat-option *ngFor="let role of fileCategoryList" [value]="role.categoryName">
+                    {{role.categoryName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.fileCategory.invalid && (eform.fileCategory.dirty || eform.fileCategory.touched)">
+                <span *ngIf="eform.fileCategory.errors.required" class="alert-danger">
+                    File Category is required
+                </span>
+                <span *ngIf="eform.fileCategory.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <!--fileIconCss-->
+        <!-- <mat-form-field class="full-width">
+            <input matInput placeholder="File Icon CSS" autocomplete="off" formControlName="fileIconCss" required>
+            <mat-error *ngIf="eform.fileIconCss.invalid && (eform.fileIconCss.dirty || eform.fileIconCss.touched)">
+                <span *ngIf="eform.fileIconCss.errors.required" class="alert-danger">
+                    Icon CSS Name is required
+                </span>
+                <span *ngIf="eform.fileIconCss.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field> -->
+
+        <!--fileContent-->
+        <input type="file" (change)="handleFileSelect($event)"
+            accept=".png, .jpg, .jpeg, .pdf" />
+        <br />
+        <span *ngIf="eform.fileContent.invalid && (eform.fileContent.dirty || eform.fileContent.touched)">
+            <span *ngIf="eform.fileContent.errors.required" class="alert-danger">
+                Please choose a file
+            </span>
+        </span>
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

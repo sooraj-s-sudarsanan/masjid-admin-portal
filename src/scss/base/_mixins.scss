@@ -1,0 +1,430 @@
+@if mixin-exists(clearfix) {
+  @debug "@warn: Already clearfix mixin support Available";
+}
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@function em($px, $base: $baseFontSize) {
+  @return ($px / $base) * 1em;
+}
+@function rem($px, $base: $baseFontSize) {
+  @return ($px / $base) * 1rem;
+}
+
+@mixin font($font, $forced: false) {
+  @if type-of($font) == number {
+    @if $forced == true {
+      font-weight: $font !important;
+    } @else {
+      font-weight: $font;
+    }
+  } @else {
+    @if $forced == true {
+      font-family: $font !important;
+    } @else {
+      font-family: $font;
+    }
+  }
+}
+
+@mixin langFont($style: 400) {
+  @if $style == "bold" {
+    @include font($fontFamilyBold);
+  } @else {
+    @include font($fontFamily);
+  }
+}
+
+@mixin animation($animate...) {
+  $max: length($animate);
+  $animations: "";
+
+  @for $i from 1 through $max {
+    $animations: #{$animations + nth($animate, $i)};
+
+    @if $i < $max {
+      $animations: #{$animations + ", "};
+    }
+  }
+  @include prefix(
+    (
+      animation: $animations
+    ),
+    webkit moz o
+  );
+} //@include animation('animationName 1s 1'[, 'animationName2 1s 1 1s']);
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+} //@include keyframes(animationName) {0% { x: x; }100% { x: x;} }
+
+@mixin userSelect($val) {
+  -webkit-touch-callout: $val;
+  -webkit-user-select: $val;
+  -khtml-user-select: $val;
+  -moz-user-select: $val;
+  -ms-user-select: $val;
+  user-select: $val;
+}
+
+@mixin transform($val) {
+  @include prefix(
+    (
+      transform: $val
+    ),
+    webkit ms
+  );
+}
+
+@mixin transition($val) {
+  @include prefix(
+    (
+      transition: #{$val}
+    ),
+    webkit ms
+  );
+}
+
+@mixin box-shadow($arguments) {
+  @include prefix(
+    (
+      box-shadow: #{$arguments}
+    ),
+    webkit ms
+  );
+} ///*@include box-shadow(inset -3px -2px 6px 0px rgba(0, 0, 0, 0.3));*/
+
+/// Compute the maximum len of a map
+/// @param {Map} $map
+/// @return {Number} max len of `$map`
+@function map-len($map) {
+  $level: 1;
+  @each $key, $value in $map {
+    @if type-of($value) == "map" {
+      $level: max(map-len($value) + 1, $level);
+    }
+  }
+  @return $level;
+} // Map deep get
+// @param {Map} $map - Map
+// @param {Arglist} $keys - Key chain
+// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+} // Deep set function to set a value in nested maps
+// @param {Map} $map - Map
+// @param {List} $keys -  Key chaine
+// @param {*} $value - Value to assign
+// @return {Map}
+@function map-deep-set($map, $keys, $value) {
+  $maps: ($map);
+  $result: null; // If the last key is a map already
+  // Warn the user we will be overriding it with $value
+  @if type-of(nth($keys, -1)) == "map" {
+    @warn "The last key you specified is a map; it will be overrided with `#{$value}`.";
+  } // If $keys is a single key
+  // Just merge and return
+  @if length($keys) ==1 {
+    @return map-merge(
+      $map,
+      (
+        $keys: $value
+      )
+    );
+  } // Loop from the first to the second to last key from $keys
+  // Store the associated map to this key in the $maps list
+  // If the key doesn't exist, throw an error
+  @for $i from 1 through length($keys) - 1 {
+    $current-key: nth($keys, $i);
+    $current-map: nth($maps, -1);
+    $current-get: map-get($current-map, $current-key);
+    @if $current-get==null {
+      @error "Key `#{$key}` doesn't exist at current level in map.";
+    }
+    $maps: append($maps, $current-get);
+  } // Loop from the last map to the first one
+  // Merge it with the previous one
+  @for $i from length($maps) through 1 {
+    $current-map: nth($maps, $i);
+    $current-key: nth($keys, $i);
+    $current-val: if($i==length($maps), $value, $result);
+    $result: map-merge(
+      $current-map,
+      (
+        $current-key: $current-val
+      )
+    );
+  } // Return result
+  @return $result;
+}
+
+// /**********************************************/
+// /**************** Gradient ********************/
+// /**********************************************/
+/// Test if `$value` is a valid direction
+/// @param {*} $value - Value to test
+/// @return {Bool} - return boolean
+@function is-direction($value) {
+  $is-keyword: index(
+    (
+      to top,
+      to top right,
+      to right top,
+      to right,
+      to bottom right,
+      to right bottom,
+      to bottom,
+      to bottom left,
+      to left bottom,
+      to left,
+      to left top,
+      to top left
+    ),
+    $value
+  );
+  $is-angle: type-of($value) == "number" and index("deg" "grad" "turn" "rad", unit($value));
+
+  @return $is-keyword or $is-angle;
+}
+
+/// Convert a direction to legacy syntax
+/// @param {Keyword | Angle} $value - Value to convert
+/// @require {function} is-direction
+/// @require {function} convert-angle
+/// @throw Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.;
+@function legacy-direction($value) {
+  @if is-direction($value) == false {
+    @error "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.";
+  }
+
+  $conversion-map: (
+    to top: bottom,
+    to top #{$right}: bottom left,
+    to right top: left bottom,
+    to #{$right}: left,
+    to bottom #{$right}: top left,
+    to right bottom: left top,
+    to bottom: top,
+    to bottom #{$left}: top right,
+    to left bottom: right top,
+    to #{$left}: right,
+    to left top: right bottom,
+    to top #{$left}: bottom right
+  );
+
+  @if map-has-key($conversion-map, $value) {
+    @return map-get($conversion-map, $value);
+  }
+  @return 90deg - $value;
+}
+
+@mixin linear-gradient($direction, $color-stops...) {
+  // Direction has been omitted and happens to be a color-stop
+  @if is-direction($direction) == false {
+    $color-stops: $direction, $color-stops;
+    $direction: 180deg;
+  }
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}
+// Examples
+// @include linear-gradient(#31B7D7, #EDAC7D);
+// @include linear-gradient(to right, #E47D7D 0%, #C195D3 50%, #4FB4E8 100%);
+// @include linear-gradient(42deg, #B58234 0%, #D2B545 50%, #D7C04D 50.01%, #FFFFFF 100%);
+
+@mixin prefix($declarations, $prefixes: ()) {
+  @each $property, $value in $declarations {
+    @each $prefix in $prefixes {
+      #{'-' + $prefix + '-' + $property}: #{$value};
+    }
+    // Output standard non-prefixed declaration
+    #{$property}: #{$value};
+  }
+} ///* [EG] @include prefix((column-count: 3,column-gap: 1.5em,column-rule: 2px solid hotpink), webkit moz);
+//[copy]//  @include prefix(( X:X,X:X ), webkit moz);
+//*/
+
+$vendor: "-moz-", "-webkit-", "-ms-", "";
+
+@mixin animate($animateName, $duration: 0.3s, $loop: 1, $timing: ease-in) {
+  @each $prefix in $vendor {
+    #{$prefix}animation-name: $animateName;
+    #{$prefix}animation-iteration-count: $loop;
+    #{$prefix}animation-timing-function: $timing;
+    #{$prefix}animation-duration: $duration;
+  }
+} ///*@include animate(slideUp, 0.3s, 1, ease-in);*/
+
+@mixin placeholder {
+  @include optional-at-root("::-webkit-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root("::-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":-ms-input-placeholder") {
+    @content;
+  }
+}
+
+// @include scrollbar(.5em, slategray);
+@mixin scrollbar($size, $fgColor, $bgColor: mix($fgColor, white, 50%)) {
+  // For Chromium Browsers
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+
+  // /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: $fgColor;
+    // /* Handle on hover */
+    &:hover {
+      background: darken($fgColor, 6.5%);
+    }
+  }
+  // /* Track */
+  &::-webkit-scrollbar-track {
+    margin: 0 4px;
+    border-radius: 4px;
+    background: $bgColor;
+  }
+
+  // IE
+  scrollbar-face-color: $fgColor;
+  scrollbar-track-color: $bgColor;
+
+  // Mozilla Firefox
+  scrollbar-color: $fgColor $bgColor;
+  &,
+  * {
+    scrollbar-width: thin;
+  }
+}
+
+@mixin matIconSize($size: 24px) {
+  width: $size;
+  height: $size;
+  font-size: $size;
+}
+
+// @for $i from 1 through 100 {
+//   @debug '#{$i}%: ' mix(#115989, white, $i);
+// }
+// @for $i from 100 through 1 {
+//   @debug '#{$i}%: ' mix(#35729b, black, $i);
+// }
+$defaultContrast: (
+  50: rgba(0, 0, 0, 0.87),
+  100: rgba(0, 0, 0, 0.87),
+  200: rgba(0, 0, 0, 0.87),
+  300: #ffffff,
+  400: #ffffff,
+  500: #ffffff,
+  600: #ffffff,
+  700: #ffffff,
+  800: #ffffff,
+  900: #ffffff,
+  A100: rgba(0, 0, 0, 0.87),
+  A200: #000000,
+  A400: #ffffff,
+  A700: #ffffff
+);
+@function colorPalette($color, $contrast: $defaultContrast) {
+  $p: (
+    50: mix($color, light, 12),
+    100: mix($color, light, 30),
+    200: mix($color, light, 50),
+    300: mix($color, light, 70),
+    400: mix($color, light, 85),
+    500: mix($color, light, 100),
+    600: mix($color, dark, 89),
+    700: mix($color, dark, 76),
+    800: mix($color, dark, 64),
+    900: mix($color, dark, 43),
+    A100: #8cbbff,
+    A200: #599eff,
+    A400: #2680ff,
+    A700: #0c71ff,
+    contrast: $contrast
+  );
+  @return $p;
+}
+
+/*
+ * Creates CSS triangle
+ * direction options: top, right, bottom, left.
+ * Example @include cssTriangle(bottom, red, 50px);
+ */
+@mixin cssTriangle($direction: left, $color: #89d4e7, $width: 34px) {
+  $opposite: nth((top, right, bottom, left), index((bottom, left, top, right), $direction));
+  border: solid $width transparent;
+  border-#{$direction}: none;
+  border-#{$opposite}: solid $width $color;
+}
+
+@mixin leftRightSectors($lWidth) {
+  body {
+    &:not(.xsEnabled) {
+      .leftSection {
+        @include media-breakpoint-up(lg) {
+          width: $lWidth;
+          min-width: $lWidth;
+          max-width: $lWidth;
+        }
+      }
+    }
+    &.xsEnabled {
+      .leftSection {
+        @include media-breakpoint-up(xl) {
+          width: $lWidth;
+          min-width: $lWidth;
+          max-width: $lWidth;
+        }
+      }
+    }
+  }
+}
+
+@import "matMixins";
+@import "direction";

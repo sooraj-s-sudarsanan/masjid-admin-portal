@@ -1,0 +1,11 @@
+@mixin mat-toogle-button($clr) {
+  .mat-button-toggle {
+    color: map-get($clr, text);
+    background-color: map-get($clr, bg);
+  }
+
+  .mat-button-toggle-checked {
+    color: map-get($clr, activeText);
+    background-color: map-get($clr, activeBg);
+  }
+}

@@ -1,0 +1,166 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+    <h1 mat-dialog-title class="dialog-title-h1">Accept Terms & Condition</h1>
+    <!-- <mat-dialog-content>
+
+    <div class="full-width term_condition">
+        <p>Hello {{this.row?.merchant.merchantContactName?this.row?.merchant.merchantContactName:"Merchant"}},</p>
+        Please confirm that you agree to comply with the terms & condition and privacy policy of
+        Zerveazy of becoming a member in partner program, Please click here to know more <a target="_blank"
+            [href]="termAndCondition">terms & condition</a>
+
+        <h4 class="bold">More Info</h4>
+        <h4>Merchant : {{this.row?.merchant.merchantName}}</h4>
+        <h4>Contact Email : {{this.row?.merchant.merchantContactEmail}}</h4>
+        <h4>Contact Mobile : {{this.row?.merchant.merchantContactName}}</h4>
+    </div>
+
+</mat-dialog-content> -->
+
+    <mat-dialog-content>
+
+        <!--merchant Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Name" autocomplete="off" formControlName="merchantName" required>
+            <mat-error *ngIf="eform.merchantName.invalid && (eform.merchantName.dirty || eform.merchantName.touched)">
+                <span *ngIf="eform.merchantName.errors.required" class="alert-danger">
+                    Merchant Name is required
+                </span>
+                <span *ngIf="eform.merchantName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchant Name AR-->
+        <!-- <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Merchant Name AR" autocomplete="off" formControlName="merchantNameAR" required>
+            <mat-error
+                *ngIf="eform.merchantNameAR.invalid && (eform.merchantNameAR.dirty || eform.merchantNameAR.touched)">
+                <span *ngIf="eform.merchantNameAR.errors.required" class="alert-danger">
+                    Merchant Name is required
+                </span>
+                <span *ngIf="eform.merchantNameAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field> -->
+
+        <!--merchantDescription-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Description" autocomplete="off" formControlName="merchantDescription">
+            <mat-error
+                *ngIf="eform.merchantDescription.invalid && (eform.merchantDescription.dirty || eform.merchantDescription.touched)">
+                <span *ngIf="eform.merchantDescription.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactName AR-->
+        <!-- <mat-form-field color="accent" class="full-width matform-rtl">
+            <input matInput placeholder="Merchant Description AR" autocomplete="off"
+                formControlName="merchantDescriptionAR">
+            <mat-error
+                *ngIf="eform.merchantDescriptionAR.invalid && (eform.merchantDescriptionAR.dirty || eform.merchantDescriptionAR.touched)">
+                <span *ngIf="eform.merchantDescriptionAR.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field> -->
+
+        <!--merchantContactName-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Contact Name" autocomplete="off" formControlName="merchantContactName"
+                required>
+            <mat-error
+                *ngIf="eform.merchantContactName.invalid && (eform.merchantContactName.dirty || eform.merchantContactName.touched)">
+                <span *ngIf="eform.merchantContactName.errors.required" class="alert-danger">
+                    Contact Name is required
+                </span>
+                <span *ngIf="eform.merchantContactName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactPhone-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Contact Phone" autocomplete="off"
+                formControlName="merchantContactPhone" required>
+            <mat-error
+                *ngIf="eform.merchantContactPhone.invalid && (eform.merchantContactPhone.dirty || eform.merchantContactPhone.touched)">
+                <span *ngIf="eform.merchantContactPhone.errors.required" class="alert-danger">
+                    Merchant Contact Phone is required
+                </span>
+                <span *ngIf="eform.merchantContactPhone.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactMobile-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Merchant Contact Mobile" autocomplete="off"
+                formControlName="merchantContactMobile" required>
+            <mat-error
+                *ngIf="eform.merchantContactMobile.invalid && (eform.merchantContactMobile.dirty || eform.merchantContactMobile.touched)">
+                <span *ngIf="eform.merchantContactMobile.errors.required" class="alert-danger">
+                    Merchant Contact Mobile is required
+                </span>
+                <span *ngIf="eform.merchantContactMobile.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--merchantContactEmail-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="text"  matInput placeholder="Merchant Contact Email" autocomplete="off"
+                formControlName="merchantContactEmail">
+        </mat-form-field>
+
+        <mat-form-field class=" m-t-20 full-width" appearance="fill">
+            <mat-label>Choose Category</mat-label>
+            <mat-select [formControl]="categoryFC" (selectionChange)="categorySelect($event)" multiple>
+                <mat-option *ngFor="let item of categoryList" [value]="item.categoryId">{{item.categoryName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.category.invalid && (eform.category.dirty || eform.category.touched)">
+                <span *ngIf="eform.category.errors.required" class="alert-danger">
+                    Please choose Category
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--planTypeCode-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Plan</mat-label>
+            <mat-select disabled formControlName="planTypeCode" required>
+                <mat-option *ngFor="let item of planList" [value]="item.planTypeCode">
+                    {{item.planTypeName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eform.planTypeCode.invalid && (eform.planTypeCode.dirty || eform.planTypeCode.touched)">
+                <span *ngIf="eform.planTypeCode.errors.required" class="alert-danger">
+                    Please choose a Plan
+                </span>
+            </mat-error>
+        </mat-form-field>
+       
+    </mat-dialog-content>
+
+    <div mat-dialog-actions>
+        <div fxLayout="row" fxFill>
+            <div fxFlex="90">
+                <p>
+                    Please confirm that you agree to comply with the terms & condition and privacy policy of
+                    Zerveazy of becoming a member in partner program, Please click here to know more <a target="_blank"
+                        [href]="termAndCondition">terms & condition</a></p>
+            </div>
+            <div fxFlex="10">        
+                <button type="submit" mat-raised-button color="primary">Accept</button>
+            </div>
+        </div>    
+    </div>
+</form>

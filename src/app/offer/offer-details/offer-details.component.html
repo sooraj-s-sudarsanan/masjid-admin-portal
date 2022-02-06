@@ -1,0 +1,52 @@
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Details</h1>
+  </header>
+  <mat-dialog-content>
+    <mat-list>
+    
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Branch :</small>
+          <div class="w-100 font-weight-bold">{{row.data.branch.branchName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Offer Name :</small>
+          <div class="w-100 font-weight-bold">{{row.data.offerName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Offer Name AR :</small>
+          <div class="w-100 font-weight-bold">{{row.data.offerNameAR}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Offer Other Service :</small>
+          <div class="w-100 font-weight-bold">{{row.data.offerOtherService}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Start Date :</small>
+          <div class="w-100 font-weight-bold">{{row.data.offerStartDate}}</div>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">End Date :</small>
+          <div class="w-100 font-weight-bold">{{row.data.offerEndDate}}</div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+  </div>
