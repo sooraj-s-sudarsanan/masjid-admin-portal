@@ -140,7 +140,7 @@
         </mat-form-field>
 
         <!--scheduleTime-->
-        <mat-form-field class="full-width" [ngStyle]="{'display': eform.sendNow.value==false ?'block':'none'}">
+        <!-- <mat-form-field class="full-width" [ngStyle]="{'display': eform.sendNow.value==false ?'block':'none'}">
             <input matInput [readonly]="true" formControlName="scheduleTime" placeholder="Notification Schedule Time"
                 [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" [min]='min' (dateTimeChange)="dateTimeChange($event)"
                 required>
@@ -153,7 +153,7 @@
                 </span>
             </mat-error>
         </mat-form-field>
-        <owl-date-time #dt1 [hour12Timer]='false'></owl-date-time>
+        <owl-date-time #dt1 [hour12Timer]='false'></owl-date-time> -->
 
         <!--sendNow-->
         <div *ngIf='eform.scheduleTime.value==null'>

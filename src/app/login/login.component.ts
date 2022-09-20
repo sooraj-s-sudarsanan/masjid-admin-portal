@@ -53,20 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.headerService.toggleSpinner(true);
     this.subscriptions.push(this.initializeService.initializeCompleted$.subscribe((response) => {
       if (response) {
-        let requestBody = {
-          staticPageName: 'Partner Program'
-        };
-        this.subscriptions.push(this.adminBaseService.requestSubmit('ADM_GET_STATIC_DATA_BYPAGENAME', requestBody)
-          .subscribe((pageResponse) => {
-            if (pageResponse) {
-              if (pageResponse.result) {
-                if (pageResponse.result.status === ResponseStatusModel.SUCCESS && pageResponse.result.data) {
-                  this.partnerPageInfo = pageResponse.result.data[0];
-                }
-              }
-            }
-            this.headerService.toggleSpinner(false);
-          }));
+       
       }
     }));
 

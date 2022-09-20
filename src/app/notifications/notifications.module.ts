@@ -9,7 +9,6 @@ import { NotificationsDetailsComponent } from './notifications-details/notificat
 import { NotificationsGridActionComponent } from './notifications-grid-action/notifications-grid-action.component';
 import { NotificationsListComponent } from './notifications-list/notifications-list.component';
 import { CoreModule } from '../core/core.module';
-import { OwlDateTimeModule, OwlNativeDateTimeModule, DateTimeAdapter, OWL_DATE_TIME_LOCALE, OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
 
 
 export const MY_CUSTOM_FORMATS = {
@@ -31,9 +30,8 @@ export const MY_CUSTOM_FORMATS = {
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    CKEditorModule,
-    OwlDateTimeModule,    
-    OwlNativeDateTimeModule,   
+    CKEditorModule     
+       
   ],
   entryComponents: [
     NotificationsDeleteComponent,
@@ -43,8 +41,7 @@ export const MY_CUSTOM_FORMATS = {
   exports: [
     CKEditorModule    
   ],
-  providers: [
-    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_FORMATS}
+  providers: [   
   ]
 })
 export class NotificationsModule { }
