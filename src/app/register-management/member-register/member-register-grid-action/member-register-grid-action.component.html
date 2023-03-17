@@ -1,0 +1,271 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+        ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.memberRegister.name}}
+    </h1>
+    <mat-dialog-content>
+
+        <!--Choose family-->
+        <mat-form-field class="full-width" formGroupName="family">
+            <mat-label>Choose Family</mat-label>
+            <mat-select matNativeControl required formControlName="familyId">
+                <mat-option [value]="family.familyId" *ngFor="let family of familyList">
+                    {{family.familyName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('family.familyId').invalid && (form.get('family.familyId').dirty || form.get('family.familyId').touched)">
+                <span *ngIf="form.get('family.familyId').errors.required" class="alert-danger">
+                    Please choose Family
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--First Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="First Name" autocomplete="off" formControlName="firstName" required>
+            <mat-error *ngIf="eform.firstName.invalid && (eform.firstName.dirty || eform.firstName.touched)">
+                <span *ngIf="eform.firstName.errors.required" class="alert-danger">
+                    First Name is required
+                </span>
+                <span *ngIf="eform.firstName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Last Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Last Name" autocomplete="off" formControlName="lastName" required>
+            <mat-error *ngIf="eform.lastName.invalid && (eform.lastName.dirty || eform.lastName.touched)">
+                <span *ngIf="eform.lastName.errors.required" class="alert-danger">
+                    Last Name is required
+                </span>
+                <span *ngIf="eform.lastName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--Choose gender-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Gender</mat-label>
+            <mat-select matNativeControl required formControlName="gender">
+                <mat-option [value]="gender" *ngFor="let gender of ['Male','Female','Transgender']">
+                    {{gender}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('gender').invalid && (form.get('gender').dirty || form.get('gender').touched)">
+                <span *ngIf="form.get('gender').errors.required" class="alert-danger">
+                    Please choose Gender
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose BloodGroup-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose BloodGroup</mat-label>
+            <mat-select matNativeControl required formControlName="bloodGroup">
+                <mat-option [value]="bloodGroup" *ngFor="let bloodGroup of ['A+','A-','B+','B-','O+','O-','AB+','AB-']">
+                    {{bloodGroup}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('bloodGroup').invalid && (form.get('bloodGroup').dirty || form.get('bloodGroup').touched)">
+                <span *ngIf="form.get('bloodGroup').errors.required" class="alert-danger">
+                    Please choose BloodGroup
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Date Of Birth-->
+        <mat-form-field>
+            <mat-label>Choose Date Of Birth</mat-label>
+            <input matInput [max]="dobMaxDate" [matDatepicker]="picker" formControlName="dateOfBirth" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="eform.dateOfBirth.invalid && (eform.dateOfBirth.dirty || eform.dateOfBirth.touched)">
+                <span *ngIf="eform.dateOfBirth.errors.required" class="alert-danger">
+                    Choose Date Of Birth
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Father Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Father Name" autocomplete="off" formControlName="fatherName">
+            <mat-error *ngIf="eform.fatherName.invalid && (eform.fatherName.dirty || eform.fatherName.touched)">
+                <span *ngIf="eform.fatherName.errors.required" class="alert-danger">
+                    Father Name is required
+                </span>
+                <span *ngIf="eform.fatherName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Mother Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Mother Name" autocomplete="off" formControlName="motherName">
+            <mat-error *ngIf="eform.motherName.invalid && (eform.motherName.dirty || eform.motherName.touched)">
+                <span *ngIf="eform.motherName.errors.required" class="alert-danger">
+                    Mother Name is required
+                </span>
+                <span *ngIf="eform.motherName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Mobile-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Mobile" autocomplete="off" formControlName="mobile">
+            <mat-error *ngIf="eform.mobile.invalid && (eform.mobile.dirty || eform.mobile.touched)">
+                <span *ngIf="eform.mobile.errors.required" class="alert-danger">
+                    Mobile is required
+                </span>
+                <span *ngIf="eform.mobile.errors.pattern" class="alert-danger">
+                    Please enter valid Mobile Number
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Email-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="email" autocomplete="off" formControlName="email">
+            <mat-error *ngIf="eform.email.invalid && (eform.email.dirty || eform.email.touched)">
+                <span *ngIf="eform.email.errors.required" class="alert-danger">
+                    email is required
+                </span>
+                <span *ngIf="eform.email.errors.email" class="alert-danger">
+                    Please enter valid email
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Occupation-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Occupation" autocomplete="off" formControlName="occupation">
+            <mat-error *ngIf="eform.occupation.invalid && (eform.occupation.dirty || eform.occupation.touched)">
+
+                <span *ngIf="eform.occupation.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--Marital Status-->
+        <mat-form-field class="full-width">
+            <mat-label>Marital Status</mat-label>
+            <mat-select matNativeControl required formControlName="maritalStatus">
+                <mat-option [value]="maritalStatus"
+                    *ngFor="let maritalStatus of ['single', 'married', 'widowed', 'divorced']">
+                    {{maritalStatus}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('maritalStatus').invalid && (form.get('maritalStatus').dirty || form.get('maritalStatus').touched)">
+                <span *ngIf="form.get('maritalStatus').errors.required" class="alert-danger">
+                    Please choose Marital Status
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--marriedToJamath-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Married To Jamath" autocomplete="off" formControlName="marriedToJamath">
+            <mat-error
+                *ngIf="eform.marriedToJamath.invalid && (eform.marriedToJamath.dirty || eform.marriedToJamath.touched)">
+
+
+            </mat-error>
+        </mat-form-field>
+
+        <!--aAdhaarNo-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Aadhar No" autocomplete="off" formControlName="aAdhaarNo">
+            <mat-error *ngIf="eform.aAdhaarNo.invalid && (eform.aAdhaarNo.dirty || eform.aAdhaarNo.touched)">
+
+                <span *ngIf="eform.aAdhaarNo.errors.pattern" class="alert-danger">
+                    Please enter valid Aadhar Number
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--relativeMahal-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Relative Mahal" autocomplete="off" formControlName="relativeMahal">
+            <mat-error *ngIf="eform.relativeMahal.invalid && (eform.aAdhaarNo.dirty || eform.aAdhaarNo.touched)">
+
+            </mat-error>
+        </mat-form-field>
+
+        <!--previousJamath-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Previous Jamath" autocomplete="off" formControlName="previousJamath">
+            <mat-error *ngIf="eform.previousJamath.invalid && (eform.aAdhaarNo.dirty || eform.aAdhaarNo.touched)">
+
+            </mat-error>
+        </mat-form-field>
+
+        <!--noOfKids-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Number Of Kids" autocomplete="off" formControlName="noOfKids">
+            <mat-error *ngIf="eform.noOfKids.invalid && (eform.aAdhaarNo.dirty || eform.aAdhaarNo.touched)">
+
+            </mat-error>
+        </mat-form-field>
+
+        <!--noOfSons-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Number Of Sons" autocomplete="off" formControlName="noOfSons">
+            <mat-error *ngIf="eform.noOfSons.invalid && (eform.aAdhaarNo.dirty || eform.aAdhaarNo.touched)">
+
+            </mat-error>
+        </mat-form-field>
+
+        <!--noOfDaughters-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Number Of Sons" autocomplete="off"
+                formControlName="noOfDaughters">
+            <mat-error *ngIf="eform.noOfDaughters.invalid && (eform.aAdhaarNo.dirty || eform.aAdhaarNo.touched)">
+
+            </mat-error>
+        </mat-form-field>
+
+        <!--Husband Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Husband Name" autocomplete="off" formControlName="husbandName">
+            <mat-error *ngIf="eform.husbandName.invalid && (eform.husbandName.dirty || eform.husbandName.touched)">
+                <span *ngIf="eform.husbandName.errors.required" class="alert-danger">
+                    Husband Name is required
+                </span>
+                <span *ngIf="eform.husbandName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Wife Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Wife Name" autocomplete="off" formControlName="wifeName">
+            <mat-error *ngIf="eform.wifeName.invalid && (eform.wifeName.dirty || eform.wifeName.touched)">
+                <span *ngIf="eform.wifeName.errors.required" class="alert-danger">
+                    Wife Name is required
+                </span>
+                <span *ngIf="eform.wifeName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

@@ -1,0 +1,90 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+        ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.registerMaster.name}}</h1>
+    <mat-dialog-content>
+
+          <!--Choose Register Master-->
+          <mat-form-field class="full-width" formGroupName="registerMaster">
+            <mat-label>Choose Register Master</mat-label>
+            <mat-select matNativeControl required formControlName="registerMasterId">
+                <mat-option [value]="registerMaster.registerMasterId" *ngFor="let registerMaster of masterList">
+                    {{registerMaster.registerDisplayName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('registerMaster.registerMasterId').invalid && (form.get('registerMaster.registerMasterId').dirty || form.get('registerMaster.registerMasterId').touched)">
+                <span *ngIf="form.get('registerMaster.registerMasterId').errors.required" class="alert-danger">
+                    Please choose Register Master
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Family No-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Family No." autocomplete="off" formControlName="familyNo" required>
+            <mat-error *ngIf="eform.familyNo.invalid && (eform.familyNo.dirty || eform.familyNo.touched)">
+                <span *ngIf="eform.familyNo.errors.required" class="alert-danger">
+                    Family No. is required
+                </span>
+                <span *ngIf="eform.familyNo.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Family Name-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Family Name" autocomplete="off" formControlName="familyName" required>
+            <mat-error *ngIf="eform.familyName.invalid && (eform.familyName.dirty || eform.familyName.touched)">
+                <span *ngIf="eform.familyName.errors.required" class="alert-danger">
+                    Family Name is required
+                </span>
+                <span *ngIf="eform.familyName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Phone-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Phone" autocomplete="off" formControlName="phone" required>
+            <mat-error
+                *ngIf="eform.phone.invalid && (eform.phone.dirty || eform.phone.touched)">
+                <span *ngIf="eform.phone.errors.required" class="alert-danger">
+                    Phone is required
+                </span>
+                <span *ngIf="eform.phone.errors.pattern" class="alert-danger">
+                    Please enter valid Phone Number
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Origin From-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Origin From" autocomplete="off" formControlName="originFrom" required>
+            <mat-error *ngIf="eform.originFrom.invalid && (eform.originFrom.dirty || eform.originFrom.touched)">
+                <span *ngIf="eform.originFrom.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Income-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Income" autocomplete="off" formControlName="income">
+            <mat-error *ngIf="eform.income.invalid && (eform.income.dirty || eform.income.touched)">
+                <span *ngIf="eform.income.errors.required" class="alert-danger">
+                    Income is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

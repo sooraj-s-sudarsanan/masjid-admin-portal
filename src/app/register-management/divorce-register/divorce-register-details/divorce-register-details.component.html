@@ -1,0 +1,75 @@
+<p>house-register-details works!</p>
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Details</h1>
+</header>
+<mat-dialog-content>
+    <mat-list>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Family :</small>
+                <div class="w-100 font-weight-bold">{{row.data.family.familyName}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Marriage :</small>
+                <div class="w-100 font-weight-bold">{{row.data?.marriage?.brideFirstName}} - {{row.data?.marriage?.groomFirstName}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Divorced Date :</small>
+                <div class="w-100 font-weight-bold">{{row.data.divorcedDate|date:'dd/MM/yyyy'}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>    
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Other Info:</small>
+                <div class="w-100 font-weight-bold">{{row.data.otherInfo}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Reason :</small>
+                <div class="w-100 font-weight-bold">{{row.data.reason}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Mahar Details :</small>
+                <div class="w-100 font-weight-bold">{{row.data.maharDetails}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Delegate Name :</small>
+                <div class="w-100 font-weight-bold">{{row.data.delegateName}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Witness1 :</small>
+                <div class="w-100 font-weight-bold">{{row.data.witness1}}</div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <div class="m-y-10">
+                <small class="w-100 f-medium d-block m-b-5 o-50">Witness2 :</small>
+                <div class="w-100 font-weight-bold">{{row.data.witness2}}</div>
+            </div>
+        </mat-list-item>
+       
+    </mat-list>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+</div>

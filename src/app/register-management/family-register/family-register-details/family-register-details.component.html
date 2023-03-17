@@ -1,0 +1,52 @@
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Details</h1>
+  </header>
+  <mat-dialog-content>
+    <mat-list>
+    
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">FamilyNo :</small>
+          <div class="w-100 font-weight-bold">{{row.data.familyNo}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Family Name :</small>
+          <div class="w-100 font-weight-bold">{{row.data.familyName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Phone:</small>
+          <div class="w-100 font-weight-bold">{{row.data.phone}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Origin From :</small>
+          <div class="w-100 font-weight-bold">{{row.data.originFrom}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Income :</small>
+          <div class="w-100 font-weight-bold">{{row.data.income}}</div>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Register Master :</small>
+          <div class="w-100 font-weight-bold">{{row.data.registerMaster.registerName}}</div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+  </div>

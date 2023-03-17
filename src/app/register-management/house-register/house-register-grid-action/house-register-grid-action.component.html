@@ -1,0 +1,241 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+        ?'Edit':''}}&nbsp;{{moduleKeyModel.houseRegister.name}}
+    </h1>
+    <mat-dialog-content>
+
+        <!--Choose family-->
+        <mat-form-field class="full-width" formGroupName="family">
+            <mat-label>Choose Family</mat-label>
+            <mat-select matNativeControl required formControlName="familyId"
+            (selectionChange)="OnFamilyChange($event.value)">
+                <mat-option [value]="family.familyId" *ngFor="let family of familyList">
+                    {{family.familyName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('family.familyId').invalid && (form.get('family.familyId').dirty || form.get('family.familyId').touched)">
+                <span *ngIf="form.get('family.familyId').errors.required" class="alert-danger">
+                    Please choose Family
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose member-->
+        <mat-form-field class="full-width" formGroupName="member">
+            <mat-label>Choose Member</mat-label>
+            <mat-select matNativeControl required formControlName="memberId">
+                <mat-option [value]="member.memberId" *ngFor="let member of memberList">
+                    {{member.firstName}} {{member.lastName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('member.memberId').invalid && (form.get('member.memberId').dirty || form.get('member.memberId').touched)">
+                <span *ngIf="form.get('member.memberId').errors.required" class="alert-danger">
+                    Please choose Member
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--House No-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="House No" autocomplete="off" formControlName="houseNo" required>
+            <mat-error *ngIf="eform.houseNo.invalid && (eform.houseNo.dirty || eform.houseNo.touched)">
+                <span *ngIf="eform.houseNo.errors.required" class="alert-danger">
+                    House No is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--House Land Phone-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="House Land Phone" autocomplete="off"
+                formControlName="houseLandPhone" required>
+            <mat-error
+                *ngIf="eform.houseLandPhone.invalid && (eform.houseLandPhone.dirty || eform.houseLandPhone.touched)">
+                <!-- <span *ngIf="eform.houseLandPhone.errors.required" class="alert-danger">
+                    House Land Phone is required
+                </span>                -->
+            </mat-error>
+        </mat-form-field>
+
+        <!--House Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="House Name" autocomplete="off" formControlName="houseName">
+            <mat-error *ngIf="eform.houseName.invalid && (eform.houseName.dirty || eform.houseName.touched)">
+                <span *ngIf="eform.houseName.errors.required" class="alert-danger">
+                    House Name is required
+                </span>
+                <span *ngIf="eform.houseName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Address-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Address" autocomplete="off" formControlName="houseAddress1">
+            <mat-error
+                *ngIf="eform.houseAddress1.invalid && (eform.houseAddress1.dirty || eform.houseAddress1.touched)">
+                <span *ngIf="eform.houseAddress1.errors.required" class="alert-danger">
+                    Address is required
+                </span>
+                <span *ngIf="eform.houseAddress1.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Mobile No-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Mobile No" autocomplete="off" formControlName="houseMobileNo" required>
+            <mat-error
+                *ngIf="eform.houseMobileNo.invalid && (eform.houseMobileNo.dirty || eform.houseMobileNo.touched)">
+                <span *ngIf="eform.houseMobileNo.errors.required" class="alert-danger">
+                    Mobile No is required
+                </span>
+                <span *ngIf="eform.houseMobileNo.errors.pattern" class="alert-danger">
+                    Please enter valid Mobile No
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Block-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Block" autocomplete="off" formControlName="block" required>
+            <mat-error *ngIf="eform.block.invalid && (eform.block.dirty || eform.block.touched)">
+                <span *ngIf="eform.block.errors.required" class="alert-danger">
+                    Block is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Villege-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Villege" autocomplete="off" formControlName="villege" required>
+            <mat-error *ngIf="eform.villege.invalid && (eform.villege.dirty || eform.villege.touched)">
+                <span *ngIf="eform.villege.errors.required" class="alert-danger">
+                    Villege is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Ward-->
+        <mat-form-field color="accent" class="full-width">
+            <input type="number" matInput placeholder="Ward" autocomplete="off" formControlName="ward" required>
+            <mat-error *ngIf="eform.ward.invalid && (eform.ward.dirty || eform.ward.touched)">
+                <span *ngIf="eform.ward.errors.required" class="alert-danger">
+                    ward is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--Area-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Area" autocomplete="off" formControlName="area">
+            <mat-error *ngIf="eform.area.invalid && (eform.area.dirty || eform.area.touched)">
+                <span *ngIf="eform.area.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Zone-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Zone" autocomplete="off" formControlName="zone">
+            <mat-error *ngIf="eform.zone.invalid && (eform.zone.dirty || eform.zone.touched)">
+                <span *ngIf="eform.zone.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Pincode-->
+        <mat-form-field color="accent" class="full-width">
+            <input maxlength="6" matInput placeholder="Pincode" autocomplete="off"
+                formControlName="pincode" required>
+            <mat-error *ngIf="eform.pincode.invalid && (eform.pincode.dirty || eform.pincode.touched)">
+                <span *ngIf="eform.pincode.errors.required" class="alert-danger">
+                    Pincode is required
+                </span>
+                <span *ngIf="eform.pincode.errors.pattern" class="alert-danger">
+                    Please enter valid Pincode
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Ration Type-->
+        <mat-form-field class="full-width">
+            <mat-label>Choose Ration Type</mat-label>
+            <mat-select matNativeControl required formControlName="rationType">
+                <mat-option [value]="rationType" *ngFor="let rationType of ['APL','BPL']">
+                    {{rationType}}
+                </mat-option>
+            </mat-select>
+            <!-- <mat-error
+                *ngIf="form.get('rationType').invalid && (form.get('rationType').dirty || form.get('rationType').touched)">
+                <span *ngIf="form.get('rationType').errors.required" class="alert-danger">
+                    Please choose rationType
+                </span>
+            </mat-error> -->
+        </mat-form-field>
+
+        <!--Ration Card No-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Ration Card No" autocomplete="off" formControlName="rationCardNo">
+            <!-- <mat-error *ngIf="eform.rationCardNo.invalid && (eform.rationCardNo.dirty || eform.rationCardNo.touched)">
+                <span *ngIf="eform.rationCardNo.errors.required" class="alert-danger">
+                    Ration Card No is required
+                </span>
+                <span *ngIf="eform.rationCardNo.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error> -->
+        </mat-form-field>
+
+        <!--Relative Mahal-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Relative Mahal" autocomplete="off" formControlName="relativeMahal">
+            <mat-error
+                *ngIf="eform.relativeMahal.invalid && (eform.relativeMahal.dirty || eform.relativeMahal.touched)">
+
+                <span *ngIf="eform.relativeMahal.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--Previous Jamath-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Previous Jamath" autocomplete="off" formControlName="previousJamath">
+            <mat-error
+                *ngIf="eform.previousJamath.invalid && (eform.previousJamath.dirty || eform.previousJamath.touched)">
+
+                <span *ngIf="eform.previousJamath.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Remarks-->
+        <mat-form-field color="accent" class="full-width">
+            <textarea matInput placeholder="Remarks" formControlName="remarks"></textarea>
+            <mat-error *ngIf="eform.remarks.invalid && (eform.remarks.dirty || eform.remarks.touched)">
+
+                <span *ngIf="eform.remarks.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

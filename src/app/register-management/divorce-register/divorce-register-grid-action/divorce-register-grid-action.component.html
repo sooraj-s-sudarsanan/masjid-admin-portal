@@ -1,0 +1,150 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+        ?'Edit':''}}&nbsp;{{moduleKeyModel.divorceRegister.name}}
+    </h1>
+    <mat-dialog-content>
+
+        <!--Choose family-->
+        <mat-form-field class="full-width" formGroupName="family">
+            <mat-label>Choose Family</mat-label>
+            <mat-select matNativeControl required formControlName="familyId"
+                (selectionChange)="OnFamilyChange($event.value)" required>
+                <mat-option [value]="family.familyId" *ngFor="let family of familyList">
+                    {{family.familyName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('family.familyId').invalid && (form.get('family.familyId').dirty || form.get('family.familyId').touched)">
+                <span *ngIf="form.get('family.familyId').errors.required" class="alert-danger">
+                    Please choose Family
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Choose Marriage-->
+        <mat-form-field class="full-width" formGroupName="marriage">
+            <mat-label>Choose Marriage</mat-label>
+            <mat-select matNativeControl required formControlName="marriageId" required>
+                <mat-option [value]="marriage.marriageId" *ngFor="let marriage of marriageList">
+                    {{marriage.brideFirstName}} - {{marriage.groomFirstName}}
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="form.get('marriage.marriageId').invalid && (form.get('marriage.marriageId').dirty || form.get('marriage.marriageId').touched)">
+                <span *ngIf="form.get('marriage.marriageId').errors.required" class="alert-danger">
+                    Please choose Marriage
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        
+        <!--Bride DOB-->
+        <mat-form-field>
+            <mat-label>Divorced Date</mat-label>
+            <input matInput [max]="dobMaxDate" [matDatepicker]="picker" formControlName="divorcedDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="eform.divorcedDate.invalid && (eform.divorcedDate.dirty || eform.divorcedDate.touched)">
+                <span *ngIf="eform.divorcedDate.errors.required" class="alert-danger">
+                    Choose Divorced Date
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+
+        <!--Other Info-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Other Info" autocomplete="off" formControlName="otherInfo" required>
+            <mat-error
+                *ngIf="eform.otherInfo.invalid && (eform.otherInfo.dirty || eform.otherInfo.touched)">
+                <span *ngIf="eform.otherInfo.errors.required" class="alert-danger">
+                    Other Info is required
+                </span>
+                <span *ngIf="eform.otherInfo.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--Reason-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Reason" autocomplete="off" formControlName="reason" required>
+            <mat-error
+                *ngIf="eform.reason.invalid && (eform.reason.dirty || eform.reason.touched)">
+                <span *ngIf="eform.reason.errors.required" class="alert-danger">
+                    Reason is required
+                </span>
+                <span *ngIf="eform.reason.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+
+        <!--Mahar Details-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Mahar Details" autocomplete="off" formControlName="maharDetails" required>
+            <mat-error
+                *ngIf="eform.maharDetails.invalid && (eform.maharDetails.dirty || eform.maharDetails.touched)">
+                <span *ngIf="eform.maharDetails.errors.required" class="alert-danger">
+                    Mahar Details is required
+                </span>
+                <span *ngIf="eform.maharDetails.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--Delegate Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Delegate Name" autocomplete="off" formControlName="delegateName" required>
+            <mat-error
+                *ngIf="eform.delegateName.invalid && (eform.delegateName.dirty || eform.delegateName.touched)">
+                <span *ngIf="eform.delegateName.errors.required" class="alert-danger">
+                    Delegate Name is required
+                </span>
+                <span *ngIf="eform.delegateName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>   
+
+        <!--Witness 1-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Witness 1" autocomplete="off" formControlName="witness1" required>
+            <mat-error *ngIf="eform.witness1.invalid && (eform.witness1.dirty || eform.witness1.touched)">
+                <span *ngIf="eform.witness1.errors.required" class="alert-danger">
+                    Witness 1 is required
+                </span>
+                <span *ngIf="eform.witness1.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Witness 2-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Witness 2" autocomplete="off" formControlName="witness2" required>
+            <mat-error *ngIf="eform.witness2.invalid && (eform.witness2.dirty || eform.witness2.touched)">
+                <span *ngIf="eform.witness2.errors.required" class="alert-danger">
+                    Witness 2 is required
+                </span>
+                <span *ngIf="eform.witness2.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

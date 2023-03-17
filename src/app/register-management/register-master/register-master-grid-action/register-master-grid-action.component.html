@@ -1,0 +1,94 @@
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
+
+
+    <h1 mat-dialog-title class="dialog-title-h1">{{this.row.data
+        ?'Edit':'Add'}}&nbsp;{{moduleKeyModel.registerMaster.name}}</h1>
+    <mat-dialog-content>
+
+        <!--Register Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Register Name" autocomplete="off" formControlName="registerName" required>
+            <mat-error *ngIf="eform.registerName.invalid && (eform.registerName.dirty || eform.registerName.touched)">
+                <span *ngIf="eform.registerName.errors.required" class="alert-danger">
+                    Register Name is required
+                </span>
+                <span *ngIf="eform.registerName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Register Name ML-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Register Name ML" autocomplete="off" formControlName="registerNameML" required>
+            <mat-error
+                *ngIf="eform.registerNameML.invalid && (eform.registerNameML.dirty || eform.registerNameML.touched)">
+                <span *ngIf="eform.registerNameML.errors.required" class="alert-danger">
+                    Register Name ML is required
+                </span>
+                <span *ngIf="eform.registerNameML.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Register Display Name-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Register Display Name" autocomplete="off" formControlName="registerDisplayName"
+                required>
+            <mat-error
+                *ngIf="eform.registerDisplayName.invalid && (eform.registerDisplayName.dirty || eform.registerDisplayName.touched)">
+                <span *ngIf="eform.registerDisplayName.errors.required" class="alert-danger">
+                    Register Display Name is required
+                </span>
+                <span *ngIf="eform.registerDisplayName.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Register Display Name ML-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Register Display Name ML" autocomplete="off"
+                formControlName="registerDisplayNameML" required>
+            <mat-error
+                *ngIf="eform.registerDisplayNameML.invalid && (eform.registerDisplayNameML.dirty || eform.registerDisplayNameML.touched)">
+                <span *ngIf="eform.registerDisplayNameML.errors.required" class="alert-danger">
+                    Register Display Name ML is required
+                </span>
+                <span *ngIf="eform.registerDisplayNameML.errors.maxlength" class="alert-danger">
+                    length exceeded
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Register Description-->
+        <mat-form-field color="accent" class="full-width">
+            <input matInput placeholder="Register Description" autocomplete="off" formControlName="registerDescription">
+            <mat-error
+                *ngIf="eform.registerDescription.invalid && (eform.registerDescription.dirty || eform.registerDescription.touched)">
+                <span *ngIf="eform.registerDescription.errors.required" class="alert-danger">
+                    Register Description is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Register Description ML-->
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Register Description ML" autocomplete="off"
+                formControlName="registerDescriptionML">
+            <mat-error
+                *ngIf="eform.registerDescriptionML.invalid && (eform.registerDescriptionML.dirty || eform.registerDescriptionML.touched)">
+                <span *ngIf="eform.registerDescriptionML.errors.required" class="alert-danger">
+                    Register Description ML is required
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Cancel</button>
+    </div>
+
+</form>

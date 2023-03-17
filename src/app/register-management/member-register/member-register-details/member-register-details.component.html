@@ -1,0 +1,130 @@
+<header class="">
+    <h1 class="w-100 m-r-auto dialog-title-h1" mat-dialog-title>Details</h1>
+  </header>
+  <mat-dialog-content>
+    <mat-list>
+    
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Family :</small>
+          <div class="w-100 font-weight-bold">{{row.data.family.familyName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">First Name :</small>
+          <div class="w-100 font-weight-bold">{{row.data.firstName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Last Name:</small>
+          <div class="w-100 font-weight-bold">{{row.data.lastName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Father Name :</small>
+          <div class="w-100 font-weight-bold">{{row.data.fatherName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">MotherName :</small>
+          <div class="w-100 font-weight-bold">{{row.data.motherName}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Date Of Birth :</small>
+          <div class="w-100 font-weight-bold">{{row.data.dateOfBirth | date:'dd/MM/yyyy'}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Aadhaar No :</small>
+          <div class="w-100 font-weight-bold">{{row.data.aAdhaarNo}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Blood Group :</small>
+          <div class="w-100 font-weight-bold">{{row.data.bloodGroup}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Gender :</small>
+          <div class="w-100 font-weight-bold">{{row.data.gender}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Marital Status :</small>
+          <div class="w-100 font-weight-bold">{{row.data.maritalStatus}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Mobile :</small>
+          <div class="w-100 font-weight-bold">{{row.data.mobile}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Occupation :</small>
+          <div class="w-100 font-weight-bold">{{row.data.occupation}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Previous Jamath :</small>
+          <div class="w-100 font-weight-bold">{{row.data.previousJamath}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Relative Mahal :</small>
+          <div class="w-100 font-weight-bold">{{row.data.relativeMahal}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Daughters :</small>
+          <div class="w-100 font-weight-bold">{{row.data.noOfDaughters}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Kids :</small>
+          <div class="w-100 font-weight-bold">{{row.data.noOfKids}}</div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="m-y-10">
+          <small class="w-100 f-medium d-block m-b-5 o-50">Sons :</small>
+          <div class="w-100 font-weight-bold">{{row.data.noOfSons}}</div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'NO'" cdkFocusInitial>Close</button>
+  </div>
