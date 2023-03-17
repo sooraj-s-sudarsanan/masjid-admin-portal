@@ -7,6 +7,7 @@
 
   <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="side" [opened]='isLoggedIn && authService.userIsValid' class="sideNav">
+     
       <mat-nav-list>
         <span *ngFor="let item of navItems">
           <app-sidebar-navigation *ngIf="item.children.length>0" [item]="item"></app-sidebar-navigation>

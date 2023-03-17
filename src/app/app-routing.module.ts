@@ -5,6 +5,8 @@ import { AnnonymousGuardService } from './core/services/annonymous-guard.service
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RedirectComponent } from './redirect/redirect.component';
+import { RegisterMasterListComponent } from './register-management/register-master/register-master-list/register-master-list.component';
+import { ModuleListComponent } from './module/module-list/module-list.component';
 
 const routes: Routes = [
 
@@ -176,7 +178,13 @@ const routes: Routes = [
     path: 'report',
     loadChildren:() => import('./report-management/report-management.module').then(m => m.ReportManagementModule),
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'register-management',
+    loadChildren:() => import('./register-management/register-management.module').then(m => m.RegisterManagementModule),
+    canActivate: [AuthGuardService]
   }
+  
 ];
 
 @NgModule({

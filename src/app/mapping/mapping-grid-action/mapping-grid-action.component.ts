@@ -334,7 +334,7 @@ export class MappingGridActionComponent implements OnInit, OnDestroy {
         if (result.rowValue && result.rowValue.serviceMappingId && this.serviceList.length > 0) {
           const index = this.serviceList.findIndex(x => x.serviceMappingId === result.rowValue.serviceMappingId);
           if (index > -1) {
-            debugger;
+            
             this.serviceList[index].numberOfBookingAllowed = result.rowValue.numberOfBookingAllowed;
             this.serviceList[index].servicePersonAvgDuration = result.rowValue.servicePersonAvgDuration;
             this.serviceList[index].servicePersonEndTime = result.rowValue.servicePersonEndTime;

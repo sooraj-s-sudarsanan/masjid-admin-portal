@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:dev": "ng build --prod --configuration=dev --base-href=/adminv2/",
+    "build:dev": "ng build --prod --configuration=dev --base-href=/jumamasjid-admin/",
     "test:dev": "ng serve -o --configuration=dev --port=4204",
     "build:prod": "ng build --prod --configuration=production --base-href=/zerveazy-partner/",
     "test:prod": "ng serve -o --configuration=production --port=4204"

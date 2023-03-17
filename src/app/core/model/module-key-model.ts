@@ -175,4 +175,28 @@ export class ModuleKeyModel {
         key: 'reportConfig',
         name: 'Report Configuration'
     };
+    public static registerMaster = {
+        key: 'registerMaster',
+        name: 'Register Master'
+    };
+    public static memberRegister = {
+        key: 'memberRegister',
+        name: 'Member Register'
+    };
+    public static familyRegister = {
+        key: 'familyRegister',
+        name: 'Family Register'
+    };
+    public static houseRegister = {
+        key: 'houseRegister',
+        name: 'House Register'
+    };
+    public static marriageRegister = {
+        key: 'marriageRegister',
+        name: 'Marriage Register'
+    };
+    public static divorceRegister = {
+        key: 'divorceRegister',
+        name: 'Divorce Register'
+    };
 }

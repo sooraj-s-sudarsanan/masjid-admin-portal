@@ -266,6 +266,48 @@ export class ManageGridServiceBaseModel {
             updateServiceId: 'ADM_UPDATE_REPORT_CONFIG',
             deleteServiceId: 'ADM_DELETE_REPORT_CONFIG',
             listServiceId: 'ADM_LIST_REPORT_CONFIG_PAGED'
+        },
+        {
+            section: ModuleKeyModel.registerMaster.key,
+            createServiceId: 'ADM_ADD_REGISTER_MASTER',
+            updateServiceId: 'ADM_UPDATE_REGISTER_MASTER',
+            deleteServiceId: 'ADM_DELETE_REGISTER_MASTER_BYID',
+            listServiceId: 'ADM_LIST_REGISTER_MASTER'
+        },
+        {
+            section: ModuleKeyModel.memberRegister.key,
+            createServiceId: 'ADM_ADD_MEMBER_REGISTER',
+            updateServiceId: 'ADM_UPDATE_MEMBER_REGISTER',
+            deleteServiceId: 'ADM_DELETE_MEMBER_REGISTER',
+            listServiceId: 'ADM_LIST_MEMBER_REGISTER'
+        },
+        {
+            section: ModuleKeyModel.familyRegister.key,
+            createServiceId: 'ADM_ADD_FAMILY_REGISTER',
+            updateServiceId: 'ADM_UPDATE_FAMILY_REGISTER',
+            deleteServiceId: 'ADM_DELETE_FAMILY_REGISTER',
+            listServiceId: 'ADM_LIST_FAMILY_REGISTER'
+        },
+        {
+            section: ModuleKeyModel.houseRegister.key,
+            createServiceId: 'ADM_ADD_HOUSE_REGISTER',
+            updateServiceId: 'ADM_UPDATE_HOUSE_REGISTER',
+            deleteServiceId: 'ADM_DELETE_HOUSE_REGISTER',
+            listServiceId: 'ADM_LIST_HOUSE_REGISTER'
+        },
+        {
+            section: ModuleKeyModel.marriageRegister.key,
+            createServiceId: 'ADM_ADD_MARRIAGE_REGISTER',
+            updateServiceId: 'ADM_UPDATE_MARRIAGE_REGISTER',
+            deleteServiceId: 'ADM_DELETE_MARRIAGE_REGISTER',
+            listServiceId: 'ADM_LIST_MARRIAGE_REGISTER'
+        },
+        {
+            section: ModuleKeyModel.divorceRegister.key,
+            createServiceId: 'ADM_ADD_DIVORCE_REGISTER',
+            updateServiceId: 'ADM_UPDATE_DIVORCE_REGISTER',
+            deleteServiceId: 'ADM_DELETE_DIVORCE_REGISTER',
+            listServiceId: 'ADM_LIST_DIVORCE_REGISTER'
         }
     ];
 }

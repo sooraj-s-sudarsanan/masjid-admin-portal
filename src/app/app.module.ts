@@ -27,6 +27,7 @@ import { ForceChangePasswordComponent } from './force-change-password/force-chan
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { RegisterManagementModule } from './register-management/register-management.module';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { NgxImageCompressService } from 'ngx-image-compress';
     StaticPageNameModule,
     CategoryModule,
     BranchModule,    
-    FlexLayoutModule    
+    FlexLayoutModule,
+    RegisterManagementModule
   ],
   providers: [
     DatePipe,
